@@ -12,13 +12,84 @@ class RetroAudioEngine {
     this.isMuted = false;
     this.volume = 0.7;
 
-    // Music Player State
+    // Music Player State & Real Audio Element
     this.currentTrackIndex = 0;
     this.isPlaying = false;
+    this.playbackTime = 0;
+    this.musicTimer = null;
+    this.synthLoopTimeout = null;
+
+    this.audioEl = new Audio();
+    this.audioEl.addEventListener('timeupdate', () => {
+      if (this.isPlaying && this.playlist[this.currentTrackIndex]?.src) {
+        this.playbackTime = Math.floor(this.audioEl.currentTime);
+        this.updatePlayerProgress();
+      }
+    });
+    this.audioEl.addEventListener('loadedmetadata', () => {
+      const track = this.playlist[this.currentTrackIndex];
+      if (track && this.audioEl.duration && !isNaN(this.audioEl.duration)) {
+        track.duration = Math.floor(this.audioEl.duration);
+        this.updatePlayerProgress();
+      }
+    });
+    this.audioEl.addEventListener('ended', () => {
+      this.nextTrack();
+    });
+
     this.playlist = [
       {
-        title: "01. Windows 98 Vapor Dreams.mid",
-        artist: "RetroSynth 98",
+        title: "01. Long Time (Intro) - Playboi Carti.mp3",
+        artist: "Playboi Carti (Die Lit)",
+        src: "./music/1-01 Long Time (Intro).mp3",
+        duration: 211,
+        type: "audio"
+      },
+      {
+        title: "02. R.I.P. - Playboi Carti.mp3",
+        artist: "Playboi Carti (Die Lit)",
+        src: "./music/1-02 R.I.P.mp3",
+        duration: 192,
+        type: "audio"
+      },
+      {
+        title: "03. Shoota (feat. Lil Uzi Vert).mp3",
+        artist: "Playboi Carti & Lil Uzi Vert",
+        src: "./music/1-06 Shoota (feat. Lil Uzi Vert).mp3",
+        duration: 153,
+        type: "audio"
+      },
+      {
+        title: "04. Fell in Luv (feat. Bryson Tiller).mp3",
+        artist: "Playboi Carti (Die Lit)",
+        src: "./music/1-10 Fell in Luv (feat. Bryson Tiller).mp3",
+        duration: 206,
+        type: "audio"
+      },
+      {
+        title: "05. Foreign - Playboi Carti.mp3",
+        artist: "Playboi Carti (Die Lit)",
+        src: "./music/1-11 Foreign.mp3",
+        duration: 142,
+        type: "audio"
+      },
+      {
+        title: "06. Mileage (feat. Chief Keef).mp3",
+        artist: "Playboi Carti & Chief Keef",
+        src: "./music/1-13 Mileage (feat. Chief Keef).mp3",
+        duration: 149,
+        type: "audio"
+      },
+      {
+        title: "07. FlatBed Freestyle - Playboi Carti.mp3",
+        artist: "Playboi Carti (Die Lit)",
+        src: "./music/1-14 FlatBed Freestyle.mp3",
+        duration: 193,
+        type: "audio"
+      },
+      {
+        title: "08. Windows 98 Vapor Dreams.mid",
+        artist: "RetroSynth 98 (FL Studio)",
         duration: 145,
         type: "synth",
         tempo: 110,
@@ -28,51 +99,8 @@ class RetroAudioEngine {
           [329.63, 0.4], [261.63, 0.4], [220.00, 0.4], [293.66, 0.8],
           [261.63, 0.4], [329.63, 0.4], [392.00, 0.4], [523.25, 1.2]
         ]
-      },
-      {
-        title: "02. Cyber Nostalgia 1998.opus",
-        artist: "Aura Sound Lab",
-        duration: 180,
-        type: "synth",
-        tempo: 125,
-        notes: [
-          [220.00, 0.3], [261.63, 0.3], [329.63, 0.3], [440.00, 0.6],
-          [392.00, 0.3], [329.63, 0.3], [261.63, 0.3], [349.23, 0.6],
-          [329.63, 0.3], [261.63, 0.3], [196.00, 0.3], [261.63, 0.6],
-          [293.66, 0.3], [349.23, 0.3], [440.00, 0.3], [523.25, 0.9]
-        ]
-      },
-      {
-        title: "03. Dial-Up Memories.wav",
-        artist: "Win98 FM",
-        duration: 160,
-        type: "synth",
-        tempo: 95,
-        notes: [
-          [329.63, 0.5], [392.00, 0.5], [493.88, 0.5], [587.33, 1.0],
-          [523.25, 0.5], [440.00, 0.5], [392.00, 0.5], [493.88, 1.0],
-          [440.00, 0.5], [349.23, 0.5], [293.66, 0.5], [392.00, 1.0],
-          [329.63, 0.5], [392.00, 0.5], [493.88, 0.5], [659.25, 1.5]
-        ]
-      },
-      {
-        title: "04. Sunset Over Redmond.mp3",
-        artist: "DirectSound 3D",
-        duration: 210,
-        type: "synth",
-        tempo: 105,
-        notes: [
-          [174.61, 0.4], [220.00, 0.4], [261.63, 0.4], [349.23, 0.8],
-          [196.00, 0.4], [246.94, 0.4], [293.66, 0.4], [392.00, 0.8],
-          [220.00, 0.4], [261.63, 0.4], [329.63, 0.4], [440.00, 0.8],
-          [261.63, 0.4], [329.63, 0.4], [392.00, 0.4], [523.25, 1.2]
-        ]
       }
     ];
-
-    this.musicTimer = null;
-    this.playbackTime = 0;
-    this.synthLoopTimeout = null;
   }
 
   initContext() {
@@ -310,17 +338,44 @@ class RetroAudioEngine {
     } catch (e) {}
   }
 
-  // Music Player Synthesizer Sequencer
+  // Music Player (Supports Real MP3 Audio & Synthesizer)
   playMusic() {
     this.initContext();
     this.isPlaying = true;
-    this.startSynthTrack();
-    this.startTimer();
+    const track = this.playlist[this.currentTrackIndex];
+
+    if (track && track.type === 'audio' && track.src) {
+      if (this.synthLoopTimeout) {
+        clearTimeout(this.synthLoopTimeout);
+        this.synthLoopTimeout = null;
+      }
+      if (this.musicTimer) {
+        clearInterval(this.musicTimer);
+        this.musicTimer = null;
+      }
+      
+      const targetSrc = new URL(track.src, window.location.href).href;
+      if (this.audioEl.src !== targetSrc) {
+        this.audioEl.src = track.src;
+        this.audioEl.currentTime = this.playbackTime || 0;
+      }
+      this.audioEl.volume = this.volume;
+      this.audioEl.play().catch(e => console.warn("Audio playback notice:", e));
+    } else {
+      if (this.audioEl) {
+        this.audioEl.pause();
+      }
+      this.startSynthTrack();
+      this.startTimer();
+    }
     this.updatePlayerUI();
   }
 
   pauseMusic() {
     this.isPlaying = false;
+    if (this.audioEl) {
+      this.audioEl.pause();
+    }
     if (this.synthLoopTimeout) {
       clearTimeout(this.synthLoopTimeout);
       this.synthLoopTimeout = null;
@@ -329,6 +384,25 @@ class RetroAudioEngine {
       clearInterval(this.musicTimer);
       this.musicTimer = null;
     }
+    this.updatePlayerUI();
+  }
+
+  stopMusic() {
+    this.isPlaying = false;
+    if (this.audioEl) {
+      this.audioEl.pause();
+      this.audioEl.currentTime = 0;
+    }
+    if (this.synthLoopTimeout) {
+      clearTimeout(this.synthLoopTimeout);
+      this.synthLoopTimeout = null;
+    }
+    if (this.musicTimer) {
+      clearInterval(this.musicTimer);
+      this.musicTimer = null;
+    }
+    this.playbackTime = 0;
+    this.updatePlayerProgress();
     this.updatePlayerUI();
   }
 
@@ -341,10 +415,13 @@ class RetroAudioEngine {
   }
 
   nextTrack() {
+    if (this.audioEl) {
+      this.audioEl.pause();
+      this.audioEl.currentTime = 0;
+    }
     this.currentTrackIndex = (this.currentTrackIndex + 1) % this.playlist.length;
     this.playbackTime = 0;
     if (this.isPlaying) {
-      this.pauseMusic();
       this.playMusic();
     } else {
       this.updatePlayerUI();
@@ -352,10 +429,13 @@ class RetroAudioEngine {
   }
 
   prevTrack() {
+    if (this.audioEl) {
+      this.audioEl.pause();
+      this.audioEl.currentTime = 0;
+    }
     this.currentTrackIndex = (this.currentTrackIndex - 1 + this.playlist.length) % this.playlist.length;
     this.playbackTime = 0;
     if (this.isPlaying) {
-      this.pauseMusic();
       this.playMusic();
     } else {
       this.updatePlayerUI();
@@ -364,10 +444,13 @@ class RetroAudioEngine {
 
   selectTrack(index) {
     if (index >= 0 && index < this.playlist.length) {
+      if (this.audioEl) {
+        this.audioEl.pause();
+        this.audioEl.currentTime = 0;
+      }
       this.currentTrackIndex = index;
       this.playbackTime = 0;
       if (this.isPlaying) {
-        this.pauseMusic();
         this.playMusic();
       } else {
         this.updatePlayerUI();

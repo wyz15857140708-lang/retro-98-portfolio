@@ -1343,9 +1343,7 @@ export class DesktopController {
     if (nextBtn) nextBtn.addEventListener('click', () => audioEngine.nextTrack());
     if (stopBtn) {
       stopBtn.addEventListener('click', () => {
-        audioEngine.pauseMusic();
-        audioEngine.playbackTime = 0;
-        audioEngine.updatePlayerProgress();
+        audioEngine.stopMusic();
       });
     }
 
