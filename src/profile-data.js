@@ -14,7 +14,7 @@ export const profileData = {
       title: "创意开发者 / 数字设计者 / 学生研究者",
       subtitle: "用代码、设计、音乐与研究，把感兴趣的想法变成可以真正体验的数字作品。",
       status: "● 正在开发新项目 / 开放合作",
-      avatar: "/tico_avatar.jpg",
+      avatar: "./tico_avatar.jpg",
       bio: [
         "我是王寅喆，也可以叫我 Tico。",
         "我是一名学生、创意开发者和数字设计者，主要关注技术、网页设计、音乐文化、产品体验和社会研究之间的交叉。",
@@ -39,7 +39,7 @@ export const profileData = {
         techStack: "HTML5 / CSS3 / JavaScript (ES6+) / GitHub Pages",
         detailsUrl: "https://wyz15857140708-lang.github.io/Carti-website/",
         linkLabel: "访问在线网站 ➔",
-        icon: "/icons/cd.svg",
+        icon: "./icons/cd.svg",
         type: "dev",
         specs: {
           releaseDate: "1998-08-20 / 2024",
@@ -65,7 +65,7 @@ export const profileData = {
         techStack: "Web 开发 / 产品设计 / UI/UX / 课堂互动系统 / 模块化架构",
         detailsUrl: "https://github.com/wyz15857140708-lang",
         linkLabel: "查看开发仓库 ➔",
-        icon: "/icons/book.svg",
+        icon: "./icons/book.svg",
         type: "dev",
         specs: {
           releaseDate: "2024-2025 (进行中)",
@@ -91,7 +91,7 @@ export const profileData = {
         techStack: "HTML / CSS / JavaScript / Web Audio API / SVG 滤镜",
         detailsUrl: "https://github.com/wyz15857140708-lang",
         linkLabel: "实验项目详情 ➔",
-        icon: "/icons/soundcard.svg",
+        icon: "./icons/soundcard.svg",
         type: "dev",
         specs: {
           releaseDate: "1998-05-12 / 2024",
@@ -116,7 +116,7 @@ export const profileData = {
         techStack: "Three.js / Cannon-es / JavaScript / WebGL / Raycast 车辆动力学",
         detailsUrl: "https://github.com/wyz15857140708-lang",
         linkLabel: "查看物理实验 ➔",
-        icon: "/icons/joystick.svg",
+        icon: "./icons/joystick.svg",
         type: "dev",
         specs: {
           releaseDate: "2024",
@@ -141,7 +141,7 @@ export const profileData = {
         techStack: "Job Analysis / KSAO 框架 / 体育数据分析 / 绩效指标 / 统计学",
         detailsUrl: "#",
         linkLabel: "查看研究报告 ➔",
-        icon: "/icons/chart.svg",
+        icon: "./icons/chart.svg",
         type: "research",
         specs: {
           releaseDate: "2024",
@@ -166,7 +166,7 @@ export const profileData = {
         techStack: "实地观察 / 纪实摄影 / 空间分析 / 访谈法 / 社会学研究",
         detailsUrl: "#",
         linkLabel: "浏览调研记录 ➔",
-        icon: "/icons/camera.svg",
+        icon: "./icons/camera.svg",
         type: "research",
         specs: {
           releaseDate: "2023-2024",
@@ -191,7 +191,7 @@ export const profileData = {
         techStack: "问卷设计 / 分层抽样 / 统计学 (Statistics) / 偏差控制 / Jamovi 建模",
         detailsUrl: "#",
         linkLabel: "查看量化模型 ➔",
-        icon: "/icons/chart.svg",
+        icon: "./icons/chart.svg",
         type: "research",
         specs: {
           releaseDate: "2024",
@@ -208,7 +208,7 @@ export const profileData = {
 
     skillsCategories: [
       {
-        icon: "/icons/computer.svg",
+        icon: "./icons/computer.svg",
         title: "创意开发 (Creative Development)",
         items: [
           "实验性网页开发 (Experimental Websites)",
@@ -219,7 +219,7 @@ export const profileData = {
         ]
       },
       {
-        icon: "/icons/paint.svg",
+        icon: "./icons/paint.svg",
         title: "UI / UX 与数字设计",
         items: [
           "网页视觉设计与设计系统 (Web Design Systems)",
@@ -230,7 +230,7 @@ export const profileData = {
         ]
       },
       {
-        icon: "/icons/book.svg",
+        icon: "./icons/book.svg",
         title: "产品设计与教育科技",
         items: [
           "教育科技产品策划 (EdTech Products)",
@@ -241,7 +241,7 @@ export const profileData = {
         ]
       },
       {
-        icon: "/icons/chart.svg",
+        icon: "./icons/chart.svg",
         title: "社会研究与数据分析",
         items: [
           "社会科学实证研究 (Social Science Research)",
@@ -252,7 +252,7 @@ export const profileData = {
         ]
       },
       {
-        icon: "/icons/cd.svg",
+        icon: "./icons/cd.svg",
         title: "音乐与数字文化",
         items: [
           "Hip-Hop / Trap 青年文化研究",
@@ -320,35 +320,35 @@ export const profileData = {
     socials: [
       {
         name: "GitHub 个人主页",
-        icon: "/icons/network.svg",
+        icon: "./icons/network.svg",
         handle: "@wyz15857140708-lang",
         url: "https://github.com/wyz15857140708-lang",
         badge: "开源活跃"
       },
       {
         name: "Carti Website (在线演示)",
-        icon: "/icons/cd.svg",
+        icon: "./icons/cd.svg",
         handle: "wyz15857140708-lang.github.io/Carti-website",
         url: "https://wyz15857140708-lang.github.io/Carti-website/",
         badge: "在线 DEMO"
       },
       {
         name: "个人主页网站",
-        icon: "/icons/globe.svg",
+        icon: "./icons/globe.svg",
         handle: "即将上线 (Coming Soon)",
         url: "#",
         badge: "敬请期待"
       },
       {
         name: "电子邮箱与合作",
-        icon: "/icons/mail.svg",
+        icon: "./icons/mail.svg",
         handle: "可通过 GitHub 取得联系",
         url: "https://github.com/wyz15857140708-lang",
         badge: "开放合作"
       },
       {
         name: "FL Studio 音乐工作室",
-        icon: "/icons/soundcard.svg",
+        icon: "./icons/soundcard.svg",
         handle: "Trap & Hip-Hop 音乐制作",
         url: "#",
         badge: "编曲音轨"
@@ -437,7 +437,7 @@ export const profileData = {
       title: "CREATIVE DEVELOPER // DIGITAL DESIGNER // STUDENT RESEARCHER",
       subtitle: "Turning ideas I care about into digital experiences through code, design, music, and research.",
       status: "● Currently building new projects / Open to collaborations",
-      avatar: "/tico_avatar.jpg",
+      avatar: "./tico_avatar.jpg",
       bio: [
         "I’m Yinzhe Wang, or Tico. I’m a student, creative developer, and digital designer interested in the intersection of technology, web design, music culture, product experiences, and social research.",
         "I enjoy turning ideas into things people can actually interact with rather than leaving them as concepts. My projects range from experimental music websites and interactive web experiences to education technology platforms, browser-based 3D games, and social science research.",
@@ -461,7 +461,7 @@ export const profileData = {
         techStack: "HTML5 / CSS3 / JavaScript (ES6+) / GitHub Pages",
         detailsUrl: "https://wyz15857140708-lang.github.io/Carti-website/",
         linkLabel: "Open Live Site ➔",
-        icon: "/icons/cd.svg",
+        icon: "./icons/cd.svg",
         type: "dev",
         specs: {
           releaseDate: "1998-08-20 / 2024",
@@ -487,7 +487,7 @@ export const profileData = {
         techStack: "Web Dev / Product Design / UI/UX / Classroom Interaction / Modular Architecture",
         detailsUrl: "https://github.com/wyz15857140708-lang",
         linkLabel: "View Repository ➔",
-        icon: "/icons/book.svg",
+        icon: "./icons/book.svg",
         type: "dev",
         specs: {
           releaseDate: "2024-2025 (In Progress)",
@@ -513,7 +513,7 @@ export const profileData = {
         techStack: "HTML / CSS / JavaScript / Web Audio API / SVG Filters",
         detailsUrl: "https://github.com/wyz15857140708-lang",
         linkLabel: "View Experiment ➔",
-        icon: "/icons/soundcard.svg",
+        icon: "./icons/soundcard.svg",
         type: "dev",
         specs: {
           releaseDate: "1998-05-12 / 2024",
@@ -538,7 +538,7 @@ export const profileData = {
         techStack: "Three.js / Cannon-es / JavaScript / WebGL / Raycast Dynamics",
         detailsUrl: "https://github.com/wyz15857140708-lang",
         linkLabel: "View 3D Demo ➔",
-        icon: "/icons/joystick.svg",
+        icon: "./icons/joystick.svg",
         type: "dev",
         specs: {
           releaseDate: "2024",
@@ -563,7 +563,7 @@ export const profileData = {
         techStack: "Job Analysis / KSAO Framework / Sports Analytics / Metrics / Statistics",
         detailsUrl: "#",
         linkLabel: "Read Paper ➔",
-        icon: "/icons/chart.svg",
+        icon: "./icons/chart.svg",
         type: "research",
         specs: {
           releaseDate: "2024",
@@ -588,7 +588,7 @@ export const profileData = {
         techStack: "Field Observation / Documentary Photography / Spatial Analysis / Sociology",
         detailsUrl: "#",
         linkLabel: "View Archive ➔",
-        icon: "/icons/camera.svg",
+        icon: "./icons/camera.svg",
         type: "research",
         specs: {
           releaseDate: "2023-2024",
@@ -613,7 +613,7 @@ export const profileData = {
         techStack: "Survey Design / Stratified Sampling / Statistics / Bias Control / Jamovi",
         detailsUrl: "#",
         linkLabel: "View Data Model ➔",
-        icon: "/icons/chart.svg",
+        icon: "./icons/chart.svg",
         type: "research",
         specs: {
           releaseDate: "2024",
@@ -630,7 +630,7 @@ export const profileData = {
 
     skillsCategories: [
       {
-        icon: "/icons/computer.svg",
+        icon: "./icons/computer.svg",
         title: "Creative Development",
         items: [
           "Experimental Websites",
@@ -641,7 +641,7 @@ export const profileData = {
         ]
       },
       {
-        icon: "/icons/paint.svg",
+        icon: "./icons/paint.svg",
         title: "UI / UX & Digital Design",
         items: [
           "Web Design & Systems",
@@ -652,7 +652,7 @@ export const profileData = {
         ]
       },
       {
-        icon: "/icons/book.svg",
+        icon: "./icons/book.svg",
         title: "Product Design & EdTech",
         items: [
           "Education Technology",
@@ -663,7 +663,7 @@ export const profileData = {
         ]
       },
       {
-        icon: "/icons/chart.svg",
+        icon: "./icons/chart.svg",
         title: "Research & Data Analysis",
         items: [
           "Social Science Research",
@@ -674,7 +674,7 @@ export const profileData = {
         ]
       },
       {
-        icon: "/icons/cd.svg",
+        icon: "./icons/cd.svg",
         title: "Music & Digital Culture",
         items: [
           "Hip-Hop / Trap Culture",
@@ -742,35 +742,35 @@ export const profileData = {
     socials: [
       {
         name: "GitHub Profile",
-        icon: "/icons/network.svg",
+        icon: "./icons/network.svg",
         handle: "@wyz15857140708-lang",
         url: "https://github.com/wyz15857140708-lang",
         badge: "ACTIVE"
       },
       {
         name: "Carti Website (Live Demo)",
-        icon: "/icons/cd.svg",
+        icon: "./icons/cd.svg",
         handle: "wyz15857140708-lang.github.io/Carti-website",
         url: "https://wyz15857140708-lang.github.io/Carti-website/",
         badge: "LIVE DEMO"
       },
       {
         name: "Personal Website",
-        icon: "/icons/globe.svg",
+        icon: "./icons/globe.svg",
         handle: "Coming Soon",
         url: "#",
         badge: "SOON"
       },
       {
         name: "Email & Inquiries",
-        icon: "/icons/mail.svg",
+        icon: "./icons/mail.svg",
         handle: "Available via GitHub",
         url: "https://github.com/wyz15857140708-lang",
         badge: "OPEN"
       },
       {
         name: "FL Studio / Music Lab",
-        icon: "/icons/soundcard.svg",
+        icon: "./icons/soundcard.svg",
         handle: "Trap & Hip-Hop Production",
         url: "#",
         badge: "AUDIO"
