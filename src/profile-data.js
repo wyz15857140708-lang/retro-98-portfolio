@@ -337,11 +337,38 @@ export const profileData = {
 
     socials: [
       {
+        name: "电子邮箱 (Email)",
+        icon: "./icons/mail.svg",
+        handle: "tico.wangyinzhe@yungu.org",
+        url: "mailto:tico.wangyinzhe@yungu.org",
+        badge: "发送邮件",
+        canCopy: true,
+        copyText: "tico.wangyinzhe@yungu.org"
+      },
+      {
+        name: "手机号码 (Phone)",
+        icon: "./icons/phone.svg",
+        handle: "15857140708",
+        url: "tel:15857140708",
+        badge: "一键呼叫",
+        canCopy: true,
+        copyText: "15857140708"
+      },
+      {
+        name: "微信 (WeChat)",
+        icon: "./icons/network.svg",
+        handle: "ticowang666",
+        url: "javascript:void(0)",
+        badge: "点击复制",
+        canCopy: true,
+        copyText: "ticowang666"
+      },
+      {
         name: "GitHub 个人主页",
         icon: "./icons/network.svg",
         handle: "@wyz15857140708-lang",
         url: "https://github.com/wyz15857140708-lang",
-        badge: "开源项目"
+        badge: "开源主页"
       },
       {
         name: "Carti Website (在线演示)",
@@ -349,27 +376,6 @@ export const profileData = {
         handle: "wyz15857140708-lang.github.io/Carti-website",
         url: "https://wyz15857140708-lang.github.io/Carti-website/",
         badge: "在线 DEMO"
-      },
-      {
-        name: "个人作品集主页",
-        icon: "./icons/globe.svg",
-        handle: "wyz15857140708-lang.github.io/retro-98-portfolio",
-        url: "https://wyz15857140708-lang.github.io/retro-98-portfolio/",
-        badge: "在线作品集"
-      },
-      {
-        name: "联系方式与合作",
-        icon: "./icons/mail.svg",
-        handle: "可通过 GitHub 取得联系",
-        url: "https://github.com/wyz15857140708-lang",
-        badge: "开放联系"
-      },
-      {
-        name: "音乐制作与工程",
-        icon: "./icons/soundcard.svg",
-        handle: "Trap & Hip-Hop 编曲练习",
-        url: "#",
-        badge: "FL Studio"
       }
     ],
 
@@ -398,7 +404,7 @@ export const profileData = {
       desktopIconPortfolio: "王寅喆的作品集",
       desktopIconComputer: "我的电脑",
       desktopIconMusic: "CD 播放机",
-      desktopIconSocial: "GitHub 与连接",
+      desktopIconSocial: "连接",
       desktopIconRecycle: "回收站",
       desktopIconPaint: "画图程序",
       desktopIconMinesweeper: "扫雷游戏",
@@ -430,13 +436,13 @@ export const profileData = {
       statusBarZone: "本地 Internet 区域",
       mediaPlayerTitle: "Windows 98 CD 播放机",
       systemPropertiesTitle: "系统属性 - 王寅喆工作站",
-      socialTitle: "网络连接 - GitHub 与联系方式",
+      socialTitle: "连接 - 联系方式与网络链接",
       recycleBinTitle: "回收站",
       langSwitchLabel: "中 / EN",
       startMenuPortfolio: "王寅喆的作品集",
       startMenuMusic: "CD 播放机",
       startMenuComputer: "我的电脑 (系统属性)",
-      startMenuSocial: "GitHub 与网络连接",
+      startMenuSocial: "连接",
       startMenuPaint: "画图 (Paint)",
       startMenuNotepad: "记事本 (Notepad)",
       startMenuMinesweeper: "经典扫雷 (Minesweeper)",
@@ -778,39 +784,45 @@ export const profileData = {
 
     socials: [
       {
+        name: "Email Address",
+        icon: "./icons/mail.svg",
+        handle: "tico.wangyinzhe@yungu.org",
+        url: "mailto:tico.wangyinzhe@yungu.org",
+        badge: "MAILTO",
+        canCopy: true,
+        copyText: "tico.wangyinzhe@yungu.org"
+      },
+      {
+        name: "Mobile Phone",
+        icon: "./icons/phone.svg",
+        handle: "+86 15857140708",
+        url: "tel:15857140708",
+        badge: "CALL",
+        canCopy: true,
+        copyText: "15857140708"
+      },
+      {
+        name: "WeChat",
+        icon: "./icons/network.svg",
+        handle: "ticowang666",
+        url: "javascript:void(0)",
+        badge: "COPY ID",
+        canCopy: true,
+        copyText: "ticowang666"
+      },
+      {
         name: "GitHub Profile",
         icon: "./icons/network.svg",
         handle: "@wyz15857140708-lang",
         url: "https://github.com/wyz15857140708-lang",
-        badge: "Open Source"
+        badge: "GITHUB"
       },
       {
         name: "Carti Website (Live Demo)",
         icon: "./icons/cd.svg",
         handle: "wyz15857140708-lang.github.io/Carti-website",
         url: "https://wyz15857140708-lang.github.io/Carti-website/",
-        badge: "Live Demo"
-      },
-      {
-        name: "Portfolio Website",
-        icon: "./icons/globe.svg",
-        handle: "wyz15857140708-lang.github.io/retro-98-portfolio",
-        url: "https://wyz15857140708-lang.github.io/retro-98-portfolio/",
-        badge: "Live Site"
-      },
-      {
-        name: "Contact & Collaboration",
-        icon: "./icons/mail.svg",
-        handle: "Reach out via GitHub",
-        url: "https://github.com/wyz15857140708-lang",
-        badge: "Open to Connect"
-      },
-      {
-        name: "Music Production",
-        icon: "./icons/soundcard.svg",
-        handle: "Trap & Hip-Hop Beat Projects",
-        url: "#",
-        badge: "FL Studio"
+        badge: "LIVE DEMO"
       }
     ],
 
@@ -839,7 +851,7 @@ export const profileData = {
       desktopIconPortfolio: "Tico's Portfolio",
       desktopIconComputer: "My Computer",
       desktopIconMusic: "CD Player",
-      desktopIconSocial: "GitHub & Links",
+      desktopIconSocial: "Links",
       desktopIconRecycle: "Recycle Bin",
       desktopIconPaint: "MS Paint",
       desktopIconMinesweeper: "Minesweeper",
@@ -871,13 +883,13 @@ export const profileData = {
       statusBarZone: "Local intranet zone",
       mediaPlayerTitle: "Windows 98 CD Player",
       systemPropertiesTitle: "System Properties - Tico Workstation",
-      socialTitle: "Network Connections - GitHub & Links",
+      socialTitle: "Links - Contact & Online Profiles",
       recycleBinTitle: "Recycle Bin",
       langSwitchLabel: "中 / EN",
       startMenuPortfolio: "Tico's Portfolio",
       startMenuMusic: "CD Player",
       startMenuComputer: "My Computer (Properties)",
-      startMenuSocial: "GitHub & Connections",
+      startMenuSocial: "Links & Contact",
       startMenuPaint: "MS Paint",
       startMenuNotepad: "Notepad",
       startMenuMinesweeper: "Minesweeper",

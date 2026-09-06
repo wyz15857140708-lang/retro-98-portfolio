@@ -89,6 +89,7 @@ export class DosPromptApp {
           "  VER        - Display Windows / MS-DOS version",
           "  CLS        - Clear the terminal screen",
           "  PROJECTS   - List all 7 portfolio projects & links",
+          "  CONTACT    - View email, phone, WeChat and socials",
           "  MATRIX     - Run Matrix digital rain animation",
           "  DATE       - Display current system date",
           "  TIME       - Display current system time",
@@ -152,6 +153,15 @@ export class DosPromptApp {
         this.printLines([
           "=== SELECTED PROJECTS & RESEARCH (RANKED BY IMPACT) ===",
           ...(data.projects || []).map(p => `[${p.number}] [${p.statusLabel || p.status.toUpperCase()}] ${p.title} (${p.category}) -> ${p.detailsUrl ? p.detailsUrl : (p.linkStateNote || 'Private / In Dev')}`)
+        ]);
+        break;
+
+      case 'contact':
+      case 'links':
+        const socData = profileData.getData();
+        this.printLines([
+          "=== CONTACT & NETWORK DIRECTORY ===",
+          ...(socData.socials || []).map(s => `* ${s.name.padEnd(24, ' ')} : ${s.handle} (${s.badge})`)
         ]);
         break;
 

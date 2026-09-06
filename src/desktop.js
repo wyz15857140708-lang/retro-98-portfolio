@@ -239,17 +239,39 @@ export class DesktopController {
         link.href = soc.url;
         link.target = soc.url.startsWith('http') ? '_blank' : '_self';
         link.rel = 'noopener noreferrer';
-        link.className = 'flex items-center justify-between p-2 hover:bg-blue-100 win98-raised text-black no-underline block cursor-pointer';
+        link.className = 'flex items-center justify-between p-2 hover:bg-blue-100 win98-raised text-black no-underline block cursor-pointer select-none';
         link.innerHTML = `
           <span class="flex items-center gap-2 font-bold text-xs">
-            <img src="${soc.icon || '/icons/network.svg'}" class="w-4 h-4 pixel-render shrink-0" alt="" /> 
+            <img src="${soc.icon || './icons/network.svg'}" class="w-4 h-4 pixel-render shrink-0" alt="" /> 
             <span>${escapeHtml(soc.name)}</span>
           </span>
           <div class="flex items-center gap-2">
-            <span class="text-[10px] text-gray-500 font-mono">${escapeHtml(soc.handle || '')}</span>
-            <span class="win98-sunken px-1.5 py-0.2 bg-yellow-100 text-yellow-900 text-[9px] font-bold">${escapeHtml(soc.badge || 'LINK')}</span>
+            <span class="text-[11px] text-[#000080] font-mono font-bold">${escapeHtml(soc.handle || '')}</span>
+            <span class="win98-sunken px-1.5 py-0.5 bg-yellow-100 text-yellow-900 text-[9px] font-bold">${escapeHtml(soc.badge || 'LINK')}</span>
           </div>
         `;
+
+        if (soc.canCopy && soc.copyText) {
+          link.addEventListener('click', (e) => {
+            if (!soc.url.startsWith('http') && !soc.url.startsWith('mailto:') && !soc.url.startsWith('tel:')) {
+              e.preventDefault();
+            }
+            navigator.clipboard.writeText(soc.copyText).then(() => {
+              audioEngine.playDing();
+              const originalBadge = soc.badge;
+              const badgeEl = link.querySelector('.win98-sunken');
+              if (badgeEl) {
+                badgeEl.textContent = profileData.currentLang === 'zh' ? '已复制 ✔' : 'COPIED ✔';
+                badgeEl.className = 'win98-sunken px-1.5 py-0.5 bg-green-100 text-green-900 text-[9px] font-bold';
+                setTimeout(() => {
+                  badgeEl.textContent = originalBadge;
+                  badgeEl.className = 'win98-sunken px-1.5 py-0.5 bg-yellow-100 text-yellow-900 text-[9px] font-bold';
+                }, 1800);
+              }
+            }).catch(() => {});
+          });
+        }
+
         socialsContainer.appendChild(link);
       });
     }

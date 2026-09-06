@@ -220,11 +220,11 @@
           </span>
         </div>
 
-        <!-- Icon 7: Socials & GitHub -->
+        <!-- Icon 7: Socials & Connect -->
         <div class="desktop-icon group flex flex-col items-center w-20 p-1 cursor-pointer" data-opens="window-social" tabindex="0">
-          <img src="/icons/network.svg" class="w-9 h-9 pixel-render pointer-events-none drop-shadow" alt="Social Connect" />
+          <img src="./icons/network.svg" class="w-9 h-9 pixel-render pointer-events-none drop-shadow" alt="Connect" />
           <span id="icon-title-social" class="icon-title text-[11px] text-white text-center font-win98 mt-1 px-1 py-0.5 leading-tight rounded-none group-hover:bg-[#000080]">
-            GitHub 与连接
+            连接
           </span>
         </div>
 
@@ -1126,18 +1126,18 @@
       </section>
 
       <!-- ========================================================================= -->
-      <!-- WINDOW 10: NETWORK / SOCIAL LINKS & GITHUB -->
+      <!-- WINDOW 10: NETWORK / SOCIAL LINKS & CONTACT -->
       <!-- ========================================================================= -->
       <section id="window-social" class="win98-window win98-raised absolute z-20 flex flex-col shadow-xl hidden" 
                style="width: 440px; left: calc(50% - 220px); top: 160px;"
-               data-title="GitHub 与连接" 
-               data-icon="/icons/network.svg"
+               data-title="连接" 
+               data-icon="./icons/network.svg"
                role="dialog" aria-label="Network Connections Window">
         
         <header class="title-bar win98-titlebar-active px-2 py-1 flex items-center justify-between cursor-move select-none shrink-0">
           <div class="flex items-center gap-1.5 overflow-hidden">
-            <img src="/icons/network.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
-            <span class="text-xs font-bold truncate">网络连接 - GitHub 与外部链接</span>
+            <img src="./icons/network.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <span class="text-xs font-bold truncate" id="window-social-title">连接 - 联系方式与网络链接</span>
           </div>
           <div class="flex items-center gap-1 shrink-0">
             <button class="btn-minimize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Minimize">_</button>
@@ -1150,15 +1150,16 @@
 
         <div class="p-4 bg-gray-200 space-y-3 text-xs">
           <div class="win98-sunken p-2 bg-white space-y-2">
-            <div class="font-bold text-[#000080] flex items-center gap-1.5">
-              <img src="/icons/network.svg" class="w-4 h-4 pixel-render inline" alt="" />
-              <span>王寅喆的网络链接与联系目录：</span>
+            <div class="font-bold text-[#000080] flex items-center gap-1.5" id="social-window-header">
+              <img src="./icons/network.svg" class="w-4 h-4 pixel-render inline" alt="" />
+              <span>王寅喆的个人联系方式与网络链接：</span>
             </div>
             <div id="socials-list" class="space-y-1.5"></div>
           </div>
 
-          <div class="flex justify-end">
-            <button class="win98-raised px-4 py-1 font-bold active:win98-pressed cursor-pointer" onclick="document.getElementById('window-social').querySelector('.btn-close').click()">
+          <div class="flex justify-between items-center text-[10px] text-gray-600">
+            <span>💡 点击可直接复制微信/手机或发送邮件</span>
+            <button class="win98-raised px-4 py-1 font-bold active:win98-pressed cursor-pointer text-xs" onclick="document.getElementById('window-social').querySelector('.btn-close').click()">
               关闭
             </button>
           </div>
