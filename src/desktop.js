@@ -160,7 +160,7 @@ export class DesktopController {
         tile.innerHTML = `
           <div>
             <div class="flex items-center gap-2 border-b border-gray-200 pb-1.5 mb-2">
-              <img src="${cat.icon || './icons/settings.svg'}" class="w-5 h-5 pixel-render shrink-0" alt="" />
+              <img src="${cat.icon || '/icons/settings.svg'}" class="w-5 h-5 pixel-render shrink-0" alt="" />
               <h4 class="font-bold text-xs text-[#000080] uppercase tracking-wide">${escapeHtml(cat.title)}</h4>
             </div>
             <ul class="space-y-1 pl-1 font-inter">
@@ -201,7 +201,7 @@ export class DesktopController {
       data.interests.forEach(interest => {
         const tag = document.createElement('span');
         tag.className = 'win98-raised px-2 py-0.5 bg-gray-100 text-gray-800 text-xs font-mono select-none hover:bg-yellow-100 flex items-center gap-1';
-        tag.innerHTML = `<img src="./icons/star.svg" class="w-3 h-3 pixel-render inline" alt="" /> <span>${escapeHtml(interest)}</span>`;
+        tag.innerHTML = `<img src="/icons/star.svg" class="w-3 h-3 pixel-render inline" alt="" /> <span>${escapeHtml(interest)}</span>`;
         interestsContainer.appendChild(tag);
       });
     }
@@ -219,7 +219,7 @@ export class DesktopController {
 
         item.innerHTML = `
           <div class="faq-header flex justify-between items-center cursor-pointer font-bold text-xs text-gray-900 hover:text-[#000080]">
-            <span class="flex items-center gap-1.5"><img src="./icons/question.svg" class="w-3.5 h-3.5 pixel-render inline shrink-0" alt="" /> <span>${escapeHtml(faq.question)}</span></span>
+            <span class="flex items-center gap-1.5"><img src="/icons/question.svg" class="w-3.5 h-3.5 pixel-render inline shrink-0" alt="" /> <span>${escapeHtml(faq.question)}</span></span>
             <span class="faq-toggle-icon win98-raised w-5 h-5 flex items-center justify-center font-mono text-sm leading-none bg-gray-200">${isOpen ? '-' : '+'}</span>
           </div>
           <div class="faq-content ${isOpen ? '' : 'hidden'} pt-2.5 mt-2.5 border-t border-gray-300 text-xs text-gray-700 leading-relaxed font-inter">
@@ -242,7 +242,7 @@ export class DesktopController {
         link.className = 'flex items-center justify-between p-2 hover:bg-blue-100 win98-raised text-black no-underline block cursor-pointer';
         link.innerHTML = `
           <span class="flex items-center gap-2 font-bold text-xs">
-            <img src="${soc.icon || './icons/network.svg'}" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <img src="${soc.icon || '/icons/network.svg'}" class="w-4 h-4 pixel-render shrink-0" alt="" /> 
             <span>${escapeHtml(soc.name)}</span>
           </span>
           <div class="flex items-center gap-2">
@@ -366,7 +366,7 @@ export class DesktopController {
           <div class="space-y-1">
             <div class="flex items-center justify-between gap-1">
               <h3 class="font-bold text-sm text-[#000080] flex items-center gap-1.5">
-                <img src="${proj.icon || './icons/document.svg'}" class="w-4 h-4 pixel-render shrink-0" alt="" />
+                <img src="${proj.icon || '/icons/document.svg'}" class="w-4 h-4 pixel-render shrink-0" alt="" /> 
                 <span>${escapeHtml(proj.title)}</span>
               </h3>
               <span class="win98-sunken px-1 text-[9px] font-mono ${proj.type === 'research' ? 'bg-amber-100 text-amber-900' : 'bg-cyan-100 text-cyan-900'} font-bold">
@@ -385,7 +385,7 @@ export class DesktopController {
 
         <div class="pt-2 border-t border-gray-200 flex items-center justify-between gap-2">
           <button class="btn-proj-details win98-raised px-2.5 py-1 text-xs font-bold hover:bg-gray-200 active:win98-pressed text-[#000080] flex items-center gap-1 shrink-0 cursor-pointer" data-id="${proj.id}">
-            <img src="./icons/properties.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span>${profileData.currentLang === 'zh' ? '查看属性' : 'Properties'}</span>
+            <img src="/icons/properties.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span>${profileData.currentLang === 'zh' ? '查看属性' : 'Properties'}</span>
           </button>
           
           ${isExternalLink 
@@ -448,7 +448,7 @@ export class DesktopController {
 
     if (titleEl) titleEl.textContent = `${proj.title} - 对象属性`;
     if (nameEl) nameEl.textContent = proj.title;
-    if (iconEl) iconEl.innerHTML = `<img src="${proj.icon || './icons/document.svg'}" class="w-8 h-8 pixel-render" alt="" />`;
+    if (iconEl) iconEl.innerHTML = `<img src="${proj.icon || '/icons/document.svg'}" class="w-8 h-8 pixel-render" alt="" />`;
     if (catEl) catEl.textContent = `${proj.category} | 版本: ${proj.version || '1.0'}`;
     if (descEl) descEl.textContent = proj.description;
     if (techEl) techEl.textContent = proj.techStack;
@@ -509,15 +509,15 @@ export class DesktopController {
         if (itemsList) {
           itemsList.innerHTML = `
             <div class="recycle-file-row flex justify-between items-center p-1 hover:bg-blue-100 border-b border-gray-100">
-              <span class="flex items-center"><img src="./icons/document.svg" class="w-3.5 h-3.5 pixel-render inline-block mr-1.5" alt="" />无聊且缺乏灵感的模板.zip</span>
+              <span class="flex items-center"><img src="/icons/document.svg" class="w-3.5 h-3.5 pixel-render inline-block mr-1.5" alt="" />无聊且缺乏灵感的模板.zip</span>
               <span class="text-gray-400 text-[10px]">1.2 MB</span>
             </div>
             <div class="recycle-file-row flex justify-between items-center p-1 hover:bg-blue-100 border-b border-gray-100">
-              <span class="flex items-center"><img src="./icons/document.svg" class="w-3.5 h-3.5 pixel-render inline-block mr-1.5" alt="" />fl_studio_未完成的trap编曲.flp</span>
+              <span class="flex items-center"><img src="/icons/document.svg" class="w-3.5 h-3.5 pixel-render inline-block mr-1.5" alt="" />fl_studio_未完成的trap编曲.flp</span>
               <span class="text-gray-400 text-[10px]">3.4 MB</span>
             </div>
             <div class="recycle-file-row flex justify-between items-center p-1 hover:bg-blue-100">
-              <span class="flex items-center"><img src="./icons/document.svg" class="w-3.5 h-3.5 pixel-render inline-block mr-1.5" alt="" />未经过偏差控制的废弃问卷数据.csv</span>
+              <span class="flex items-center"><img src="/icons/document.svg" class="w-3.5 h-3.5 pixel-render inline-block mr-1.5" alt="" />未经过偏差控制的废弃问卷数据.csv</span>
               <span class="text-gray-400 text-[10px]">540 KB</span>
             </div>
           `;
@@ -1235,7 +1235,7 @@ export class DesktopController {
         item.className = 'win98-sunken p-2.5 bg-white text-xs space-y-1';
         item.innerHTML = `
           <div class="flex justify-between items-center border-b border-gray-300 pb-1 font-bold text-[#000080]">
-            <span class="flex items-center gap-1.5"><img src="./icons/document.svg" class="w-3.5 h-3.5 pixel-render inline shrink-0" alt="" /> <span>${escapeHtml(entry.name)}</span></span>
+            <span class="flex items-center gap-1.5"><img src="/icons/document.svg" class="w-3.5 h-3.5 pixel-render inline shrink-0" alt="" /> <span>${escapeHtml(entry.name)}</span></span>
             <span class="text-gray-500 text-[10px] font-mono">${escapeHtml(entry.time)}</span>
           </div>
           <p class="text-gray-800 leading-relaxed font-inter">${escapeHtml(entry.message)}</p>
@@ -1304,7 +1304,7 @@ export class DesktopController {
           idx === 0 ? 'bg-[#000080] text-white' : 'text-black'
         }`;
         item.innerHTML = `
-          <span class="truncate font-mono flex items-center gap-1.5"><img src="./icons/cd.svg" class="w-3.5 h-3.5 pixel-render inline shrink-0" alt="" /> <span>${track.title}</span></span>
+          <span class="truncate font-mono flex items-center gap-1.5"><img src="/icons/cd.svg" class="w-3.5 h-3.5 pixel-render inline shrink-0" alt="" /> <span>${track.title}</span></span>
           <span class="text-[10px] opacity-75 font-mono ml-2">${audioEngine.formatTime(track.duration)}</span>
         `;
         item.addEventListener('click', () => {

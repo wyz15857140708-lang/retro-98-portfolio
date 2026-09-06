@@ -160,12 +160,12 @@ export class MinesweeperGame {
   setFace(state) {
     if (!this.faceBtnEl) return;
     const faceMap = {
-      'smile': './icons/mine-smile.svg',
-      'shock': './icons/mine-shock.svg',
-      'dead': './icons/mine-dead.svg',
-      'win': './icons/mine-win.svg'
+      'smile': '/icons/mine-smile.svg',
+      'shock': '/icons/mine-shock.svg',
+      'dead': '/icons/mine-dead.svg',
+      'win': '/icons/mine-win.svg'
     };
-    const iconSrc = faceMap[state] || './icons/mine-smile.svg';
+    const iconSrc = faceMap[state] || '/icons/mine-smile.svg';
     this.faceBtnEl.innerHTML = `<img src="${iconSrc}" class="w-5 h-5 pixel-render pointer-events-none" alt="${state}" />`;
   }
 
@@ -279,7 +279,7 @@ export class MinesweeperGame {
 
     const cellBtn = document.getElementById(`mine-cell-${r}-${c}`);
     if (cellBtn) {
-      cellBtn.innerHTML = cell.isFlagged ? '<img src="./icons/flag.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Flag" />' : '';
+      cellBtn.innerHTML = cell.isFlagged ? '<img src="/icons/flag.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Flag" />' : '';
     }
     audioEngine.playClick();
   }
@@ -302,12 +302,12 @@ export class MinesweeperGame {
           cellBtn.classList.add('win98-sunken');
           if (r === hitR && c === hitC) {
             cellBtn.classList.add('bg-red-500');
-            cellBtn.innerHTML = '<img src="./icons/mine-cell.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Mine" />';
+            cellBtn.innerHTML = '<img src="/icons/mine-cell.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Mine" />';
           } else if (!cell.isFlagged) {
-            cellBtn.innerHTML = '<img src="./icons/mine-cell.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Mine" />';
+            cellBtn.innerHTML = '<img src="/icons/mine-cell.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Mine" />';
           }
         } else if (cell.isFlagged && !cell.isMine) {
-          cellBtn.innerHTML = '<img src="./icons/mine-wrong.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Wrong" />';
+          cellBtn.innerHTML = '<img src="/icons/mine-wrong.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Wrong" />';
         }
       }
     }
