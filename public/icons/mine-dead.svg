@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" shape-rendering="crispEdges">
+    <circle cx="12" cy="12" r="10" fill="#FFFF00" stroke="#000000" stroke-width="1"/>
+    <!-- X eyes -->
+    <path d="M6 7 l4 4 m-4 0 l4 -4 M14 7 l4 4 m-4 0 l4 -4" stroke="#000000" stroke-width="1.5"/>
+    <path d="M8 17 q4 -3 8 0" fill="none" stroke="#000000" stroke-width="1.5"/>
+  </svg>

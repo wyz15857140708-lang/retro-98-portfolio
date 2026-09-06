@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+  <rect x="1" y="1" width="14" height="14" fill="#fff" stroke="#000" stroke-width="1"/>
+  <!-- axes -->
+  <line x1="3" y1="2" x2="3" y2="13" stroke="#808080" stroke-width="1"/>
+  <line x1="3" y1="13" x2="14" y2="13" stroke="#808080" stroke-width="1"/>
+  <!-- bars -->
+  <rect x="5" y="8" width="2" height="5" fill="#000080"/>
+  <rect x="8" y="4" width="2" height="9" fill="#ff0000"/>
+  <rect x="11" y="6" width="2" height="7" fill="#008000"/>
+  <!-- line -->
+  <path d="M4,10 L6,7 L9,3 L12,5" fill="none" stroke="#ffff00" stroke-width="1"/>
+</svg>

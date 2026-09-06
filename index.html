@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="h-full w-full overflow-hidden select-none">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>王寅喆 / Yinzhe “Tico” Wang - Windows 98 个人作品集</title>
+  <meta name="description" content="王寅喆 (Yinzhe “Tico” Wang) - 创意开发者、数字设计者、学生研究者。Windows 98 复古桌面仿真作品集。" />
+  
+  <!-- Google Fonts: Handjet (700, 900), Inter (400, 700), VT323 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@700;900&family=Inter:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet">
+</head>
+<body class="h-full w-full bg-[#008080] text-black font-win98 overflow-hidden relative cursor-default">
+
+  <!-- CRT Visual Overlays (Stacking Context Top) -->
+  <div class="crt-jitter" aria-hidden="true"></div>
+  <div class="crt-scanlines" aria-hidden="true"></div>
+  <div class="crt-roll" aria-hidden="true"></div>
+
+  <!-- CRT Flash Squish Overlay -->
+  <div id="crt-flash" class="fixed inset-0 bg-white z-[950] hidden pointer-events-none"></div>
+
+  <!-- FULLSCREEN SCREENSAVER CANVAS OVERLAY (z-999999) -->
+  <canvas id="screensaver-canvas" class="hidden cursor-none" aria-hidden="true"></canvas>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 1: BIOS BOOT SCREEN -->
+  <!-- ========================================================================= -->
+  <section id="bios-screen" class="fixed inset-0 bg-black text-gray-200 z-[1000] p-6 sm:p-10 font-vt323 overflow-hidden flex flex-col justify-between" role="region" aria-label="BIOS Boot Sequence">
+    <div class="max-w-4xl mx-auto w-full">
+      <!-- Energy Star / BIOS Header -->
+      <div class="flex justify-between items-start border-b border-gray-700 pb-3 mb-4">
+        <div>
+          <h1 class="text-2xl sm:text-3xl text-yellow-400 font-bold tracking-wider">AWARD MODULAR BIOS v4.51PG</h1>
+          <p class="text-gray-400 text-sm sm:text-base">王寅喆工作站 98 // 创意开发与学术研究系统 (TICO-STATION 98)</p>
+        </div>
+        <div class="border border-green-500 p-1 text-center hidden sm:block">
+          <div class="text-[10px] text-green-400 leading-tight">energy</div>
+          <div class="text-xs font-bold text-green-300">EPA POLLUTION PREVENTER</div>
+        </div>
+      </div>
+
+      <!-- Typing Output -->
+      <div id="bios-text" class="space-y-1 text-base sm:text-lg"></div>
+    </div>
+
+    <!-- BIOS Footer Instructions -->
+    <div class="max-w-4xl mx-auto w-full border-t border-gray-700 pt-3 text-xs sm:text-sm text-gray-400 flex flex-wrap justify-between items-center gap-2">
+      <div>按 <span id="bios-btn-del" class="text-yellow-300 font-bold underline cursor-pointer hover:text-white">DEL</span> 进入 CMOS 设置实用程序</div>
+      <div class="text-yellow-400 font-bold animate-pulse">按 [回车键 ENTER] 继续启动</div>
+      <div>09/06/1998-i440BX-TICO-RESEARCH-00</div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 1A: AWARD BIOS CMOS SETUP UTILITY -->
+  <!-- ========================================================================= -->
+  <section id="cmos-setup-screen" class="fixed inset-0 bios-cmos-screen z-[1050] p-4 sm:p-8 font-vt323 overflow-hidden hidden flex-col justify-between select-none" role="dialog" aria-label="Award BIOS CMOS Setup Utility">
+    <div class="max-w-4xl mx-auto w-full border-2 border-yellow-300 p-4 space-y-4">
+      <div class="text-center space-y-1">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-widest text-white">ROM PCI/ISA BIOS (2A69KG0E)</h2>
+        <div class="cmos-title-banner text-lg sm:text-xl py-0.5">CMOS SETUP UTILITY - AWARD SOFTWARE, INC. (王寅喆定制版)</div>
+      </div>
+
+      <!-- Dual Column Menu Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-lg sm:text-xl pt-2">
+        <div class="space-y-1.5 border border-cyan-400 p-3">
+          <div class="cmos-menu-item active">STANDARD CMOS SETUP (标准 CMOS 设置)</div>
+          <div class="cmos-menu-item">BIOS FEATURES SETUP (BIOS 功能特性)</div>
+          <div class="cmos-menu-item">CHIPSET FEATURES SETUP (芯片组超频)</div>
+          <div class="cmos-menu-item">POWER MANAGEMENT SETUP (电源管理)</div>
+          <div class="cmos-menu-item">PNP/PCI CONFIGURATION (即插即用配置)</div>
+          <div class="cmos-menu-item">LOAD BIOS DEFAULTS (载入默认配置)</div>
+        </div>
+
+        <div class="space-y-1.5 border border-cyan-400 p-3">
+          <div class="cmos-menu-item">INTEGRATED PERIPHERALS (集成外设)</div>
+          <div class="cmos-menu-item">SUPERVISOR PASSWORD (管理员密码)</div>
+          <div class="cmos-menu-item">USER PASSWORD (用户密码)</div>
+          <div class="cmos-menu-item">IDE HDD AUTO DETECTION (自动检测硬盘)</div>
+          <div class="cmos-menu-item cmos-exit-item text-yellow-300 font-bold">SAVE & EXIT SETUP (保存并退出)</div>
+          <div class="cmos-menu-item cmos-exit-item text-red-300">EXIT WITHOUT SAVING (放弃保存并退出)</div>
+        </div>
+      </div>
+
+      <!-- Status & Spec Box -->
+      <div class="border border-yellow-300 p-2 text-base text-gray-300 flex justify-between items-center">
+        <div>CPU: Pentium II 450MHz | RAM: 131072 KB | HDD: Quantum 8.4GB</div>
+        <div class="text-yellow-300 font-bold">Time: 14:53:00</div>
+      </div>
+    </div>
+
+    <!-- CMOS Footer -->
+    <div class="max-w-4xl mx-auto w-full text-center text-sm sm:text-base text-yellow-300 flex justify-around border-t border-cyan-400 pt-2">
+      <div>ESC : 退出 / 启动 Windows</div>
+      <div>↑ ↓ ← → : 选择项目</div>
+      <div>F10 : 保存并退出设置</div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 1B: WINDOWS 98 LOGIN SCREEN -->
+  <!-- ========================================================================= -->
+  <section id="login-screen" class="fixed inset-0 bg-[#008080] z-[900] hidden items-center justify-center p-4" role="dialog" aria-label="Welcome to Windows Login">
+    <div class="win98-raised w-full max-w-md p-1 shadow-2xl">
+      <!-- Title Bar -->
+      <div class="win98-titlebar-active px-2 py-1 flex items-center justify-between font-bold text-xs">
+        <div class="flex items-center gap-1.5">
+          <img src="https://framerusercontent.com/images/97Zc0zw4nM87xhO3n8HHwelPAA.svg" class="w-4 h-4 pixel-render" alt="" />
+          <span id="login-title-text">欢迎使用 Windows 98</span>
+        </div>
+        <button id="login-close-btn" class="win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Close">
+          <svg viewBox="0 0 8 7" class="w-2.5 h-2.5 pointer-events-none"><path d="M0 0 L8 7 M8 0 L0 7" stroke="#000" stroke-width="1.2"></path></svg>
+        </button>
+      </div>
+
+      <!-- Dialog Body -->
+      <div class="p-4 space-y-4">
+        <div class="flex gap-4 items-center">
+          <div class="win98-sunken p-0.5 bg-white shrink-0">
+            <img id="login-avatar" src="/tico_avatar.jpg" class="w-16 h-16 object-cover pixel-render" alt="User Avatar" />
+          </div>
+          <div class="text-xs text-gray-800 space-y-1">
+            <p id="login-subtitle-text" class="font-bold text-sm">登录到 王寅喆 (Tico Wang) 的个人电脑工作站</p>
+            <p id="login-role-text" class="text-[11px] text-gray-600">创意开发 • 数字设计 • 学术研究</p>
+          </div>
+        </div>
+
+        <div class="space-y-2 text-xs">
+          <div class="flex items-center gap-3">
+            <label for="login-username" class="w-24 text-right font-bold" id="login-user-label"><u>用</u>户名(U):</label>
+            <input id="login-username" type="text" value="王寅喆 / Yinzhe “Tico” Wang" class="win98-sunken-field flex-1 px-2 py-1 text-xs outline-none focus:bg-blue-50" />
+          </div>
+          <div class="flex items-center gap-3">
+            <label for="login-password" class="w-24 text-right font-bold" id="login-pass-label"><u>密</u>码(P):</label>
+            <div class="win98-sunken-field flex-1 px-2 py-1 text-xs flex items-center bg-white">
+              <span class="tracking-widest font-black text-sm">••••••••</span>
+              <span class="w-1.5 h-3.5 bg-black ml-0.5 blink-caret"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dialog Buttons -->
+        <div class="flex justify-end gap-2 pt-2 border-t border-gray-300">
+          <button id="login-confirm-btn" class="win98-raised win-focus px-5 py-1 text-xs font-bold hover:bg-gray-200 active:win98-pressed cursor-pointer">
+            确定
+          </button>
+          <button id="login-cancel-btn" class="win98-raised win-focus px-4 py-1 text-xs hover:bg-gray-200 active:win98-pressed cursor-pointer">
+            取消
+          </button>
+          <button class="win98-raised win-focus px-4 py-1 text-xs hover:bg-gray-200 active:win98-pressed cursor-pointer" onclick="alert('输入任何密码或直接按 [确定] 即可登录工作站。')">
+            帮助(H)
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN DESKTOP ENVIRONMENT -->
+  <!-- ========================================================================= -->
+  <main id="desktop" class="fixed inset-0 z-0 overflow-hidden flex flex-col justify-between hidden" role="main">
+    
+    <!-- DESKTOP WORKSPACE AREA (z-10 to z-60) -->
+    <div id="desktop-area" class="relative flex-1 w-full h-full overflow-hidden bg-cover bg-center" style="background-image: url('https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/36f62ccf-95f7-452d-9fab-8de842236a62_1600w.png');">
+      <div id="desktop-wallpaper" class="absolute inset-0 z-0"></div>
+
+      <!-- DESKTOP ICONS GRID (z-10, 2-Column Vertical Layout) -->
+      <!-- DESKTOP ICONS GRID (z-10, 2-Column Vertical Layout: 4 rows x 2 cols) -->
+      <nav id="desktop-icons" class="absolute top-4 left-4 z-10 grid grid-flow-col grid-rows-4 gap-x-6 gap-y-4 select-none" aria-label="Desktop Shortcuts">
+        
+        <!-- Column 1: System, Portfolio, Notepad, Paint -->
+        <!-- Icon 1: My Computer -->
+        <div class="desktop-icon group flex flex-col items-center w-20 p-1 cursor-pointer" data-opens="window-computer" tabindex="0">
+          <img src="/icons/computer.svg" class="w-9 h-9 pixel-render pointer-events-none drop-shadow" alt="My Computer" />
+          <span id="icon-title-computer" class="icon-title text-[11px] text-white text-center font-win98 mt-1 px-1 py-0.5 leading-tight rounded-none group-hover:bg-[#000080]">
+            我的电脑
+          </span>
+        </div>
+
+        <!-- Icon 2: Main Portfolio -->
+        <div class="desktop-icon group flex flex-col items-center w-20 p-1 cursor-pointer" data-opens="window-portfolio" tabindex="0">
+          <img src="https://framerusercontent.com/images/bm5UGJSuwEUFc8TX2JS3qgoDATY.svg" class="w-9 h-9 pixel-render pointer-events-none drop-shadow" alt="Portfolio" />
+          <span id="icon-title-portfolio" class="icon-title text-[11px] text-white text-center font-win98 mt-1 px-1 py-0.5 leading-tight rounded-none group-hover:bg-[#000080]">
+            王寅喆的作品集
+          </span>
+        </div>
+
+        <!-- Icon 3: Notepad -->
+        <div class="desktop-icon group flex flex-col items-center w-20 p-1 cursor-pointer" data-opens="window-notepad" tabindex="0">
+          <img src="/icons/notepad.svg" class="w-9 h-9 pixel-render pointer-events-none drop-shadow" alt="Notepad" />
+          <span id="icon-title-notepad" class="icon-title text-[11px] text-white text-center font-win98 mt-1 px-1 py-0.5 leading-tight rounded-none group-hover:bg-[#000080]">
+            记事本 (简历)
+          </span>
+        </div>
+
+        <!-- Icon 4: MS Paint (画图) -->
+        <div class="desktop-icon group flex flex-col items-center w-20 p-1 cursor-pointer" data-opens="window-paint" tabindex="0">
+          <img src="/icons/paint.svg" class="w-9 h-9 pixel-render pointer-events-none drop-shadow" alt="Paint" />
+          <span id="icon-title-paint" class="icon-title text-[11px] text-white text-center font-win98 mt-1 px-1 py-0.5 leading-tight rounded-none group-hover:bg-[#000080]">
+            画图程序
+          </span>
+        </div>
+
+        <!-- Column 2: Minesweeper, CD Player, Socials, Recycle Bin -->
+        <!-- Icon 5: Minesweeper -->
+        <div class="desktop-icon group flex flex-col items-center w-20 p-1 cursor-pointer" data-opens="window-minesweeper" tabindex="0">
+          <img src="/icons/minesweeper.svg" class="w-9 h-9 pixel-render pointer-events-none drop-shadow" alt="Minesweeper" />
+          <span id="icon-title-minesweeper" class="icon-title text-[11px] text-white text-center font-win98 mt-1 px-1 py-0.5 leading-tight rounded-none group-hover:bg-[#000080]">
+            扫雷游戏
+          </span>
+        </div>
+
+        <!-- Icon 6: Music Player -->
+        <div class="desktop-icon group flex flex-col items-center w-20 p-1 cursor-pointer" data-opens="window-music" tabindex="0">
+          <img src="/icons/cd.svg" class="w-9 h-9 pixel-render pointer-events-none drop-shadow" alt="Music Player" />
+          <span id="icon-title-music" class="icon-title text-[11px] text-white text-center font-win98 mt-1 px-1 py-0.5 leading-tight rounded-none group-hover:bg-[#000080]">
+            CD 播放机
+          </span>
+        </div>
+
+        <!-- Icon 7: Socials & GitHub -->
+        <div class="desktop-icon group flex flex-col items-center w-20 p-1 cursor-pointer" data-opens="window-social" tabindex="0">
+          <img src="/icons/network.svg" class="w-9 h-9 pixel-render pointer-events-none drop-shadow" alt="Social Connect" />
+          <span id="icon-title-social" class="icon-title text-[11px] text-white text-center font-win98 mt-1 px-1 py-0.5 leading-tight rounded-none group-hover:bg-[#000080]">
+            GitHub 与连接
+          </span>
+        </div>
+
+        <!-- Icon 8: Recycle Bin -->
+        <div class="desktop-icon group flex flex-col items-center w-20 p-1 cursor-pointer" data-opens="window-recycle" tabindex="0">
+          <img src="https://framerusercontent.com/images/aUiO9TgRYS71ppQpJSwLrc9Z9M.png" class="w-9 h-9 pixel-render pointer-events-none drop-shadow" alt="Recycle Bin" />
+          <span id="icon-title-recycle" class="icon-title text-[11px] text-white text-center font-win98 mt-1 px-1 py-0.5 leading-tight rounded-none group-hover:bg-[#000080]">
+            回收站
+          </span>
+        </div>
+      </nav>
+
+      <!-- ========================================================================= -->
+      <!-- WINDOW 1: MAIN PORTFOLIO WINDOW -->
+      <!-- ========================================================================= -->
+      <section id="window-portfolio" class="win98-window win98-raised absolute z-30 flex flex-col shadow-2xl max-w-[95vw]" 
+               style="width: 860px; height: 620px; left: calc(50% - 430px); top: 15px;"
+               data-title="王寅喆的作品集" 
+               data-icon="https://framerusercontent.com/images/bm5UGJSuwEUFc8TX2JS3qgoDATY.svg"
+               role="dialog" aria-label="Main Portfolio Window">
+        
+        <!-- Window Title Bar -->
+        <header class="title-bar win98-titlebar-active px-2 py-1 flex items-center justify-between cursor-move select-none shrink-0">
+          <div class="flex items-center gap-1.5 overflow-hidden">
+            <img src="https://framerusercontent.com/images/bm5UGJSuwEUFc8TX2JS3qgoDATY.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <span id="window-title-portfolio" class="text-xs font-bold truncate">C:\王寅喆\作品集\index.html - Microsoft 网页浏览器 5.0</span>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button class="btn-minimize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Minimize">_</button>
+            <button class="btn-maximize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Maximize">□</button>
+            <button class="btn-close win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Close">
+              <svg viewBox="0 0 8 7" class="w-2.5 h-2.5 pointer-events-none"><path d="M0 0 L8 7 M8 0 L0 7" stroke="#000" stroke-width="1.2"></path></svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Menu Bar -->
+        <nav class="win98-sunken-sm bg-gray-200 px-2 py-0.5 flex gap-4 text-xs select-none border-b border-gray-400 shrink-0" aria-label="Window Menu">
+          <div class="relative">
+            <button id="menu-btn-file" class="menu-bar-btn px-1 hover:bg-[#000080] hover:text-white"><u>文</u>件(F)</button>
+            <div class="menu-dropdown hidden absolute left-0 top-full win98-raised py-1 w-36 shadow-lg z-50 text-black">
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="window.print()"><u>打</u>印简历...</div>
+              <div class="border-t border-gray-400 my-1"></div>
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="document.getElementById('window-portfolio').querySelector('.btn-close').click()"><u>退</u>出(X)</div>
+            </div>
+          </div>
+          <div class="relative">
+            <button id="menu-btn-edit" class="menu-bar-btn px-1 hover:bg-[#000080] hover:text-white"><u>编</u>辑(E)</button>
+            <div class="menu-dropdown hidden absolute left-0 top-full win98-raised py-1 w-40 shadow-lg z-50 text-black">
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="navigator.clipboard.writeText('https://github.com/wyz15857140708-lang')"><u>复</u>制 GitHub 链接</div>
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer">全选(A)</div>
+            </div>
+          </div>
+          <div class="relative">
+            <button id="menu-btn-view" class="menu-bar-btn px-1 hover:bg-[#000080] hover:text-white"><u>查</u>看(V)</button>
+            <div class="menu-dropdown hidden absolute left-0 top-full win98-raised py-1 w-48 shadow-lg z-50 text-black">
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="document.getElementById('tray-crt-icon').click()">切换 <u>C</u>RT 显像管效果</div>
+              <div class="border-t border-gray-400 my-1"></div>
+              <div id="menu-lang-zh" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer font-bold flex items-center gap-1.5"><img src="/icons/globe.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> 中文版 (简体)</div>
+              <div id="menu-lang-en" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer flex items-center gap-1.5"><img src="/icons/globe.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> English (US)</div>
+              <div class="border-t border-gray-400 my-1"></div>
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="location.reload()"><u>刷</u>新(R)</div>
+            </div>
+          </div>
+          <div class="relative">
+            <button id="menu-btn-go" class="menu-bar-btn px-1 hover:bg-[#000080] hover:text-white"><u>转</u>到(G)</button>
+            <div class="menu-dropdown hidden absolute left-0 top-full win98-raised py-1 w-44 shadow-lg z-50 text-black">
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="document.getElementById('section-work').scrollIntoView()"><u>精</u>选项目 (Work)</div>
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="document.getElementById('section-skills').scrollIntoView()"><u>专</u>业技能 (Skills)</div>
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="document.getElementById('section-faq').scrollIntoView()"><u>常</u>见问题 (FAQ)</div>
+            </div>
+          </div>
+          <div class="relative">
+            <button id="menu-btn-help" class="menu-bar-btn px-1 hover:bg-[#000080] hover:text-white"><u>帮</u>助(H)</button>
+            <div class="menu-dropdown hidden absolute left-0 top-full win98-raised py-1 w-48 shadow-lg z-50 text-black">
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="alert('王寅喆 (Yinzhe “Tico” Wang) - Windows 98 复古个人作品集\n创意开发者 / 数字设计者 / 学生研究者')">关于 <u>王</u>寅喆 (About)</div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Explorer Toolbar -->
+        <div class="px-2 py-1 bg-gray-200 flex items-center justify-between border-b border-gray-400 shrink-0 text-xs select-none">
+          <div class="flex items-center gap-1">
+            <button id="tb-back" class="win98-raised px-2 py-0.5 flex items-center gap-1 hover:bg-gray-100 active:win98-pressed cursor-pointer" title="后退到精选项目">
+              <span>◀</span> <span>后退</span>
+            </button>
+            <button id="tb-forward" class="win98-raised px-2 py-0.5 flex items-center gap-1 hover:bg-gray-100 active:win98-pressed cursor-pointer" title="前进到专业领域">
+              <span>前进</span> <span>▶</span>
+            </button>
+            <button id="tb-refresh" class="win98-raised px-2 py-0.5 flex items-center gap-1 hover:bg-gray-100 active:win98-pressed cursor-pointer" title="刷新页面">
+              <span>↻</span> <span>刷新</span>
+            </button>
+            <button id="tb-home" class="win98-raised px-2 py-0.5 flex items-center gap-1 hover:bg-gray-100 active:win98-pressed cursor-pointer" title="回到顶部">
+              <img src="/icons/home.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span>主页</span>
+            </button>
+            <div class="h-5 border-l border-gray-400 border-r border-white mx-1"></div>
+            <button id="tb-print" class="win98-raised px-2 py-0.5 flex items-center gap-1 hover:bg-gray-100 active:win98-pressed cursor-pointer" title="打印简历">
+              <img src="/icons/print.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span>打印</span>
+            </button>
+          </div>
+
+          <!-- Spinning Internet Explorer Globe -->
+          <div class="w-6 h-6 win98-sunken bg-black flex items-center justify-center text-sm shadow">
+            <img src="/icons/globe.svg" class="w-4 h-4 pixel-render inline ie-logo-spin" alt="" />
+          </div>
+        </div>
+
+        <!-- Address Bar -->
+        <div class="px-2 py-1 bg-gray-200 flex items-center gap-2 text-xs border-b border-gray-400 shrink-0">
+          <span class="font-bold text-gray-700" id="address-label"><u>地</u>址(A):</span>
+          <div class="win98-sunken-field flex-1 px-2 py-0.5 bg-white text-xs text-gray-800 font-mono truncate">
+            http://www.tico-wang.dev/portfolio/1998/index.htm
+          </div>
+          <button class="win98-raised px-2 py-0.5 text-xs font-bold active:win98-pressed flex items-center gap-1 cursor-pointer">
+            <span>转到</span> ➔
+          </button>
+        </div>
+
+        <!-- Scrollable Window Content Body -->
+        <div class="win98-scrollbar flex-1 overflow-y-auto overflow-x-hidden p-4 sm:p-6 bg-[#C4D6E8] bg-cover bg-fixed relative" 
+             style="background-image: url('https://framerusercontent.com/images/CY9nFVcElQuS0aRbAPoUP4Q5xU.jpeg');">
+          
+          <div class="max-w-3xl mx-auto space-y-6">
+
+            <!-- HEADER BANNER & PROFILE CARD -->
+            <div class="win98-raised p-1 shadow-md bg-gray-200">
+              <div class="win98-sunken overflow-hidden bg-black max-h-48 relative">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/8d2b9d1f-d641-4062-9af5-a0a817bcc1e4_3840w.png" 
+                     class="w-full h-full object-cover pixel-render" 
+                     alt="Retro 98 Banner" />
+                <div class="absolute bottom-2 left-2 bg-black/70 px-2.5 py-1 text-yellow-300 font-vt323 text-base">
+                  系统状态: 在线 // 王寅喆工作站就绪 (TICO-STATION READY)
+                </div>
+              </div>
+
+              <!-- Profile Details -->
+              <div class="p-4 sm:p-5 flex flex-col sm:flex-row gap-5 items-center sm:items-start bg-[#DEDEDE]">
+                <div class="win98-sunken p-1 bg-white shrink-0">
+                  <img id="profile-avatar" src="/tico_avatar.jpg" 
+                       class="w-28 h-28 object-cover pixel-render border border-gray-300" 
+                       alt="王寅喆肖像" />
+                </div>
+                
+                <div class="space-y-2 text-center sm:text-left flex-1">
+                  <div class="flex flex-wrap items-center justify-center sm:justify-between gap-2">
+                    <div>
+                      <h1 id="profile-name" class="font-handjet text-3xl sm:text-4xl font-black tracking-wider text-[#000080] uppercase">
+                        王寅喆 / YINZHE “TICO” WANG
+                      </h1>
+                      <p id="profile-title" class="text-xs text-gray-800 font-bold tracking-tight">
+                        创意开发者 / 数字设计者 / 学生研究者
+                      </p>
+                    </div>
+                    <span id="profile-status" class="win98-sunken px-2 py-0.5 bg-green-100 text-green-800 text-[10px] font-mono font-bold">
+                      ● 正在开发新项目 / 开放合作
+                    </span>
+                  </div>
+
+                  <!-- Tagline Banner -->
+                  <div class="win98-sunken p-2 bg-yellow-50 text-xs font-inter font-semibold text-gray-800 border-l-4 border-[#000080]">
+                    <span id="profile-tagline">“用代码、设计、音乐与研究，把感兴趣的想法变成可以真正体验的数字作品。”</span>
+                  </div>
+
+                  <!-- Multi-Paragraph Bio -->
+                  <div id="profile-bio-container" class="space-y-2 pt-1">
+                    <!-- Populated dynamically from profile-data.js -->
+                  </div>
+
+                  <div class="pt-3 flex flex-wrap gap-2 justify-center sm:justify-start">
+                    <button class="win98-raised px-3 py-1 text-xs font-bold hover:bg-gray-100 active:win98-pressed flex items-center gap-1.5 cursor-pointer" onclick="document.getElementById('section-work').scrollIntoView()">
+                      <img src="/icons/folder.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> 浏览精选项目 (7)
+                    </button>
+                    <a href="https://wyz15857140708-lang.github.io/Carti-website/" target="_blank" rel="noopener noreferrer" class="win98-raised px-3 py-1 text-xs font-bold hover:bg-gray-100 active:win98-pressed flex items-center gap-1.5 no-underline text-black cursor-pointer">
+                      <img src="/icons/cd.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> Carti 网站在线 Demo ➔
+                    </a>
+                    <a href="https://github.com/wyz15857140708-lang" target="_blank" rel="noopener noreferrer" class="win98-raised px-3 py-1 text-xs font-bold hover:bg-gray-100 active:win98-pressed flex items-center gap-1.5 no-underline text-black cursor-pointer">
+                      <img src="/icons/dos.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> GitHub 个人主页
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION: FEATURED WORK / PROJECTS -->
+            <section id="section-work" class="win98-raised p-4 bg-gray-200 space-y-4">
+              <div class="win98-titlebar-active px-2 py-1 flex items-center justify-between font-bold text-xs">
+                <span id="title-section-work" class="flex items-center gap-1.5">
+                  <img src="/icons/folder.svg" class="w-4 h-4 pixel-render inline" alt="" />
+                  <span>精选项目经历目录 (C:\王寅喆\项目库\*)</span>
+                </span>
+                <span id="projects-count" class="text-[10px] font-mono">共 7 项成果</span>
+              </div>
+
+              <!-- Filter Tabs -->
+              <div class="flex flex-wrap gap-1.5 text-xs select-none">
+                <button id="filter-btn-all" class="project-filter-btn win98-pressed px-3 py-1 font-bold text-xs bg-[#000080] text-white cursor-pointer flex items-center gap-1" data-filter="all">
+                  <img src="/icons/star.svg" class="w-3 h-3 pixel-render inline" alt="" /> 全部项目 (7)
+                </button>
+                <button id="filter-btn-dev" class="project-filter-btn win98-raised px-3 py-1 font-bold text-xs text-black hover:bg-gray-100 cursor-pointer flex items-center gap-1" data-filter="dev">
+                  <img src="/icons/dos.svg" class="w-3 h-3 pixel-render inline" alt="" /> 创意开发与 Web (4)
+                </button>
+                <button id="filter-btn-research" class="project-filter-btn win98-raised px-3 py-1 font-bold text-xs text-black hover:bg-gray-100 cursor-pointer flex items-center gap-1" data-filter="research">
+                  <img src="/icons/document.svg" class="w-3 h-3 pixel-render inline" alt="" /> 学术与社会研究 (3)
+                </button>
+              </div>
+
+              <!-- Projects Grid -->
+              <div id="projects-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Dynamically populated from profile-data.js -->
+              </div>
+            </section>
+
+            <!-- SECTION: SKILLS & EXPERTISE -->
+            <section id="section-skills" class="win98-raised p-4 bg-gray-200 space-y-4">
+              <div class="win98-titlebar-active px-2 py-1 flex items-center justify-between font-bold text-xs">
+                <span id="title-section-skills" class="flex items-center gap-1.5">
+                  <img src="/icons/settings.svg" class="w-4 h-4 pixel-render inline" alt="" />
+                  <span>技能与专业领域模块 (5 大核心领域)</span>
+                </span>
+                <span class="text-[10px] font-mono">专业矩阵</span>
+              </div>
+
+              <div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <!-- Dynamically populated from profile-data.js -->
+              </div>
+
+              <!-- Technologies & Tools Matrix -->
+              <div class="space-y-2 pt-2">
+                <div class="text-xs font-bold text-gray-800 border-b border-gray-400 pb-1 flex items-center gap-1.5">
+                  <img src="/icons/settings.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+                  <span>常用技术栈与工具矩阵 (TECHNOLOGIES & TOOLS):</span>
+                </div>
+                <div id="tools-matrix" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                  <!-- Dynamically populated -->
+                </div>
+              </div>
+            </section>
+
+            <!-- SECTION: PERSONAL INTERESTS -->
+            <section class="win98-raised p-4 bg-gray-200 space-y-3">
+              <div class="win98-titlebar-active px-2 py-1 flex items-center justify-between font-bold text-xs">
+                <span id="title-section-interests" class="flex items-center gap-1.5">
+                  <img src="/icons/star.svg" class="w-4 h-4 pixel-render inline" alt="" />
+                  <span>跨学科兴趣与探索 (INTERESTS)</span>
+                </span>
+                <span class="text-[10px] font-mono">好奇心引擎</span>
+              </div>
+
+              <div class="p-3 bg-white win98-sunken space-y-2">
+                <p class="text-xs text-gray-700 leading-relaxed font-inter">
+                  在常规 Web 开发之外我持续探索的跨学科领域，连接创意科技、社会科学、数字艺术与青年文化：
+                </p>
+                <div id="interests-tags" class="flex flex-wrap gap-1.5 pt-1">
+                  <!-- Dynamically populated -->
+                </div>
+              </div>
+            </section>
+
+            <!-- SECTION: FAQ ACCORDION (+ / - TOGGLES) -->
+            <section id="section-faq" class="win98-raised p-4 bg-gray-200 space-y-3">
+              <div class="win98-titlebar-active px-2 py-1 flex items-center justify-between font-bold text-xs">
+                <span id="title-section-faq" class="flex items-center gap-1.5">
+                  <img src="/icons/help.svg" class="w-4 h-4 pixel-render inline" alt="" />
+                  <span>常见问题解答 (FAQ.TXT)</span>
+                </span>
+                <span class="text-[10px] font-mono">理念与合作</span>
+              </div>
+
+              <div id="faq-container" class="space-y-2 text-xs">
+                <!-- Dynamically populated from profile-data.js -->
+              </div>
+            </section>
+
+            <!-- SECTION: INTERACTIVE GUESTBOOK -->
+            <section id="section-guestbook" class="win98-raised p-4 bg-gray-200 space-y-4">
+              <div class="win98-titlebar-active px-2 py-1 flex items-center justify-between font-bold text-xs">
+                <span id="title-section-guestbook" class="flex items-center gap-1.5">
+                  <img src="/icons/guestbook.svg" class="w-4 h-4 pixel-render inline" alt="" />
+                  <span>访客留言簿 (GUESTBK.DB)</span>
+                </span>
+                <span class="text-[10px] font-mono">欢迎留下印记</span>
+              </div>
+
+              <div class="space-y-4">
+                <form id="guestbook-form" class="win98-sunken p-3 bg-white space-y-3">
+                  <div id="guestbook-prompt-title" class="font-bold text-xs text-[#000080]">给王寅喆 (Tico) 留言：</div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    <div>
+                      <label id="guestbook-name-label" for="guestbook-name" class="block font-bold mb-1">您的姓名 / 昵称：</label>
+                      <input id="guestbook-name" type="text" placeholder="例如: 极客99 / 访客" class="win98-sunken-field w-full px-2 py-1 outline-none text-xs" required />
+                    </div>
+                    <div>
+                      <label id="guestbook-msg-label" for="guestbook-msg" class="block font-bold mb-1">留言内容：</label>
+                      <input id="guestbook-msg" type="text" placeholder="写下您的留言、反馈或合作意向..." class="win98-sunken-field w-full px-2 py-1 outline-none text-xs" required />
+                    </div>
+                  </div>
+                  <div class="flex justify-end">
+                    <button id="guestbook-submit-btn" type="submit" class="win98-raised px-4 py-1 text-xs font-bold hover:bg-gray-200 active:win98-pressed cursor-pointer flex items-center gap-1">
+                      <span>发送留言</span> <img src="/icons/rocket.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+                    </button>
+                  </div>
+                </form>
+
+                <div class="space-y-2">
+                  <div id="guestbook-recent-title" class="text-xs font-bold text-gray-700">最新留言记录：</div>
+                  <div id="guestbook-list" class="space-y-2 max-h-44 overflow-y-auto win98-scrollbar pr-1"></div>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+
+        <!-- Window Status Bar -->
+        <footer class="win98-sunken-sm bg-gray-200 px-2 py-0.5 flex justify-between items-center text-[11px] text-gray-700 select-none border-t border-gray-400 shrink-0">
+          <div class="flex items-center gap-3">
+            <span id="status-bar-done">就绪</span>
+            <span id="status-bar-objects" class="border-l border-gray-400 pl-3">已载入 7 个项目</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span id="status-bar-zone" class="win98-sunken px-1.5 py-0.2 bg-gray-100 text-[10px]">本地 Internet 区域</span>
+          </div>
+        </footer>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- WINDOW 2: MS PAINT (经典画图程序) -->
+      <!-- ========================================================================= -->
+      <section id="window-paint" class="win98-window win98-raised absolute z-25 flex flex-col shadow-2xl hidden" 
+               style="width: 580px; height: 440px; left: calc(50% - 290px); top: 90px;"
+               data-title="画图 - 无标题" 
+               data-icon="/icons/paint.svg"
+               role="dialog" aria-label="MS Paint Application">
+        
+        <header class="title-bar win98-titlebar-active px-2 py-1 flex items-center justify-between cursor-move select-none shrink-0">
+          <div class="flex items-center gap-1.5 overflow-hidden">
+            <img src="/icons/paint.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <span class="text-xs font-bold truncate">无标题 - 画图 (MS Paint 98)</span>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button class="btn-minimize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Minimize">_</button>
+            <button class="btn-maximize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Maximize">□</button>
+            <button class="btn-close win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Close">
+              <svg viewBox="0 0 8 7" class="w-2.5 h-2.5 pointer-events-none"><path d="M0 0 L8 7 M8 0 L0 7" stroke="#000" stroke-width="1.2"></path></svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Paint Menu Bar -->
+        <nav class="win98-sunken-sm bg-gray-200 px-2 py-0.5 flex gap-4 text-xs select-none border-b border-gray-400 shrink-0">
+          <div class="relative">
+            <button class="menu-bar-btn px-1 hover:bg-[#000080] hover:text-white"><u>文</u>件(F)</button>
+            <div class="menu-dropdown hidden absolute left-0 top-full win98-raised py-1 w-36 shadow-lg z-50 text-black">
+              <div id="paint-menu-new" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer"><u>新</u>建(N)</div>
+              <div id="paint-menu-save" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer font-bold"><u>另</u>存为图片...</div>
+              <div class="border-t border-gray-400 my-1"></div>
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="document.getElementById('window-paint').querySelector('.btn-close').click()">退出(X)</div>
+            </div>
+          </div>
+          <div class="relative">
+            <button class="menu-bar-btn px-1 hover:bg-[#000080] hover:text-white"><u>编</u>辑(E)</button>
+            <div class="menu-dropdown hidden absolute left-0 top-full win98-raised py-1 w-36 shadow-lg z-50 text-black">
+              <div id="paint-menu-undo" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer"><u>撤</u>销(U) <span class="text-gray-500 text-[10px]">Ctrl+Z</span></div>
+              <div id="paint-menu-clear" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer"><u>清</u>除图像(C)</div>
+            </div>
+          </div>
+          <div class="relative">
+            <button class="menu-bar-btn px-1 hover:bg-[#000080] hover:text-white"><u>帮</u>助(H)</button>
+            <div class="menu-dropdown hidden absolute left-0 top-full win98-raised py-1 w-44 shadow-lg z-50 text-black">
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="alert('Windows 98 画图程序 (MS Paint)\n支持 16 种绘图工具、28 色调色板与图片导出。')">关于画图(A)</div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Paint Workspace -->
+        <div class="flex-1 flex overflow-hidden bg-gray-200">
+          
+          <!-- Left Tool Palette (16 Classic Tools) -->
+          <div class="w-14 bg-gray-200 p-1 flex flex-col items-center gap-1 border-r border-gray-400 shrink-0 select-none">
+            <div class="grid grid-cols-2 gap-0.5">
+              <button class="paint-tool-btn win98-pressed w-5 h-5 flex items-center justify-center text-xs" data-tool="pencil" title="铅笔">
+                <img src="/icons/tool-pencil.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Pencil" />
+              </button>
+              <button class="paint-tool-btn win98-raised w-5 h-5 flex items-center justify-center text-xs" data-tool="brush" title="刷子">
+                <img src="/icons/tool-brush.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Brush" />
+              </button>
+              <button class="paint-tool-btn win98-raised w-5 h-5 flex items-center justify-center text-xs" data-tool="eraser" title="橡皮擦">
+                <img src="/icons/tool-eraser.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Eraser" />
+              </button>
+              <button class="paint-tool-btn win98-raised w-5 h-5 flex items-center justify-center text-xs" data-tool="fill" title="油漆桶填充">
+                <img src="/icons/tool-fill.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Fill" />
+              </button>
+              <button class="paint-tool-btn win98-raised w-5 h-5 flex items-center justify-center text-xs" data-tool="picker" title="取色管">
+                <img src="/icons/tool-picker.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Picker" />
+              </button>
+              <button class="paint-tool-btn win98-raised w-5 h-5 flex items-center justify-center text-xs" data-tool="text" title="文字">
+                <img src="/icons/tool-text.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Text" />
+              </button>
+              <button class="paint-tool-btn win98-raised w-5 h-5 flex items-center justify-center text-xs" data-tool="line" title="直线">
+                <img src="/icons/tool-line.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Line" />
+              </button>
+              <button class="paint-tool-btn win98-raised w-5 h-5 flex items-center justify-center text-xs" data-tool="rect" title="矩形">
+                <img src="/icons/tool-rect.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Rect" />
+              </button>
+              <button class="paint-tool-btn win98-raised w-5 h-5 flex items-center justify-center text-xs" data-tool="circle" title="椭圆">
+                <img src="/icons/tool-circle.svg" class="w-3.5 h-3.5 pixel-render pointer-events-none" alt="Circle" />
+              </button>
+            </div>
+
+            <!-- Stroke Width Selector -->
+            <div class="win98-sunken w-full mt-2 p-1 flex flex-col items-center gap-1 bg-white">
+              <div class="paint-stroke-btn w-8 h-2 win98-raised flex items-center justify-center cursor-pointer" data-width="1"><div class="w-6 h-[1px] bg-black"></div></div>
+              <div class="paint-stroke-btn w-8 h-2.5 win98-pressed bg-gray-400 flex items-center justify-center cursor-pointer" data-width="2"><div class="w-6 h-[2px] bg-black"></div></div>
+              <div class="paint-stroke-btn w-8 h-3 win98-raised flex items-center justify-center cursor-pointer" data-width="4"><div class="w-6 h-[4px] bg-black"></div></div>
+              <div class="paint-stroke-btn w-8 h-4 win98-raised flex items-center justify-center cursor-pointer" data-width="8"><div class="w-6 h-[7px] bg-black"></div></div>
+            </div>
+          </div>
+
+          <!-- Canvas Container -->
+          <div class="flex-1 win98-sunken p-2 bg-gray-600 overflow-auto win98-scrollbar flex items-center justify-center">
+            <canvas id="paint-canvas" class="bg-white shadow-xl cursor-crosshair"></canvas>
+          </div>
+        </div>
+
+        <!-- Bottom Palette (28 Colors) -->
+        <div class="bg-gray-200 p-1.5 border-t border-gray-400 flex items-center gap-2 select-none shrink-0">
+          <!-- Foreground / Background Color Indicator -->
+          <div class="win98-sunken p-1 bg-gray-300 w-9 h-9 relative shrink-0">
+            <div id="paint-bg-color" class="absolute bottom-1 right-1 w-5 h-5 win98-raised bg-white border border-gray-600 z-0"></div>
+            <div id="paint-fg-color" class="absolute top-1 left-1 w-5 h-5 win98-raised bg-black border border-gray-600 z-10"></div>
+          </div>
+
+          <!-- 28-Color Grid -->
+          <div id="paint-palette-grid" class="grid grid-rows-2 grid-flow-col gap-0.5 win98-sunken p-1 bg-gray-300">
+            <!-- Dynamically populated from paint.js -->
+          </div>
+        </div>
+
+        <!-- Paint Status Bar -->
+        <footer class="win98-sunken-sm bg-gray-200 px-2 py-0.5 flex justify-between items-center text-[10px] text-gray-700 select-none border-t border-gray-400 shrink-0">
+          <span id="paint-coord-status">0, 0 像素</span>
+          <span>按住鼠标左键绘图，右键使用背景色</span>
+        </footer>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- WINDOW 3: MINESWEEPER (扫雷) -->
+      <!-- ========================================================================= -->
+      <section id="window-minesweeper" class="win98-window win98-raised absolute z-25 flex flex-col shadow-xl hidden" 
+               style="width: 250px; left: calc(50% + 140px); top: 50px;"
+               data-title="扫雷" 
+               data-no-resize="true"
+               data-icon="/icons/minesweeper.svg"
+               role="dialog" aria-label="Minesweeper Game">
+        
+        <header class="title-bar win98-titlebar-active px-2 py-1 flex items-center justify-between cursor-move select-none shrink-0">
+          <div class="flex items-center gap-1.5 overflow-hidden">
+            <img src="/icons/minesweeper.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <span class="text-xs font-bold truncate">扫雷 (Minesweeper)</span>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button class="btn-minimize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Minimize">_</button>
+            <button class="btn-close win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Close">
+              <svg viewBox="0 0 8 7" class="w-2.5 h-2.5 pointer-events-none"><path d="M0 0 L8 7 M8 0 L0 7" stroke="#000" stroke-width="1.2"></path></svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Minesweeper Menu -->
+        <nav class="win98-sunken-sm bg-gray-200 px-2 py-0.5 flex gap-4 text-xs select-none border-b border-gray-400 shrink-0">
+          <div class="relative">
+            <button class="menu-bar-btn px-1 hover:bg-[#000080] hover:text-white"><u>游</u>戏(G)</button>
+            <div class="menu-dropdown hidden absolute left-0 top-full win98-raised py-1 w-36 shadow-lg z-50 text-black">
+              <div id="mine-menu-new" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer font-bold"><u>开</u>局(N) <span class="text-gray-500 text-[10px]">F2</span></div>
+              <div class="border-t border-gray-400 my-1"></div>
+              <div id="mine-menu-beg" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer"><u>初</u>级 (9x9)</div>
+              <div id="mine-menu-inter" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer"><u>中</u>级 (16x16)</div>
+              <div id="mine-menu-exp" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer"><u>高</u>级 (30x16)</div>
+              <div class="border-t border-gray-400 my-1"></div>
+              <div id="mine-menu-hall" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer"><u>英</u>雄榜...</div>
+            </div>
+          </div>
+          <div class="relative">
+            <button class="menu-bar-btn px-1 hover:bg-[#000080] hover:text-white"><u>帮</u>助(H)</button>
+            <div class="menu-dropdown hidden absolute left-0 top-full win98-raised py-1 w-36 shadow-lg z-50 text-black">
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="alert('Windows 98 经典扫雷：\n点击翻开方块，右键插红旗标记地雷。')">玩法介绍</div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Minesweeper Header Bar -->
+        <div class="p-2 bg-gray-200 space-y-2">
+          <div class="win98-sunken p-1.5 bg-gray-300 flex items-center justify-between">
+            <div id="mine-counter-led" class="led-display px-1 py-0.5 text-lg leading-none win98-sunken">010</div>
+            <button id="mine-face-btn" class="win98-raised w-7 h-7 flex items-center justify-center text-base active:win98-pressed select-none cursor-pointer">
+              <img src="/icons/mine-smile.svg" class="w-5 h-5 pixel-render pointer-events-none" alt="" />
+            </button>
+            <div id="mine-timer-led" class="led-display px-1 py-0.5 text-lg leading-none win98-sunken">000</div>
+          </div>
+
+          <!-- Board Grid -->
+          <div class="win98-sunken p-1 bg-gray-400 flex justify-center overflow-auto max-h-[60vh] win98-scrollbar">
+            <div id="minesweeper-board" class="flex flex-col gap-0 border border-gray-600 bg-gray-300"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- WINDOW 4: NOTEPAD (记事本 - 简历) -->
+      <!-- ========================================================================= -->
+      <section id="window-notepad" class="win98-window win98-raised absolute z-20 flex flex-col shadow-xl hidden" 
+               style="width: 520px; height: 380px; left: 100px; top: 120px;"
+               data-title="记事本 - 王寅喆简历.txt" 
+               data-icon="/icons/notepad.svg"
+               role="dialog" aria-label="Notepad Window">
+        
+        <header class="title-bar win98-titlebar-active px-2 py-1 flex items-center justify-between cursor-move select-none shrink-0">
+          <div class="flex items-center gap-1.5 overflow-hidden">
+            <img src="/icons/notepad.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <span class="text-xs font-bold truncate">王寅喆_个人简介.txt - 记事本</span>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button class="btn-minimize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Minimize">_</button>
+            <button class="btn-maximize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Maximize">□</button>
+            <button class="btn-close win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Close">
+              <svg viewBox="0 0 8 7" class="w-2.5 h-2.5 pointer-events-none"><path d="M0 0 L8 7 M8 0 L0 7" stroke="#000" stroke-width="1.2"></path></svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Notepad Menu -->
+        <nav class="win98-sunken-sm bg-gray-200 px-2 py-0.5 flex gap-4 text-xs select-none border-b border-gray-400 shrink-0">
+          <div class="relative">
+            <button class="menu-bar-btn px-1 hover:bg-[#000080] hover:text-white"><u>文</u>件(F)</button>
+            <div class="menu-dropdown hidden absolute left-0 top-full win98-raised py-1 w-36 shadow-lg z-50 text-black">
+              <div id="notepad-menu-new" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer"><u>新</u>建(N)</div>
+              <div id="notepad-menu-save" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer font-bold"><u>另</u>存为 .txt...</div>
+              <div class="border-t border-gray-400 my-1"></div>
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="document.getElementById('window-notepad').querySelector('.btn-close').click()">退出(X)</div>
+            </div>
+          </div>
+          <div class="relative">
+            <button class="menu-bar-btn px-1 hover:bg-[#000080] hover:text-white"><u>编</u>辑(E)</button>
+            <div class="menu-dropdown hidden absolute left-0 top-full win98-raised py-1 w-36 shadow-lg z-50 text-black">
+              <div id="notepad-menu-selectall" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer">全选(A)</div>
+              <div id="notepad-menu-time" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer">时间/日期(D) <span class="text-gray-500 text-[10px]">F5</span></div>
+            </div>
+          </div>
+          <div class="relative">
+            <button class="menu-bar-btn px-1 hover:bg-[#000080] hover:text-white"><u>格</u>式(O)</button>
+            <div class="menu-dropdown hidden absolute left-0 top-full win98-raised py-1 w-36 shadow-lg z-50 text-black">
+              <div id="notepad-menu-wrap" class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer">自动换行(W)</div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Notepad Editor Body -->
+        <div class="flex-1 win98-sunken p-0 bg-white overflow-hidden flex flex-col">
+          <textarea id="notepad-textarea" class="flex-1 w-full p-2 text-xs font-mono outline-none resize-none bg-white text-black leading-relaxed win98-scrollbar" spellcheck="false"></textarea>
+        </div>
+
+        <!-- Notepad Status Bar -->
+        <footer class="win98-sunken-sm bg-gray-200 px-2 py-0.5 flex justify-between items-center text-[10px] text-gray-700 select-none border-t border-gray-400 shrink-0">
+          <span id="notepad-status-line">Ln 1</span>
+          <span id="notepad-status-col">Col 1</span>
+          <span class="font-mono">Windows (CRLF)</span>
+        </footer>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- WINDOW 5: MS-DOS PROMPT (命令提示符) -->
+      <!-- ========================================================================= -->
+      <section id="window-dos" class="win98-window win98-raised absolute z-20 flex flex-col shadow-xl hidden" 
+               style="width: 540px; height: 360px; left: calc(50% - 270px); top: 160px;"
+               data-title="MS-DOS 提示符" 
+               data-icon="/icons/dos.svg"
+               role="dialog" aria-label="MS-DOS Prompt">
+        
+        <header class="title-bar win98-titlebar-active px-2 py-1 flex items-center justify-between cursor-move select-none shrink-0">
+          <div class="flex items-center gap-1.5 overflow-hidden">
+            <img src="/icons/dos.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <span class="text-xs font-bold truncate">MS-DOS 提示符 (TicoOS 7.10)</span>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button class="btn-minimize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Minimize">_</button>
+            <button class="btn-maximize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Maximize">□</button>
+            <button class="btn-close win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Close">
+              <svg viewBox="0 0 8 7" class="w-2.5 h-2.5 pointer-events-none"><path d="M0 0 L8 7 M8 0 L0 7" stroke="#000" stroke-width="1.2"></path></svg>
+            </button>
+          </div>
+        </header>
+
+        <div id="dos-scroll-container" class="flex-1 bg-black p-2 font-vt323 text-base text-gray-200 overflow-y-auto win98-scrollbar cursor-text">
+          <div id="dos-output" class="space-y-0.5"></div>
+          <div class="flex items-center gap-1.5 text-gray-200 mt-1">
+            <span>C:\TICO&gt;</span>
+            <input id="dos-input" type="text" class="flex-1 bg-transparent text-gray-200 outline-none font-vt323 text-base border-none p-0" autocomplete="off" spellcheck="false" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- WINDOW 6: DISPLAY PROPERTIES (显示属性 - 选项卡化) -->
+      <!-- ========================================================================= -->
+      <section id="window-display" class="win98-window win98-raised absolute z-20 flex flex-col shadow-xl hidden" 
+               style="width: 440px; left: calc(50% - 220px); top: 140px;"
+               data-title="显示属性" 
+               data-icon="/icons/display.svg"
+               role="dialog" aria-label="Display Properties">
+        
+        <header class="title-bar win98-titlebar-active px-2 py-1 flex items-center justify-between cursor-move select-none shrink-0">
+          <div class="flex items-center gap-1.5 overflow-hidden">
+            <img src="/icons/display.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <span class="text-xs font-bold truncate">显示属性 (Display Properties)</span>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button class="btn-close win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Close">
+              <svg viewBox="0 0 8 7" class="w-2.5 h-2.5 pointer-events-none"><path d="M0 0 L8 7 M8 0 L0 7" stroke="#000" stroke-width="1.2"></path></svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="p-2 bg-gray-200 space-y-2 text-xs">
+          <!-- Tab Strip -->
+          <div class="win98-tab-strip">
+            <div class="win98-tab active" data-tab="tab-display-bg">背景 (B)</div>
+            <div class="win98-tab" data-tab="tab-display-saver">屏幕保护程序 (S)</div>
+            <div class="win98-tab" data-tab="tab-display-effects">外观与效果 (E)</div>
+          </div>
+
+          <!-- Tab Panel 1: Background -->
+          <div id="tab-display-bg" class="win98-tab-panel active win98-raised p-3 space-y-3">
+            <!-- Monitor Preview Box -->
+            <div class="flex justify-center">
+              <div class="win98-sunken p-2 bg-gray-800 w-44 h-28 flex items-center justify-center rounded-sm shadow-inner">
+                <div id="display-monitor-screen" class="w-36 h-20 bg-[#008080] border-2 border-gray-400 flex items-center justify-center text-white text-[10px] font-bold bg-cover bg-center">
+                  Windows 98
+                </div>
+              </div>
+            </div>
+
+            <!-- Wallpaper Options -->
+            <div class="win98-sunken p-2.5 bg-white space-y-1.5">
+              <div class="font-bold text-[#000080]">桌面壁纸选择 (Wallpaper):</div>
+              <div class="space-y-1 text-xs">
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="display-wallpaper-opt" value="default" checked />
+                  <span>复古壁纸 (Retro Windows 98 Original)</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="display-wallpaper-opt" value="teal" />
+                  <span>经典纯青色 (Classic Teal #008080)</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="display-wallpaper-opt" value="clouds" />
+                  <span>蓝天白云 (Windows Cloud Sky)</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="display-wallpaper-opt" value="matrix" />
+                  <span>黑客帝国黑底 (Matrix Deep Green)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Panel 2: Screen Saver -->
+          <div id="tab-display-saver" class="win98-tab-panel win98-raised p-3 space-y-3">
+            <!-- Screensaver Mini Preview Box -->
+            <div class="flex justify-center">
+              <div class="win98-sunken p-2 bg-gray-800 w-44 h-28 flex items-center justify-center">
+                <div id="display-saver-preview" class="w-36 h-20 bg-black border-2 border-gray-400 flex items-center justify-center text-yellow-300 text-xs font-mono font-bold">
+                  3D Flying 98
+                </div>
+              </div>
+            </div>
+
+            <div class="win98-sunken p-2.5 bg-white space-y-2">
+              <div class="font-bold text-[#000080]">屏幕保护程序类型:</div>
+              <div class="flex items-center gap-2">
+                <select id="screensaver-type-select" class="win98-sunken-field flex-1 px-2 py-1 text-xs">
+                  <option value="starfield">星空飞梭 (3D Starfield Warp)</option>
+                  <option value="flying98">飞动视窗 (3D Flying Windows Logo)</option>
+                  <option value="none">(无)</option>
+                </select>
+                <button id="btn-screensaver-preview" class="win98-raised px-3 py-1 font-bold active:win98-pressed cursor-pointer">
+                  预览(V)
+                </button>
+              </div>
+              <div class="text-[11px] text-gray-500">提示: 点击「预览」可即时体验全屏复古屏保，移动鼠标即可退出。</div>
+            </div>
+          </div>
+
+          <!-- Tab Panel 3: Effects -->
+          <div id="tab-display-effects" class="win98-tab-panel win98-raised p-3 space-y-3">
+            <div class="win98-sunken p-2 bg-white space-y-2">
+              <div class="flex justify-between items-center font-bold text-[#000080]">
+                <span>CRT 显像管扫描线强度:</span>
+              </div>
+              <input id="display-crt-intensity" type="range" min="0" max="100" value="65" class="w-full h-3 accent-gray-700" />
+            </div>
+
+            <div class="win98-sunken p-2 bg-white space-y-1.5">
+              <div class="font-bold text-[#000080]">系统视觉特性:</div>
+              <label class="flex items-center gap-2">
+                <input type="checkbox" id="chk-crt-roll" checked />
+                <span>启用 CRT 画面周期性滚屏波动</span>
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="checkbox" id="chk-system-sfx" checked />
+                <span>启用 Windows 98 交互全真音效</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Dialog Buttons -->
+          <div class="flex justify-end gap-2 pt-1">
+            <button id="btn-display-ok" class="win98-raised px-4 py-1 font-bold active:win98-pressed cursor-pointer">确定</button>
+            <button class="win98-raised px-4 py-1 active:win98-pressed cursor-pointer" onclick="document.getElementById('window-display').querySelector('.btn-close').click()">取消</button>
+            <button id="btn-display-apply" class="win98-raised px-4 py-1 font-bold active:win98-pressed cursor-pointer">应用(A)</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- WINDOW 7: MUSIC / CD PLAYER WINDOW -->
+      <!-- ========================================================================= -->
+      <section id="window-music" class="win98-window win98-raised absolute z-25 flex flex-col shadow-xl hidden" 
+               style="width: 380px; left: calc(50% + 40px); top: 80px;"
+               data-title="CD 播放机" 
+               data-icon="https://framerusercontent.com/images/C2rNcoyAF0EcMLLTKXoNk7Ooaf4.png"
+               role="dialog" aria-label="Music Player Window">
+        
+        <header class="title-bar win98-titlebar-active px-2 py-1 flex items-center justify-between cursor-move select-none shrink-0">
+          <div class="flex items-center gap-1.5 overflow-hidden">
+            <img src="https://framerusercontent.com/images/C2rNcoyAF0EcMLLTKXoNk7Ooaf4.png" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <span class="text-xs font-bold truncate">Windows 98 CD 播放机 - DirectAudio</span>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button class="btn-minimize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Minimize">_</button>
+            <button class="btn-maximize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Maximize">□</button>
+            <button class="btn-close win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Close">
+              <svg viewBox="0 0 8 7" class="w-2.5 h-2.5 pointer-events-none"><path d="M0 0 L8 7 M8 0 L0 7" stroke="#000" stroke-width="1.2"></path></svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="p-3 bg-gray-200 space-y-3">
+          <div class="win98-sunken p-2.5 bg-black text-green-400 font-mono space-y-1">
+            <div class="flex justify-between items-center text-[10px] text-green-500">
+              <span>TRACK DIGITAL AUDIO</span>
+              <span id="player-time-display">00:00 / 02:25</span>
+            </div>
+            <div id="player-track-title" class="text-xs font-bold text-green-300 truncate">01. Windows 98 Vapor Dreams.mid</div>
+            <div id="player-artist" class="text-[10px] text-green-600 truncate">RetroSynth 98</div>
+
+            <div class="h-8 flex items-end justify-between gap-1 pt-2">
+              <div class="eq-bar w-full bg-green-500" style="height: 20%;"></div>
+              <div class="eq-bar w-full bg-green-500" style="height: 40%;"></div>
+              <div class="eq-bar w-full bg-green-400" style="height: 60%;"></div>
+              <div class="eq-bar w-full bg-green-400" style="height: 80%;"></div>
+              <div class="eq-bar w-full bg-green-300" style="height: 45%;"></div>
+              <div class="eq-bar w-full bg-green-400" style="height: 70%;"></div>
+              <div class="eq-bar w-full bg-green-500" style="height: 35%;"></div>
+              <div class="eq-bar w-full bg-green-500" style="height: 25%;"></div>
+              <div class="eq-bar w-full bg-green-400" style="height: 55%;"></div>
+              <div class="eq-bar w-full bg-green-300" style="height: 75%;"></div>
+            </div>
+
+            <div class="w-full bg-gray-800 h-1.5 mt-1 overflow-hidden">
+              <div id="player-progress-bar" class="bg-green-400 h-full w-0 transition-all"></div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex gap-1">
+              <button id="player-prev-btn" class="win98-raised px-2.5 py-1 text-xs font-bold hover:bg-gray-300 active:win98-pressed" title="上一曲">⏮</button>
+              <button id="player-play-btn" class="win98-raised px-3 py-1 text-xs font-bold hover:bg-gray-300 active:win98-pressed text-[#000080]" title="播放/暂停">▶</button>
+              <button id="player-stop-btn" class="win98-raised px-2.5 py-1 text-xs font-bold hover:bg-gray-300 active:win98-pressed" title="停止">■</button>
+              <button id="player-next-btn" class="win98-raised px-2.5 py-1 text-xs font-bold hover:bg-gray-300 active:win98-pressed" title="下一曲">⏭</button>
+            </div>
+
+            <div class="flex items-center gap-1.5">
+              <span class="text-[10px] font-bold">音量:</span>
+              <input id="player-volume" type="range" min="0" max="100" value="70" class="w-20 h-3 accent-gray-600" />
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <div class="text-[10px] font-bold text-gray-700">播放列表 (Playlist):</div>
+            <div id="player-playlist-items" class="win98-sunken bg-white p-1 max-h-28 overflow-y-auto win98-scrollbar space-y-0.5"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- WINDOW 8: MY COMPUTER (系统属性 - 选项卡化与设备管理器) -->
+      <!-- ========================================================================= -->
+      <section id="window-computer" class="win98-window win98-raised absolute z-20 flex flex-col shadow-xl hidden" 
+               style="width: 460px; left: 80px; top: 100px;"
+               data-title="我的电脑" 
+               data-icon="/icons/computer.svg"
+               role="dialog" aria-label="System Properties Window">
+        
+        <header class="title-bar win98-titlebar-active px-2 py-1 flex items-center justify-between cursor-move select-none shrink-0">
+          <div class="flex items-center gap-1.5 overflow-hidden">
+            <img src="/icons/computer.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <span class="text-xs font-bold truncate">系统属性 - 王寅喆工作站</span>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button class="btn-minimize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Minimize">_</button>
+            <button class="btn-maximize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Maximize">□</button>
+            <button class="btn-close win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Close">
+              <svg viewBox="0 0 8 7" class="w-2.5 h-2.5 pointer-events-none"><path d="M0 0 L8 7 M8 0 L0 7" stroke="#000" stroke-width="1.2"></path></svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="p-2 bg-gray-200 space-y-2 text-xs">
+          <!-- Tab Strip -->
+          <div class="win98-tab-strip">
+            <div class="win98-tab active" data-tab="tab-sys-general">常规 (General)</div>
+            <div class="win98-tab" data-tab="tab-sys-device">设备管理器 (Device Manager)</div>
+          </div>
+
+          <!-- Tab Panel 1: General -->
+          <div id="tab-sys-general" class="win98-tab-panel active win98-raised p-4 space-y-3">
+            <div class="flex gap-4 items-start">
+              <div class="win98-sunken p-2 bg-white shrink-0">
+                <img src="/icons/computer.svg" class="w-16 h-16 pixel-render" alt="Computer" />
+              </div>
+              <div class="space-y-1.5 flex-1">
+                <h3 class="font-bold text-sm text-[#000080]">操作系统:</h3>
+                <p class="text-gray-800">Microsoft Windows 98 简体中文第二版</p>
+                <p class="text-gray-600">王寅喆定制工作站 (4.10.2222 A)</p>
+                
+                <h3 class="font-bold text-sm text-[#000080] pt-1">所有者与注册信息:</h3>
+                <p id="sys-registered-owner" class="text-gray-800 font-bold">王寅喆 (Yinzhe “Tico” Wang)</p>
+                <p class="text-gray-600">创意开发者 / 数字设计者 / 学生研究者</p>
+              </div>
+            </div>
+
+            <div class="win98-sunken p-2.5 bg-white space-y-1.5">
+              <h4 class="font-bold text-[#000080]">硬件核心配置:</h4>
+              <ul id="sys-specs-list" class="space-y-1 text-gray-700 font-mono text-[11px]"></ul>
+            </div>
+          </div>
+
+          <!-- Tab Panel 2: Device Manager Tree -->
+          <div id="tab-sys-device" class="win98-tab-panel win98-raised p-3 space-y-2">
+            <div class="font-bold text-[#000080]">工作站硬件设备树 (按类型查看):</div>
+            <div class="win98-sunken bg-white p-2 max-h-56 overflow-y-auto win98-scrollbar win98-tree">
+              <div class="tree-node font-bold flex items-center gap-1.5">
+                <img src="/icons/computer.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+                <span>TICO-WORKSTATION-98</span>
+              </div>
+              <div class="tree-children space-y-1">
+                <div class="tree-node flex items-center gap-1.5">
+                  <img src="/icons/cpu.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+                  <span>处理器: Intel Pentium II 450MHz (MMX)</span>
+                </div>
+                <div class="tree-node flex items-center gap-1.5">
+                  <img src="/icons/vga.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+                  <span>显示适配器: 3dfx Voodoo3 3000 AGP (16MB)</span>
+                </div>
+                <div class="tree-node flex items-center gap-1.5">
+                  <img src="/icons/soundcard.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+                  <span>声音控制器: Creative Sound Blaster AWE64 Gold</span>
+                </div>
+                <div class="tree-node flex items-center gap-1.5">
+                  <img src="/icons/harddrive.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+                  <span>磁盘驱动器: Quantum Fireball CR 8.4A (IDE DMA-33)</span>
+                </div>
+                <div class="tree-node flex items-center gap-1.5">
+                  <img src="/icons/cdrom.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+                  <span>CD-ROM 驱动器: Creative 48X Max CD-ROM</span>
+                </div>
+                <div class="tree-node flex items-center gap-1.5">
+                  <img src="/icons/network.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+                  <span>网络适配器: 3Com Fast EtherLink XL 10/100 PCI</span>
+                </div>
+                <div class="tree-node flex items-center gap-1.5">
+                  <img src="/icons/settings.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+                  <span>键盘/鼠标: PS/2 兼容标准输入设备</span>
+                </div>
+                <div class="tree-node flex items-center gap-1.5">
+                  <img src="/icons/usb.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+                  <span>通用串行总线: Intel 82371AB/EB PCI to USB</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-end">
+            <button class="win98-raised px-4 py-1 font-bold active:win98-pressed cursor-pointer" onclick="document.getElementById('window-computer').querySelector('.btn-close').click()">
+              确定
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- WINDOW 10: NETWORK / SOCIAL LINKS & GITHUB -->
+      <!-- ========================================================================= -->
+      <section id="window-social" class="win98-window win98-raised absolute z-20 flex flex-col shadow-xl hidden" 
+               style="width: 440px; left: calc(50% - 220px); top: 160px;"
+               data-title="GitHub 与连接" 
+               data-icon="/icons/network.svg"
+               role="dialog" aria-label="Network Connections Window">
+        
+        <header class="title-bar win98-titlebar-active px-2 py-1 flex items-center justify-between cursor-move select-none shrink-0">
+          <div class="flex items-center gap-1.5 overflow-hidden">
+            <img src="/icons/network.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <span class="text-xs font-bold truncate">网络连接 - GitHub 与外部链接</span>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button class="btn-minimize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Minimize">_</button>
+            <button class="btn-maximize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Maximize">□</button>
+            <button class="btn-close win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Close">
+              <svg viewBox="0 0 8 7" class="w-2.5 h-2.5 pointer-events-none"><path d="M0 0 L8 7 M8 0 L0 7" stroke="#000" stroke-width="1.2"></path></svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="p-4 bg-gray-200 space-y-3 text-xs">
+          <div class="win98-sunken p-2 bg-white space-y-2">
+            <div class="font-bold text-[#000080] flex items-center gap-1.5">
+              <img src="/icons/network.svg" class="w-4 h-4 pixel-render inline" alt="" />
+              <span>王寅喆的网络链接与联系目录：</span>
+            </div>
+            <div id="socials-list" class="space-y-1.5"></div>
+          </div>
+
+          <div class="flex justify-end">
+            <button class="win98-raised px-4 py-1 font-bold active:win98-pressed cursor-pointer" onclick="document.getElementById('window-social').querySelector('.btn-close').click()">
+              关闭
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- WINDOW 11: RECYCLE BIN -->
+      <!-- ========================================================================= -->
+      <section id="window-recycle" class="win98-window win98-raised absolute z-20 flex flex-col shadow-xl hidden" 
+               style="width: 440px; left: calc(50% - 220px); top: 180px;"
+               data-title="回收站" 
+               data-icon="https://framerusercontent.com/images/aUiO9TgRYS71ppQpJSwLrc9Z9M.png"
+               role="dialog" aria-label="Recycle Bin Window">
+        
+        <header class="title-bar win98-titlebar-active px-2 py-1 flex items-center justify-between cursor-move select-none shrink-0">
+          <div class="flex items-center gap-1.5 overflow-hidden">
+            <img src="https://framerusercontent.com/images/aUiO9TgRYS71ppQpJSwLrc9Z9M.png" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <span class="text-xs font-bold truncate">回收站</span>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button class="btn-minimize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Minimize">_</button>
+            <button class="btn-maximize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Maximize">□</button>
+            <button class="btn-close win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Close">
+              <svg viewBox="0 0 8 7" class="w-2.5 h-2.5 pointer-events-none"><path d="M0 0 L8 7 M8 0 L0 7" stroke="#000" stroke-width="1.2"></path></svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="p-3 bg-gray-200 space-y-3 text-xs">
+          <div class="flex justify-between items-center">
+            <span id="recycle-item-count" class="text-gray-600">3 个废弃项目</span>
+            <div class="flex gap-1.5">
+              <button id="btn-restore-recycle" class="win98-raised px-2.5 py-1 text-xs font-bold hover:bg-gray-300 active:win98-pressed cursor-pointer flex items-center gap-1">
+                <img src="/icons/recycle.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> 还原所有项目(R)
+              </button>
+              <button id="btn-empty-recycle" class="win98-raised px-2.5 py-1 text-xs font-bold hover:bg-gray-300 active:win98-pressed cursor-pointer flex items-center gap-1">
+                <img src="/icons/recycle-empty.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> 清空回收站(B)
+              </button>
+            </div>
+          </div>
+
+          <div id="recycle-items-list" class="win98-sunken bg-white p-2 space-y-1.5 max-h-48 overflow-y-auto win98-scrollbar font-mono text-[11px]">
+            <div class="recycle-file-row flex justify-between items-center p-1 hover:bg-blue-100 border-b border-gray-100">
+              <span class="flex items-center"><img src="/icons/document.svg" class="w-3.5 h-3.5 pixel-render inline-block mr-1.5" alt="" />无聊且缺乏灵感的模板.zip</span>
+              <span class="text-gray-400 text-[10px]">1.2 MB</span>
+            </div>
+            <div class="recycle-file-row flex justify-between items-center p-1 hover:bg-blue-100 border-b border-gray-100">
+              <span class="flex items-center"><img src="/icons/document.svg" class="w-3.5 h-3.5 pixel-render inline-block mr-1.5" alt="" />fl_studio_未完成的trap编曲.flp</span>
+              <span class="text-gray-400 text-[10px]">3.4 MB</span>
+            </div>
+            <div class="recycle-file-row flex justify-between items-center p-1 hover:bg-blue-100">
+              <span class="flex items-center"><img src="/icons/document.svg" class="w-3.5 h-3.5 pixel-render inline-block mr-1.5" alt="" />未经过偏差控制的废弃问卷数据.csv</span>
+              <span class="text-gray-400 text-[10px]">540 KB</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- MODAL: PROJECT PROPERTIES INSPECTOR (项目属性详细视窗) -->
+      <!-- ========================================================================= -->
+      <div id="modal-project-details" class="hidden fixed inset-0 bg-black/40 z-[220] flex items-center justify-center p-4 select-none">
+        <div class="win98-raised w-full max-w-lg p-1 shadow-2xl">
+          <div class="win98-titlebar-active px-2 py-1 flex items-center justify-between font-bold text-xs">
+            <span id="proj-modal-title">对象属性 - 项目详细视窗</span>
+            <button class="win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300" onclick="document.getElementById('modal-project-details').classList.add('hidden')">
+              ✕
+            </button>
+          </div>
+
+          <div class="p-3 bg-gray-200 space-y-3 text-xs">
+            <!-- Header Identity -->
+            <div class="flex items-center gap-3 border-b border-gray-400 pb-2">
+              <div class="text-3xl" id="proj-modal-icon">
+                <img src="/icons/harddrive.svg" class="w-8 h-8 pixel-render" alt="" />
+              </div>
+              <div>
+                <h3 class="font-bold text-sm text-[#000080]" id="proj-modal-name">项目名称</h3>
+                <p class="text-gray-600 font-mono text-[11px]" id="proj-modal-category">类型分类</p>
+              </div>
+            </div>
+
+            <!-- Tab Strip -->
+            <div class="win98-tab-strip">
+              <div class="win98-tab active" data-tab="tab-proj-general">常规属性</div>
+              <div class="win98-tab" data-tab="tab-proj-arch">技术架构与设计</div>
+              <div class="win98-tab" data-tab="tab-proj-metrics">指标与成果</div>
+            </div>
+
+            <!-- Tab 1: General -->
+            <div id="tab-proj-general" class="win98-tab-panel active win98-raised p-3 space-y-2">
+              <p class="text-gray-800 leading-relaxed font-inter" id="proj-modal-desc"></p>
+              <div class="win98-sunken p-2 bg-white space-y-1">
+                <div class="font-bold text-[#000080]">技术栈 (Tech Stack):</div>
+                <div class="font-mono text-gray-700" id="proj-modal-tech"></div>
+              </div>
+            </div>
+
+            <!-- Tab 2: Architecture -->
+            <div id="tab-proj-arch" class="win98-tab-panel win98-raised p-3 space-y-2">
+              <div class="win98-sunken p-2 bg-white space-y-1.5">
+                <div class="font-bold text-[#000080]">架构设计思想:</div>
+                <p class="text-gray-700 leading-relaxed font-inter" id="proj-modal-arch"></p>
+                <div class="font-bold text-[#000080] pt-1">核心亮点与特性:</div>
+                <ul class="space-y-1 pl-2 text-gray-700 list-disc font-inter" id="proj-modal-features"></ul>
+              </div>
+            </div>
+
+            <!-- Tab 3: Metrics -->
+            <div id="tab-proj-metrics" class="win98-tab-panel win98-raised p-3 space-y-2">
+              <div class="win98-sunken p-2 bg-white space-y-1.5">
+                <div class="font-bold text-[#000080]">性能表现与量化指标:</div>
+                <p class="text-gray-700 font-mono text-xs" id="proj-modal-metrics"></p>
+                <div class="font-bold text-[#000080] pt-1">发布与版本状态:</div>
+                <p class="text-gray-700 font-mono text-xs" id="proj-modal-release"></p>
+              </div>
+            </div>
+
+            <!-- Dialog Action Buttons -->
+            <div class="flex justify-between items-center pt-2 border-t border-gray-400">
+              <a id="proj-modal-link" href="#" target="_blank" rel="noopener noreferrer" class="win98-raised px-3 py-1 font-bold text-[#000080] no-underline flex items-center gap-1 active:win98-pressed cursor-pointer">
+                <img src="/icons/rocket.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span>立即体验 / 打开仓库 ➔</span>
+              </a>
+              <button class="win98-raised px-4 py-1 font-bold active:win98-pressed cursor-pointer" onclick="document.getElementById('modal-project-details').classList.add('hidden')">
+                确定
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- START MENU POPUP (多级层叠子菜单) -->
+    <!-- ========================================================================= -->
+    <div id="start-menu" class="hidden absolute bottom-[54px] left-0 z-50 win98-raised shadow-2xl flex select-none" style="width: 240px;">
+      <!-- Windows 98 Blue Sidebar -->
+      <div class="w-8 bg-gradient-to-t from-[#000080] to-[#1084D0] flex items-end justify-center pb-3">
+        <span class="transform -rotate-90 origin-bottom font-bold text-white text-base tracking-widest font-win98 whitespace-nowrap">
+          <span class="font-extrabold text-white">王寅喆</span><span class="font-normal text-gray-300">98</span>
+        </span>
+      </div>
+
+      <!-- Start Menu Items List -->
+      <div class="flex-1 py-1 text-xs space-y-0.5 bg-gray-200">
+        
+        <!-- Cascading Submenu 1: 程序 (Programs) -->
+        <div class="start-menu-item start-submenu-parent px-3 py-1.5 flex items-center justify-between hover:bg-[#000080] hover:text-white cursor-pointer has-submenu">
+          <div class="flex items-center gap-2">
+            <img src="/icons/folder.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <span class="font-bold">程序(P)</span>
+          </div>
+          
+          <!-- Flyout Submenu -->
+          <div class="start-submenu">
+            <div class="start-menu-item px-3 py-1.5 flex items-center gap-2 hover:bg-[#000080] hover:text-white cursor-pointer" data-opens="window-portfolio">
+              <img src="https://framerusercontent.com/images/bm5UGJSuwEUFc8TX2JS3qgoDATY.svg" class="w-4 h-4 pixel-render" alt="" />
+              <span>王寅喆作品集 (IE5)</span>
+            </div>
+            <div class="start-menu-item px-3 py-1.5 flex items-center gap-2 hover:bg-[#000080] hover:text-white cursor-pointer" data-opens="window-paint">
+              <img src="/icons/paint.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+              <span>画图 (MS Paint)</span>
+            </div>
+            <div class="start-menu-item px-3 py-1.5 flex items-center gap-2 hover:bg-[#000080] hover:text-white cursor-pointer" data-opens="window-notepad">
+              <img src="/icons/notepad.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+              <span>记事本 (Notepad)</span>
+            </div>
+            <div class="start-menu-item px-3 py-1.5 flex items-center gap-2 hover:bg-[#000080] hover:text-white cursor-pointer" data-opens="window-minesweeper">
+              <img src="/icons/minesweeper.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+              <span>扫雷 (Minesweeper)</span>
+            </div>
+            <div class="start-menu-item px-3 py-1.5 flex items-center gap-2 hover:bg-[#000080] hover:text-white cursor-pointer" data-opens="window-dos">
+              <img src="/icons/dos.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+              <span>MS-DOS 提示符</span>
+            </div>
+            <div class="start-menu-item px-3 py-1.5 flex items-center gap-2 hover:bg-[#000080] hover:text-white cursor-pointer" data-opens="window-music">
+              <img src="https://framerusercontent.com/images/C2rNcoyAF0EcMLLTKXoNk7Ooaf4.png" class="w-4 h-4 pixel-render" alt="" />
+              <span>CD 播放机</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cascading Submenu 2: 文档 (Documents) -->
+        <div class="start-menu-item start-submenu-parent px-3 py-1.5 flex items-center justify-between hover:bg-[#000080] hover:text-white cursor-pointer has-submenu">
+          <div class="flex items-center gap-2">
+            <img src="/icons/document.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <span>文档(D)</span>
+          </div>
+          
+          <div class="start-submenu">
+            <div class="start-menu-item px-3 py-1.5 flex items-center gap-2 hover:bg-[#000080] hover:text-white cursor-pointer" data-opens="window-notepad">
+              <img src="/icons/document.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+              <span>王寅喆_个人简介.txt</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cascading Submenu 3: 设置 (Settings) -->
+        <div class="start-menu-item start-submenu-parent px-3 py-1.5 flex items-center justify-between hover:bg-[#000080] hover:text-white cursor-pointer has-submenu">
+          <div class="flex items-center gap-2">
+            <img src="/icons/settings.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <span>设置(S)</span>
+          </div>
+          
+          <div class="start-submenu">
+            <div class="start-menu-item px-3 py-1.5 flex items-center gap-2 hover:bg-[#000080] hover:text-white cursor-pointer" data-opens="window-display">
+              <img src="/icons/display.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+              <span>控制面板 (显示属性)</span>
+            </div>
+            <div class="start-menu-item px-3 py-1.5 flex items-center gap-2 hover:bg-[#000080] hover:text-white cursor-pointer" data-opens="window-computer">
+              <img src="/icons/computer.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+              <span>系统属性 (设备管理器)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-400 my-1"></div>
+
+        <!-- Direct Actions -->
+        <div class="start-menu-item px-3 py-1.5 flex items-center gap-2 hover:bg-[#000080] hover:text-white cursor-pointer" data-opens="window-portfolio">
+          <img src="https://framerusercontent.com/images/bm5UGJSuwEUFc8TX2JS3qgoDATY.svg" class="w-4 h-4 pixel-render" alt="" />
+          <span id="start-item-portfolio" class="font-bold">王寅喆的作品集</span>
+        </div>
+
+        <div id="start-item-run" class="start-menu-item px-3 py-1.5 flex items-center gap-2 hover:bg-[#000080] hover:text-white cursor-pointer">
+          <img src="/icons/run.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+          <span>运行(R)...</span>
+        </div>
+
+        <div class="start-menu-item px-3 py-1.5 flex items-center gap-2 hover:bg-[#000080] hover:text-white cursor-pointer" data-action="toggle-crt">
+          <img src="/icons/crt.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+          <span id="start-item-crt">切换 CRT 显像管效果</span>
+        </div>
+
+        <div class="start-menu-item px-3 py-1.5 flex items-center gap-2 hover:bg-[#000080] hover:text-white cursor-pointer" data-action="restart">
+          <img src="/icons/restart.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+          <span id="start-item-restart">重启工作站</span>
+        </div>
+
+        <div class="border-t border-gray-400 my-1"></div>
+
+        <div class="start-menu-item px-3 py-1.5 flex items-center gap-2 hover:bg-[#000080] hover:text-white cursor-pointer text-red-900 font-bold" data-action="shutdown">
+          <img src="/icons/shutdown.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
+          <span id="start-item-shutdown">关闭计算机...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RUN DIALOG (运行...) -->
+    <div id="run-modal" class="hidden fixed inset-0 bg-black/40 z-[200] flex items-center justify-center p-4 select-none">
+      <div class="win98-raised w-full max-w-sm p-1 shadow-2xl">
+        <div class="win98-titlebar-active px-2 py-1 flex items-center justify-between font-bold text-xs">
+          <span>运行 (Run)</span>
+          <button class="win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300" onclick="document.getElementById('run-modal').classList.add('hidden')">
+            ✕
+          </button>
+        </div>
+        <div class="p-4 space-y-3 text-xs">
+          <div class="flex items-center gap-3">
+            <img src="/icons/run.svg" class="w-8 h-8 pixel-render shrink-0" alt="" />
+            <p class="text-gray-800">键入程序、文件夹、文档或 Internet 资源的名称，Windows 将为您打开它。</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <label for="run-input" class="font-bold">打开(O):</label>
+            <input id="run-input" type="text" placeholder="paint / notepad / winmine / cmd / display / music" class="win98-sunken-field flex-1 px-2 py-1 text-xs outline-none" />
+          </div>
+          <div class="flex justify-end gap-2 pt-2">
+            <button id="btn-run-ok" class="win98-raised px-4 py-1 font-bold active:win98-pressed cursor-pointer">确定</button>
+            <button id="btn-run-cancel" class="win98-raised px-4 py-1 active:win98-pressed cursor-pointer">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESKTOP RIGHT-CLICK CONTEXT MENU -->
+    <div id="desktop-context-menu" class="win98-context-menu hidden shadow-2xl">
+      <div class="win98-context-item" onclick="document.getElementById('tb-refresh').click()">
+        <span>刷新(E)</span>
+      </div>
+      <div class="win98-context-divider"></div>
+      <div id="ctx-cascade" class="win98-context-item">
+        <span>层叠窗口(C)</span>
+      </div>
+      <div id="ctx-minimize-all" class="win98-context-item">
+        <span>显示桌面(S)</span>
+      </div>
+      <div class="win98-context-divider"></div>
+      <div id="ctx-properties" class="win98-context-item font-bold">
+        <span>属性(R)</span>
+      </div>
+    </div>
+
+    <!-- TASKBAR RIGHT-CLICK CONTEXT MENU -->
+    <div id="taskbar-context-menu" class="win98-context-menu hidden shadow-2xl">
+      <div class="win98-context-item" onclick="window.Retro98.windowManager.cascadeWindows()">
+        <span>层叠所有窗口(C)</span>
+      </div>
+      <div class="win98-context-item" onclick="window.Retro98.windowManager.minimizeAllWindows()">
+        <span>最小化所有窗口(M)</span>
+      </div>
+      <div class="win98-context-divider"></div>
+      <div class="win98-context-item" onclick="document.getElementById('tray-lang-btn').click()">
+        <span>切换语言 (中 / EN)</span>
+      </div>
+    </div>
+
+    <!-- MASTER VOLUME POPUP (z-55) -->
+    <div id="volume-popup" class="hidden absolute bottom-[58px] right-20 z-50 win98-raised p-3 shadow-xl w-36 space-y-2 select-none">
+      <div class="font-bold text-xs text-center border-b border-gray-400 pb-1">主音量调节</div>
+      <div class="flex flex-col items-center py-2 space-y-2">
+        <input id="master-volume-slider" type="range" min="0" max="100" value="70" class="h-28 -rotate-90 w-28 accent-blue-900" />
+        <div class="text-[10px] text-gray-600 font-bold">Master</div>
+      </div>
+    </div>
+
+    <!-- SHUT DOWN CONFIRMATION MODAL -->
+    <div id="shutdown-modal" class="hidden fixed inset-0 bg-black/40 z-[200] flex items-center justify-center p-4">
+      <div class="win98-raised w-full max-w-sm p-1 shadow-2xl">
+        <div class="win98-titlebar-active px-2 py-1 flex items-center justify-between font-bold text-xs">
+          <span>关闭 Windows 98</span>
+          <button class="win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300" onclick="document.getElementById('shutdown-modal').classList.add('hidden')">
+            ✕
+          </button>
+        </div>
+        <div class="p-4 space-y-4 text-xs">
+          <div class="flex items-center gap-3">
+            <img src="/icons/shutdown.svg" class="w-8 h-8 pixel-render shrink-0" alt="" />
+            <div>
+              <p class="font-bold text-sm">您希望计算机执行什么操作？</p>
+            </div>
+          </div>
+          <div class="win98-sunken p-2 bg-white space-y-1">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="shutdown-opt" value="restart" checked />
+              <span>重新启动并返回 BIOS 引导屏幕</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="shutdown-opt" value="dos" />
+              <span>重新启动计算机并切换到 MS-DOS 模式</span>
+            </label>
+          </div>
+          <div class="flex justify-end gap-2">
+            <button id="btn-shutdown-ok" class="win98-raised px-4 py-1 font-bold hover:bg-gray-200 active:win98-pressed cursor-pointer">
+              确定
+            </button>
+            <button id="btn-shutdown-cancel" class="win98-raised px-4 py-1 hover:bg-gray-200 active:win98-pressed cursor-pointer">
+              取消
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASKBAR (z-50, Height: 54px) -->
+    <footer id="taskbar" class="relative z-50 win98-raised h-[54px] px-2 flex items-center justify-between select-none border-t-2 border-white" role="toolbar" aria-label="Taskbar">
+      
+      <!-- Left: Start Button & Quick Launch -->
+      <div class="flex items-center gap-2">
+        
+        <!-- START BUTTON -->
+        <button id="start-button" class="win98-raised win-focus h-9 px-2.5 flex items-center gap-2 font-win98 font-black text-sm active:win98-pressed cursor-pointer" aria-label="Start Menu">
+          <img src="https://framerusercontent.com/images/97Zc0zw4nM87xhO3n8HHwelPAA.svg" class="w-5 h-5 pixel-render" alt="Windows Logo" />
+          <span id="start-text" class="tracking-wide">开始</span>
+        </button>
+
+        <!-- Quick Launch Divider -->
+        <div class="h-8 border-l border-gray-400 border-r border-white mx-1"></div>
+
+        <!-- Quick Launch Icons -->
+        <div class="flex items-center gap-1">
+          <button class="quick-launch-icon p-1 hover:win98-raised active:win98-pressed cursor-pointer" data-opens="window-portfolio" title="打开王寅喆作品集">
+            <img src="https://framerusercontent.com/images/bm5UGJSuwEUFc8TX2JS3qgoDATY.svg" class="w-4 h-4 pixel-render" alt="Portfolio" />
+          </button>
+          <button class="quick-launch-icon p-1 hover:win98-raised active:win98-pressed cursor-pointer" data-opens="window-paint" title="打开画图">
+            <img src="/icons/paint.svg" class="w-4 h-4 pixel-render" alt="Paint" />
+          </button>
+          <button class="quick-launch-icon p-1 hover:win98-raised active:win98-pressed cursor-pointer" data-opens="window-notepad" title="打开记事本">
+            <img src="/icons/notepad.svg" class="w-4 h-4 pixel-render" alt="Notepad" />
+          </button>
+          <button class="quick-launch-icon p-1 hover:win98-raised active:win98-pressed cursor-pointer" data-opens="window-minesweeper" title="打开扫雷">
+            <img src="/icons/minesweeper.svg" class="w-4 h-4 pixel-render" alt="Minesweeper" />
+          </button>
+          <button class="quick-launch-icon p-1 hover:win98-raised active:win98-pressed cursor-pointer" data-opens="window-dos" title="打开 MS-DOS 提示符">
+            <img src="/icons/dos.svg" class="w-4 h-4 pixel-render" alt="MS-DOS" />
+          </button>
+          <button class="quick-launch-icon p-1 hover:win98-raised active:win98-pressed cursor-pointer" data-opens="window-music" title="打开 CD 播放机">
+            <img src="https://framerusercontent.com/images/C2rNcoyAF0EcMLLTKXoNk7Ooaf4.png" class="w-4 h-4 pixel-render" alt="CD Player" />
+          </button>
+        </div>
+
+        <div class="h-8 border-l border-gray-400 border-r border-white mx-1"></div>
+      </div>
+
+      <!-- Center: Active Windows Bar -->
+      <div id="taskbar-windows" class="flex-1 flex items-center gap-1.5 overflow-x-auto win98-scrollbar px-2 max-w-full">
+        <!-- Dynamically rendered by WindowManager -->
+      </div>
+
+      <!-- Right: System Tray & Clock -->
+      <div class="win98-sunken h-9 px-2.5 flex items-center gap-2.5 bg-gray-200 shrink-0 ml-2">
+        <!-- Language Switcher in System Tray -->
+        <button id="tray-lang-btn" class="win98-raised px-1.5 py-0.5 text-xs font-bold hover:bg-yellow-100 cursor-pointer flex items-center gap-1" title="切换语言 / Switch Language">
+          <img src="/icons/globe.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+          <span id="tray-lang-text">中</span>
+        </button>
+        <button id="tray-crt-icon" class="text-xs hover:bg-gray-300 p-0.5 cursor-pointer flex items-center justify-center" title="切换 CRT 显像管效果">
+          <img src="/icons/crt.svg" class="w-3.5 h-3.5 pixel-render" alt="CRT" />
+        </button>
+        <button id="tray-volume-icon" class="text-xs hover:bg-gray-300 p-0.5 cursor-pointer flex items-center justify-center" title="音量控制">
+          <img src="/icons/speaker.svg" class="w-3.5 h-3.5 pixel-render" alt="Volume" />
+        </button>
+        <div class="border-l border-gray-400 h-5"></div>
+        <div id="taskbar-clock" class="text-xs font-mono font-bold tracking-tight text-gray-900 min-w-[55px] text-center">
+          12:00 PM
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

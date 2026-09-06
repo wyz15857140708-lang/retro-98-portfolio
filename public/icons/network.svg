@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="crispEdges">
+  <!-- Desktop / PC 1 -->
+  <rect x="2" y="3" width="15" height="12" fill="#C0C0C0" stroke="#000000" stroke-width="1"/>
+  <rect x="4" y="5" width="11" height="8" fill="#000080"/>
+  <rect x="2" y="15" width="15" height="4" fill="#C0C0C0" stroke="#000000" stroke-width="1"/>
+  <rect x="11" y="16" width="4" height="1" fill="#000000"/>
+  <rect x="4" y="16" width="2" height="1" fill="#00FF00"/>
+  
+  <!-- PC 2 (Bottom Right) -->
+  <rect x="15" y="13" width="15" height="12" fill="#C0C0C0" stroke="#000000" stroke-width="1"/>
+  <rect x="17" y="15" width="11" height="8" fill="#000080"/>
+  <rect x="15" y="25" width="15" height="4" fill="#C0C0C0" stroke="#000000" stroke-width="1"/>
+  <rect x="24" y="26" width="4" height="1" fill="#000000"/>
+  <rect x="17" y="26" width="2" height="1" fill="#00FF00"/>
+
+  <!-- Network Cable -->
+  <path d="M9 19 v7 h8 v-2" stroke="#000000" stroke-width="2" fill="none"/>
+  <path d="M9 19 v7 h8 v-2" stroke="#FF0000" stroke-width="1" fill="none"/>
+</svg>

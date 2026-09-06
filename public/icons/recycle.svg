@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="crispEdges">
+    <path d="M6 8 l3 20 h14 l3 -20 z" fill="#C0C0C0" stroke="#000000" stroke-width="1"/>
+    <path d="M4 6 h24 v3 h-24 z" fill="#808080" stroke="#000000" stroke-width="1"/>
+    <!-- Papers inside -->
+    <path d="M8 5 h16 l2 4 h-20 z" fill="#FFFFFF"/>
+    <rect x="11" y="3" width="8" height="4" fill="#FFFFFF" stroke="#808080" stroke-width="1"/>
+    <!-- Green recycle symbol -->
+    <path d="M12 14 l4 -4 l4 4 h-2 v4 h-4 v-4 z" fill="#008000"/>
+  </svg>
