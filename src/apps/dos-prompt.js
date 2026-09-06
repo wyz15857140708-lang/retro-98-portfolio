@@ -150,8 +150,8 @@ export class DosPromptApp {
       case 'projects':
         const data = profileData.getData();
         this.printLines([
-          "=== SELECTED PROJECTS & RESEARCH ===",
-          ...(data.projects || []).map(p => `[${p.number}] ${p.title} (${p.category}) -> ${p.detailsUrl}`)
+          "=== SELECTED PROJECTS & RESEARCH (RANKED BY IMPACT) ===",
+          ...(data.projects || []).map(p => `[${p.number}] [${p.statusLabel || p.status.toUpperCase()}] ${p.title} (${p.category}) -> ${p.detailsUrl ? p.detailsUrl : (p.linkStateNote || 'Private / In Dev')}`)
         ]);
         break;
 

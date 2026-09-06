@@ -338,6 +338,26 @@ export class DesktopController {
       countEl.textContent = profileData.currentLang === 'zh' ? `共 ${filtered.length} 项成果` : `${filtered.length} Items Displayed`;
     }
 
+    const getStatusBadgeHtml = (status, label) => {
+      const s = status || 'prototype';
+      let bgClass = 'bg-blue-800 text-white';
+      let dot = '◆';
+      if (s === 'live') {
+        bgClass = 'bg-emerald-700 text-white';
+        dot = '●';
+      } else if (s === 'in-progress') {
+        bgClass = 'bg-purple-700 text-white';
+        dot = '▲';
+      } else if (s === 'research') {
+        bgClass = 'bg-amber-800 text-white';
+        dot = '■';
+      } else if (s === 'archived') {
+        bgClass = 'bg-gray-700 text-white';
+        dot = '▼';
+      }
+      return `<span class="win98-raised px-1.5 py-0.5 text-[9px] font-mono font-bold tracking-wide ${bgClass} shrink-0">${dot} ${escapeHtml(label || s.toUpperCase())}</span>`;
+    };
+
     filtered.forEach(proj => {
       const card = document.createElement('article');
       card.className = 'win98-sunken p-3 bg-white space-y-2.5 flex flex-col justify-between cursor-pointer hover:bg-blue-50/40';
@@ -348,9 +368,9 @@ export class DesktopController {
       card.innerHTML = `
         <div class="space-y-2">
           <div class="win98-sunken bg-gray-950 h-28 flex flex-col justify-between p-2 overflow-hidden relative border border-gray-800">
-            <div class="flex justify-between items-center text-[10px] font-mono text-gray-400">
-              <span class="text-yellow-400 font-bold font-vt323 text-sm tracking-wider">[ ${escapeHtml(proj.category)} ]</span>
-              <span class="bg-gray-800 text-white px-1 font-bold">${escapeHtml(proj.version || '1.0')}</span>
+            <div class="flex justify-between items-center text-[10px] font-mono text-gray-400 gap-1">
+              <span class="text-yellow-400 font-bold font-vt323 text-sm tracking-wider truncate">[ ${escapeHtml(proj.category)} ]</span>
+              ${getStatusBadgeHtml(proj.status, proj.statusLabel)}
             </div>
             
             <div class="font-handjet text-2xl ${proj.accentColor || 'text-cyan-400'} font-bold tracking-widest text-center px-1 truncate">
@@ -366,10 +386,10 @@ export class DesktopController {
           <div class="space-y-1">
             <div class="flex items-center justify-between gap-1">
               <h3 class="font-bold text-sm text-[#000080] flex items-center gap-1.5">
-                <img src="${proj.icon || '/icons/document.svg'}" class="w-4 h-4 pixel-render shrink-0" alt="" /> 
+                <img src="${proj.icon || './icons/document.svg'}" class="w-4 h-4 pixel-render shrink-0" alt="" /> 
                 <span>${escapeHtml(proj.title)}</span>
               </h3>
-              <span class="win98-sunken px-1 text-[9px] font-mono ${proj.type === 'research' ? 'bg-amber-100 text-amber-900' : 'bg-cyan-100 text-cyan-900'} font-bold">
+              <span class="win98-sunken px-1 text-[9px] font-mono ${proj.type === 'research' ? 'bg-amber-100 text-amber-900' : 'bg-cyan-100 text-cyan-900'} font-bold shrink-0">
                 ${proj.type === 'research' ? (profileData.currentLang === 'zh' ? '学术研究' : 'RESEARCH') : (profileData.currentLang === 'zh' ? '交互开发' : 'INTERACTIVE')}
               </span>
             </div>
@@ -385,16 +405,16 @@ export class DesktopController {
 
         <div class="pt-2 border-t border-gray-200 flex items-center justify-between gap-2">
           <button class="btn-proj-details win98-raised px-2.5 py-1 text-xs font-bold hover:bg-gray-200 active:win98-pressed text-[#000080] flex items-center gap-1 shrink-0 cursor-pointer" data-id="${proj.id}">
-            <img src="/icons/properties.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span>${profileData.currentLang === 'zh' ? '查看属性' : 'Properties'}</span>
+            <img src="./icons/properties.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span>${profileData.currentLang === 'zh' ? '查看属性' : 'Properties'}</span>
           </button>
           
           ${isExternalLink 
-            ? `<a href="${proj.detailsUrl}" target="_blank" rel="noopener noreferrer" class="win98-raised px-2.5 py-1 text-xs font-bold hover:bg-gray-200 active:win98-pressed no-underline text-black flex items-center gap-1 shrink-0">
-                <span>${escapeHtml(proj.linkLabel || 'Open Link ➔')}</span>
+            ? `<a href="${proj.detailsUrl}" target="_blank" rel="noopener noreferrer" class="win98-raised px-2.5 py-1 text-xs font-bold hover:bg-gray-200 active:win98-pressed no-underline text-[#000080] flex items-center gap-1 shrink-0 font-sans">
+                <span>${escapeHtml(proj.linkLabel || (profileData.currentLang === 'zh' ? '访问在线网站 ➔' : 'Open Live Site ➔'))}</span>
               </a>`
-            : `<button class="win98-raised px-2.5 py-1 text-xs font-bold hover:bg-gray-200 active:win98-pressed text-gray-800 shrink-0 cursor-pointer" onclick="document.querySelector('[data-id=\\'${proj.id}\\']').click()">
-                <span>${escapeHtml(proj.linkLabel || 'Details ➔')}</span>
-              </button>`
+            : `<span class="win98-sunken px-2 py-0.5 text-[10px] text-gray-500 bg-gray-100 font-mono select-none">
+                ${escapeHtml(proj.linkStateNote || (profileData.currentLang === 'zh' ? '🔒 私有项目 / 暂无外链' : '🔒 Private Project'))}
+              </span>`
           }
         </div>
       `;
@@ -448,8 +468,8 @@ export class DesktopController {
 
     if (titleEl) titleEl.textContent = `${proj.title} - 对象属性`;
     if (nameEl) nameEl.textContent = proj.title;
-    if (iconEl) iconEl.innerHTML = `<img src="${proj.icon || '/icons/document.svg'}" class="w-8 h-8 pixel-render" alt="" />`;
-    if (catEl) catEl.textContent = `${proj.category} | 版本: ${proj.version || '1.0'}`;
+    if (iconEl) iconEl.innerHTML = `<img src="${proj.icon || './icons/document.svg'}" class="w-8 h-8 pixel-render" alt="" />`;
+    if (catEl) catEl.innerHTML = `${escapeHtml(proj.category)} &nbsp;|&nbsp; <span class="font-bold text-[#000080]">${escapeHtml(proj.statusLabel || proj.version || '1.0')}</span>`;
     if (descEl) descEl.textContent = proj.description;
     if (techEl) techEl.textContent = proj.techStack;
 
@@ -470,7 +490,24 @@ export class DesktopController {
     if (releaseEl) releaseEl.textContent = specs.releaseDate || '1998 / 2024';
 
     if (linkEl) {
-      linkEl.href = (proj.detailsUrl && proj.detailsUrl.startsWith('http')) ? proj.detailsUrl : 'https://github.com/wyz15857140708-lang';
+      const isExternalLink = proj.detailsUrl && proj.detailsUrl.startsWith('http');
+      let noLinkBadge = document.getElementById('proj-modal-no-link');
+      if (isExternalLink) {
+        linkEl.style.display = 'inline-flex';
+        linkEl.href = proj.detailsUrl;
+        linkEl.innerHTML = `<img src="./icons/rocket.svg" class="w-3.5 h-3.5 pixel-render inline mr-1" alt="" /> <span>${escapeHtml(proj.linkLabel || (profileData.currentLang === 'zh' ? '访问在线网站 ➔' : 'Open Live Site ➔'))}</span>`;
+        if (noLinkBadge) noLinkBadge.style.display = 'none';
+      } else {
+        linkEl.style.display = 'none';
+        if (!noLinkBadge) {
+          noLinkBadge = document.createElement('span');
+          noLinkBadge.id = 'proj-modal-no-link';
+          noLinkBadge.className = 'win98-sunken px-2.5 py-1 text-[11px] text-gray-600 bg-gray-100 font-mono';
+          linkEl.parentNode.insertBefore(noLinkBadge, linkEl);
+        }
+        noLinkBadge.style.display = 'inline-block';
+        noLinkBadge.textContent = proj.linkStateNote || (profileData.currentLang === 'zh' ? '🔒 私有项目 / 暂无公开外链' : '🔒 Private Project / Unavailable');
+      }
     }
 
     // Reset tabs to first

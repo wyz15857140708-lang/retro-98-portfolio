@@ -41,7 +41,7 @@ export class NotepadApp {
       ...(p.bio || []),
       ``,
       `[SELECTED PROJECTS]`,
-      ...(data.projects || []).map((proj, i) => `${i + 1}. ${proj.title} (${proj.category})\n   - ${proj.description}\n   - Tech: ${proj.techStack}\n   - Link: ${proj.detailsUrl}\n`),
+      ...(data.projects || []).map((proj, i) => `${i + 1}. [${proj.statusLabel || (proj.status ? proj.status.toUpperCase() : 'PROJECT')}] ${proj.title} (${proj.category})\n   - ${proj.description}\n   - Tech: ${proj.techStack}\n   - Status: ${proj.detailsUrl ? proj.detailsUrl : (proj.linkStateNote || 'Private / In Development')}\n`),
       `[CORE DOMAINS]`,
       ...(data.skillsCategories || []).map(cat => `* ${cat.title}:\n  ${cat.items.join(', ')}`),
       ``,
