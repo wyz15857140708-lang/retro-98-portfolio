@@ -49,7 +49,7 @@ export class NotepadApp {
       ...(data.socials || []).map(soc => `* ${soc.name}: ${soc.url} (${soc.handle})`),
       ``,
       `=============================================================`,
-      `  Saved from Windows 98 Workstation - (C) 1998 Tico Wang`,
+      `  Saved from Windows 98 Workstation - (C) 1998 Tico`,
       `=============================================================`
     ];
 
@@ -135,7 +135,7 @@ export class NotepadApp {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'Tico_Wang_Profile_1998.txt';
+    a.download = 'Tico_Profile_1998.txt';
     a.click();
     URL.revokeObjectURL(url);
     audioEngine.playDing();

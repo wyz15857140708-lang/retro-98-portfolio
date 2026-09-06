@@ -1,5 +1,5 @@
 /**
- * Yinzhe “Tico” Wang - Retro '98 Portfolio Configuration
+ * Tico - Retro '98 Portfolio Configuration
  * Dual-language support: Chinese (zh) & English (en)
  * Natural, authentic engineering specs & research notes for Project Properties Inspector dialog.
  */
@@ -9,8 +9,8 @@ export const profileData = {
 
   zh: {
     personal: {
-      name: "王寅喆 / Yinzhe “Tico” Wang",
-      displayName: "王寅喆 (TICO WANG)",
+      name: "王寅喆 / Tico",
+      displayName: "王寅喆 (TICO)",
       title: "创意开发者 / 数字设计者 / 学生研究者",
       subtitle: "用代码、设计、音乐和研究，把感兴趣的想法做成可以交互的数字作品。",
       status: "● 正在开发新项目 / 开放合作",
@@ -22,7 +22,7 @@ export const profileData = {
         "我做网站的时候会花很多时间在字体、动画、声音和页面切换上，因为这些细节会直接决定整个网站给人的感觉。",
         "除了写代码和做设计，我也对社会学、心理学、统计学、哲学以及篮球数据分析感兴趣。"
       ],
-      registeredOwner: "王寅喆 (Yinzhe “Tico” Wang)",
+      registeredOwner: "王寅喆 (Tico)",
       systemEdition: "Windows 98 中文第二版 (王寅喆定制版 - 4.10.2222 A)"
     },
 
@@ -393,7 +393,7 @@ export const profileData = {
       bootSubtitle: "王寅喆工作站 98 // 个人作品与研究系统",
       bootPrompt: ">>> 按 [回车键 ENTER] 或点击屏幕进入 Windows 98 <<<",
       loginTitle: "欢迎使用 Windows 98",
-      loginSubtitle: "登录到 王寅喆 (Tico Wang) 的个人电脑工作站",
+      loginSubtitle: "登录到 王寅喆 (Tico) 的个人电脑工作站",
       loginRole: "创意开发 • 数字设计 • 学术研究",
       loginUserLabel: "用户名(U):",
       loginPassLabel: "密码(P):",
@@ -456,20 +456,20 @@ export const profileData = {
 
   en: {
     personal: {
-      name: "Yinzhe “Tico” Wang",
-      displayName: "TICO WANG",
+      name: "Tico",
+      displayName: "TICO",
       title: "CREATIVE DEVELOPER // DIGITAL DESIGNER // STUDENT RESEARCHER",
       subtitle: "Turning ideas into interactive digital projects through code, design, music, and research.",
       status: "● Currently building new projects / Open to collaborations",
       avatar: "./tico_avatar.jpg",
       bio: [
-        "I’m Yinzhe Wang, or Tico.",
+        "I’m Tico.",
         "I build web projects, experiment with music-driven digital tools, and conduct social science research.",
         "I like turning ideas into things people can actually interact with rather than leaving them as concepts or static mockups. My past work includes music-focused experimental sites, classroom interaction prototypes, browser 3D experiments, and field research.",
         "When building websites, I spend a lot of time on typography, motion, sound, and transitions because those details shape how an interface actually feels.",
         "Outside of development and design, I'm interested in sociology, psychology, statistics, philosophy, and basketball analytics."
       ],
-      registeredOwner: "Yinzhe “Tico” Wang",
+      registeredOwner: "Tico",
       systemEdition: "Windows 98 Second Edition (Tico Edition - 4.10.2222 A)"
     },
 
@@ -840,7 +840,7 @@ export const profileData = {
       bootSubtitle: "TICO-STATION 98 // Portfolio & Research System",
       bootPrompt: ">>> Press [ENTER] or click screen to boot Windows 98 <<<",
       loginTitle: "Welcome to Windows 98",
-      loginSubtitle: "Log on to Yinzhe (Tico) Wang's Personal Workstation",
+      loginSubtitle: "Log on to Tico's Personal Workstation",
       loginRole: "Creative Dev • Digital Design • Research",
       loginUserLabel: "User name(U):",
       loginPassLabel: "Password(P):",
@@ -871,7 +871,7 @@ export const profileData = {
       sectionInterestsTitle: "Interdisciplinary Exploration",
       sectionFaqTitle: "Frequently Asked Questions (FAQ.TXT)",
       sectionGuestbookTitle: "Visitor Guestbook (GUESTBK.DB)",
-      guestbookPrompt: "Leave a message for Yinzhe (Tico):",
+      guestbookPrompt: "Leave a message for Tico:",
       guestbookNameLabel: "Your Name / Handle:",
       guestbookMsgLabel: "Message:",
       guestbookNamePlaceholder: "e.g., Guest99",

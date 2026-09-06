@@ -119,7 +119,7 @@ export class DosPromptApp {
           "KSAO     DOC        12,300  09-06-98   6:20p NBA-Player-KSAO-Study",
           "WULIAN   DOC        15,200  09-06-98   7:10p Wulian-Xiyuan-Field-Report",
           "LUNCH    DAT         9,800  09-06-98   8:45p School-Lunch-Break-Study",
-          "RESUME   TXT         8,940  09-06-98   9:00p Tico-Wang-Profile",
+          "RESUME   TXT         8,940  09-06-98   9:00p Tico-Profile",
           "       8 file(s)        118,460 bytes",
           "       2 dir(s)   4,214,800,000 bytes free"
         ]);

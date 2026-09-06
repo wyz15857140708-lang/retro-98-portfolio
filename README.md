@@ -1,4 +1,4 @@
-# 💾 Windows 98 Interactive Portfolio — Yinzhe "Tico" Wang
+# 💾 Windows 98 Interactive Portfolio — Tico
 
 <p align="center">
   <img src="https://img.shields.io/badge/Windows_98-Authentic_Emulation-008080?style=for-the-badge&logo=windows95&logoColor=white" alt="Windows 98" />
@@ -129,7 +129,7 @@ retro-98-portfolio/
 Launch the **MS-DOS Prompt** icon from the desktop or Start Menu to use built-in CLI commands:
 
 - `help` - Display list of available commands
-- `bio` - Print Yinzhe Wang's biography
+- `bio` - Print Tico's biography
 - `projects` - List all featured works & repositories
 - `skills` - Display development & design stack
 - `contact` - Show email, social links & GitHub
@@ -142,7 +142,7 @@ Launch the **MS-DOS Prompt** icon from the desktop or Start Menu to use built-in
 
 ## 👤 Author
 
-**Yinzhe “Tico” Wang (王寅喆)**  
+**Tico (王寅喆)**  
 *Creative Developer / Digital Designer / Student Researcher*
 
 - 🌐 **Portfolio**: [https://wyz15857140708-lang.github.io/retro-98-portfolio/](https://wyz15857140708-lang.github.io/retro-98-portfolio/)
