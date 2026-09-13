@@ -22,38 +22,25 @@ export class NotepadApp {
   }
 
   loadInitialContent() {
-    const data = profileData.getData();
-    const p = data.personal;
-    
-    const lines = [
-      `=============================================================`,
-      `  ${p.name.toUpperCase()} - PORTFOLIO & RESUME`,
-      `  ${p.title}`,
-      `=============================================================`,
-      ``,
-      `[TAGLINE]`,
-      `"${p.subtitle}"`,
-      ``,
-      `[STATUS]`,
-      `${p.status}`,
-      ``,
-      `[ABOUT ME]`,
-      ...(p.bio || []),
-      ``,
-      `[SELECTED PROJECTS]`,
-      ...(data.projects || []).map((proj, i) => `${i + 1}. [${proj.statusLabel || (proj.status ? proj.status.toUpperCase() : 'PROJECT')}] ${proj.title} (${proj.category})\n   - ${proj.description}\n   - Tech: ${proj.techStack}\n   - Status: ${proj.detailsUrl ? proj.detailsUrl : (proj.linkStateNote || 'Private / In Development')}\n`),
-      `[CORE DOMAINS]`,
-      ...(data.skillsCategories || []).map(cat => `* ${cat.title}:\n  ${cat.items.join(', ')}`),
-      ``,
-      `[CONTACT & LINKS]`,
-      ...(data.socials || []).map(soc => `* ${soc.name}: ${soc.url} (${soc.handle})`),
-      ``,
-      `=============================================================`,
-      `  Saved from Windows 98 Workstation - (C) 1998 Tico`,
-      `=============================================================`
-    ];
+    const isZh = profileData.currentLang === 'zh';
+    const textZh = `请注意：这里看到的大部分东西都可以点。
 
-    this.textarea.value = lines.join('\n');
+图标、文件、按钮、窗口……都可以试试。
+
+不用担心点坏，反正这台电脑也不是真的。
+
+随便翻，自己探索吧！！`;
+
+    const textEn = `Most things you see here are clickable.
+
+Icons, files, buttons, windows... try whatever looks interesting.
+
+Don't worry about breaking anything.
+This computer isn't real anyway.
+
+Click around and explore.`;
+
+    this.textarea.value = isZh ? textZh : textEn;
     this.updateStatus();
   }
 
@@ -135,7 +122,7 @@ export class NotepadApp {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'Tico_Profile_1998.txt';
+    a.download = 'README.TXT';
     a.click();
     URL.revokeObjectURL(url);
     audioEngine.playDing();

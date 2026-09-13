@@ -20,11 +20,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const desktopController = new DesktopController(windowManager);
   desktopController.init();
 
+  // Auto-open README.TXT once per page session
+  let hasAutoOpenedReadme = false;
+
   // Initialize Boot & Login Sequence
   const bootManager = new BootManager(() => {
     console.log("Windows 98 Desktop Environment Initialized.");
     // Focus main portfolio window on boot
     windowManager.openWindow('window-portfolio');
+
+    // Auto-open README.TXT ~400ms after desktop appears
+    if (!hasAutoOpenedReadme) {
+      hasAutoOpenedReadme = true;
+      setTimeout(() => {
+        windowManager.openWindow('window-notepad');
+      }, 400);
+    }
   });
   bootManager.init();
 

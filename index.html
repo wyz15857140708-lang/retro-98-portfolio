@@ -186,11 +186,11 @@
           </span>
         </div>
 
-        <!-- Icon 3: Notepad -->
+        <!-- Icon 3: README.TXT -->
         <div class="desktop-icon group flex flex-col items-center w-20 p-1 cursor-pointer" data-opens="window-notepad" tabindex="0">
-          <img src="/icons/notepad.svg" class="w-9 h-9 pixel-render pointer-events-none drop-shadow" alt="Notepad" />
+          <img src="/icons/notepad.svg" class="w-9 h-9 pixel-render pointer-events-none drop-shadow" alt="README.TXT" />
           <span id="icon-title-notepad" class="icon-title text-[11px] text-white text-center font-win98 mt-1 px-1 py-0.5 leading-tight rounded-none group-hover:bg-[#000080]">
-            记事本 (简历)
+            README.TXT
           </span>
         </div>
 
@@ -482,7 +482,7 @@
 
                 <div class="pt-2 flex flex-wrap gap-2 justify-end border-t border-gray-200">
                   <button id="btn-open-notepad-about" class="win98-raised px-3 py-1 text-xs font-bold hover:bg-gray-100 active:win98-pressed flex items-center gap-1.5 cursor-pointer">
-                    <img src="/icons/document.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span id="btn-label-notepad">打开记事本完整简介 (Notepad)</span>
+                    <img src="/icons/document.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span id="btn-label-notepad">打开 README.TXT (Notepad)</span>
                   </button>
                   <button id="btn-open-socials-win" class="win98-raised px-3 py-1 text-xs font-bold hover:bg-gray-100 active:win98-pressed flex items-center gap-1.5 cursor-pointer">
                     <img src="/icons/network.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span id="btn-label-socials">打开连接窗口 (Links)</span>
@@ -689,18 +689,18 @@
       </section>
 
       <!-- ========================================================================= -->
-      <!-- WINDOW 4: NOTEPAD (记事本 - 简历) -->
+      <!-- WINDOW 4: NOTEPAD (README.TXT) -->
       <!-- ========================================================================= -->
-      <section id="window-notepad" class="win98-window win98-raised absolute z-20 flex flex-col shadow-xl hidden" 
-               style="width: 520px; height: 380px; left: 100px; top: 120px;"
-               data-title="记事本 - 王寅喆简历.txt" 
+      <section id="window-notepad" class="win98-window win98-raised absolute z-20 flex flex-col shadow-xl hidden max-w-[95vw]" 
+               style="width: 480px; height: 320px; left: calc(50% - 240px); top: 120px;"
+               data-title="README.TXT - 记事本" 
                data-icon="/icons/notepad.svg"
-               role="dialog" aria-label="Notepad Window">
+               role="dialog" aria-label="README.TXT - Notepad Window">
         
         <header class="title-bar win98-titlebar-active px-2 py-1 flex items-center justify-between cursor-move select-none shrink-0">
           <div class="flex items-center gap-1.5 overflow-hidden">
             <img src="/icons/notepad.svg" class="w-4 h-4 pixel-render shrink-0" alt="" />
-            <span class="text-xs font-bold truncate">王寅喆_个人简介.txt - 记事本</span>
+            <span id="notepad-window-title" class="text-xs font-bold truncate">README.TXT - 记事本</span>
           </div>
           <div class="flex items-center gap-1 shrink-0">
             <button class="btn-minimize win98-raised w-4 h-4 flex items-center justify-center text-[10px] font-bold leading-none title-btn hover:bg-gray-300 active:win98-pressed" aria-label="Minimize">_</button>

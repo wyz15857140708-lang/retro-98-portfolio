@@ -305,7 +305,8 @@ export class DesktopController {
     setText('icon-title-recycle', ui.desktopIconRecycle);
     setText('icon-title-paint', ui.desktopIconPaint || (profileData.currentLang === 'zh' ? '画图程序' : 'MS Paint'));
     setText('icon-title-minesweeper', profileData.currentLang === 'zh' ? '扫雷游戏' : 'Minesweeper');
-    setText('icon-title-notepad', profileData.currentLang === 'zh' ? '记事本 (简历)' : 'Notepad');
+    setText('icon-title-notepad', ui.desktopIconNotepad || 'README.TXT');
+    setText('notepad-window-title', ui.notepadWindowTitle || (profileData.currentLang === 'zh' ? 'README.TXT - 记事本' : 'README.TXT - Notepad'));
 
     setText('title-section-featured', ui.sectionFeaturedTitle);
     setText('title-section-about', ui.sectionAboutTitle);
@@ -320,7 +321,7 @@ export class DesktopController {
     setText('status-bar-objects', ui.statusBarObjects);
     setText('status-bar-zone', ui.statusBarZone);
 
-    setText('btn-label-notepad', profileData.currentLang === 'zh' ? '打开记事本完整简介 (Notepad)' : 'Open Full Bio in Notepad');
+    setText('btn-label-notepad', ui.btnLabelNotepad || (profileData.currentLang === 'zh' ? '打开 README.TXT (Notepad)' : 'Open README.TXT (Notepad)'));
     setText('btn-label-socials', profileData.currentLang === 'zh' ? '打开连接窗口 (Links)' : 'Open Links Window');
     setText('about-contact-intro', profileData.currentLang === 'zh' 
       ? '我平时会做网页、音乐相关的数字项目，也会做一些社会科学研究。如果对我的项目感兴趣，或者想一起做点有意思的事情，欢迎随时联系我：' 
