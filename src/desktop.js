@@ -308,8 +308,10 @@ export class DesktopController {
     setText('icon-title-notepad', ui.desktopIconNotepad || 'README.TXT');
     setText('notepad-window-title', ui.notepadWindowTitle || (profileData.currentLang === 'zh' ? 'README.TXT - 记事本' : 'README.TXT - Notepad'));
 
-    setText('title-section-featured', ui.sectionFeaturedTitle);
-    setText('title-section-about', ui.sectionAboutTitle);
+    setText('window-title-portfolio', ui.windowPortfolioTitle || 'C:\\My Documents\\portfolio\\index.htm');
+    setText('address-bar-path', ui.addressBarUrl || 'C:\\My Documents\\portfolio\\index.htm');
+
+    setText('title-section-featured', ui.sectionFeaturedTitle || (profileData.currentLang === 'zh' ? '项目' : 'Projects'));
     setText('label-toggle-all', this.isShowingAllProjects ? ui.btnShowFeatured : ui.btnViewAll);
 
     setText('filter-btn-all', ui.tabAllProjects);
@@ -321,11 +323,8 @@ export class DesktopController {
     setText('status-bar-objects', ui.statusBarObjects);
     setText('status-bar-zone', ui.statusBarZone);
 
-    setText('btn-label-notepad', ui.btnLabelNotepad || (profileData.currentLang === 'zh' ? '打开 README.TXT (Notepad)' : 'Open README.TXT (Notepad)'));
-    setText('btn-label-socials', profileData.currentLang === 'zh' ? '打开连接窗口 (Links)' : 'Open Links Window');
-    setText('about-contact-intro', profileData.currentLang === 'zh' 
-      ? '我平时会做网页、音乐相关的数字项目，也会做一些社会科学研究。如果对我的项目感兴趣，或者想一起做点有意思的事情，欢迎随时联系我：' 
-      : 'I build web projects, music-driven experiments, and conduct social science research. If you find my work interesting or want to collaborate on something fun, feel free to reach out:');
+    setText('footer-find-me-label', ui.footerFindMe || (profileData.currentLang === 'zh' ? '其他地方:' : 'Find me:'));
+    setText('footer-more-label', ui.footerMoreLink || (profileData.currentLang === 'zh' ? '更多联系方式 (Online)...' : 'Online profiles...'));
 
     setText('guestbook-prompt-title', ui.guestbookPrompt);
     setText('guestbook-name-label', ui.guestbookNameLabel);
@@ -954,13 +953,12 @@ export class DesktopController {
     }
   }
 
-  // Explorer Toolbar (Back, Forward, Stop, Refresh, Home, Print)
+  // Explorer Toolbar (Back, Forward, Stop, Refresh, Home)
   initExplorerToolbar() {
     const btnBack = document.getElementById('tb-back');
     const btnForward = document.getElementById('tb-forward');
     const btnRefresh = document.getElementById('tb-refresh');
     const btnHome = document.getElementById('tb-home');
-    const btnPrint = document.getElementById('tb-print');
 
     if (btnBack) {
       btnBack.addEventListener('click', () => {
@@ -972,7 +970,7 @@ export class DesktopController {
     if (btnForward) {
       btnForward.addEventListener('click', () => {
         audioEngine.playClick();
-        const el = document.getElementById('section-about-contact');
+        const el = document.getElementById('portfolio-footer-contact');
         if (el) el.scrollIntoView({ behavior: 'smooth' });
       });
     }
@@ -989,11 +987,6 @@ export class DesktopController {
         if (mainContent) mainContent.scrollTop = 0;
       });
     }
-    if (btnPrint) {
-      btnPrint.addEventListener('click', () => {
-        window.print();
-      });
-    }
   }
 
   // Portfolio Window Actions & Interactions
@@ -1002,9 +995,7 @@ export class DesktopController {
     const allWrapper = document.getElementById('all-projects-wrapper');
     const labelToggleAll = document.getElementById('label-toggle-all');
     const btnWork = document.getElementById('intro-btn-work');
-    const btnSocial = document.getElementById('intro-btn-social');
-    const btnNotepad = document.getElementById('btn-open-notepad-about');
-    const btnSocials = document.getElementById('btn-open-socials-win');
+    const btnSocials = document.getElementById('footer-btn-open-socials');
 
     if (btnToggleAll && allWrapper) {
       btnToggleAll.addEventListener('click', () => {
@@ -1030,20 +1021,6 @@ export class DesktopController {
         audioEngine.playClick();
         const el = document.getElementById('section-featured');
         if (el) el.scrollIntoView({ behavior: 'smooth' });
-      });
-    }
-
-    if (btnSocial) {
-      btnSocial.addEventListener('click', () => {
-        audioEngine.playClick();
-        const el = document.getElementById('section-about-contact');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      });
-    }
-
-    if (btnNotepad) {
-      btnNotepad.addEventListener('click', () => {
-        this.wm.openWindow('window-notepad');
       });
     }
 
