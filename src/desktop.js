@@ -35,6 +35,9 @@ export class DesktopController {
     this.screensaverAnimId = null;
     this.screensaverCanvas = null;
     this.screensaverCtx = null;
+
+    // Portfolio State
+    this.isShowingAllProjects = false;
   }
 
   init() {
@@ -72,6 +75,7 @@ export class DesktopController {
     this.initScreensaver();
     this.initProjectInspector();
     this.initRecycleBin();
+    this.initPortfolioActions();
   }
 
   // Generic Win98 Tab Control Switcher
@@ -303,15 +307,24 @@ export class DesktopController {
     setText('icon-title-minesweeper', profileData.currentLang === 'zh' ? '扫雷游戏' : 'Minesweeper');
     setText('icon-title-notepad', profileData.currentLang === 'zh' ? '记事本 (简历)' : 'Notepad');
 
-    setText('title-section-work', ui.sectionWorkTitle);
-    setText('title-section-skills', ui.sectionSkillsTitle);
-    setText('title-section-interests', ui.sectionInterestsTitle);
-    setText('title-section-faq', ui.sectionFaqTitle);
-    setText('title-section-guestbook', ui.sectionGuestbookTitle);
+    setText('title-section-featured', ui.sectionFeaturedTitle);
+    setText('title-section-about', ui.sectionAboutTitle);
+    setText('label-toggle-all', this.isShowingAllProjects ? ui.btnShowFeatured : ui.btnViewAll);
 
     setText('filter-btn-all', ui.tabAllProjects);
     setText('filter-btn-dev', ui.tabDevProjects);
     setText('filter-btn-research', ui.tabResearchProjects);
+
+    setText('address-label', ui.addressLabel);
+    setText('status-bar-done', ui.statusBarDone);
+    setText('status-bar-objects', ui.statusBarObjects);
+    setText('status-bar-zone', ui.statusBarZone);
+
+    setText('btn-label-notepad', profileData.currentLang === 'zh' ? '打开记事本完整简介 (Notepad)' : 'Open Full Bio in Notepad');
+    setText('btn-label-socials', profileData.currentLang === 'zh' ? '打开连接窗口 (Links)' : 'Open Links Window');
+    setText('about-contact-intro', profileData.currentLang === 'zh' 
+      ? '我平时会做网页、音乐相关的数字项目，也会做一些社会科学研究。如果对我的项目感兴趣，或者想一起做点有意思的事情，欢迎随时联系我：' 
+      : 'I build web projects, music-driven experiments, and conduct social science research. If you find my work interesting or want to collaborate on something fun, feel free to reach out:');
 
     setText('guestbook-prompt-title', ui.guestbookPrompt);
     setText('guestbook-name-label', ui.guestbookNameLabel);
@@ -344,21 +357,9 @@ export class DesktopController {
 
   renderProjects() {
     const data = profileData.getData();
-    const projectsContainer = document.getElementById('projects-grid');
-    if (!projectsContainer || !data.projects) return;
-
-    projectsContainer.innerHTML = '';
-
-    const filtered = data.projects.filter(p => {
-      if (this.currentProjectFilter === 'dev') return p.type === 'dev';
-      if (this.currentProjectFilter === 'research') return p.type === 'research';
-      return true;
-    });
-
-    const countEl = document.getElementById('projects-count');
-    if (countEl) {
-      countEl.textContent = profileData.currentLang === 'zh' ? `共 ${filtered.length} 项成果` : `${filtered.length} Items Displayed`;
-    }
+    const featuredGrid = document.getElementById('featured-projects-grid');
+    const moreGrid = document.getElementById('more-projects-grid');
+    if (!data.projects) return;
 
     const getStatusBadgeHtml = (status, label) => {
       const s = status || 'prototype';
@@ -380,79 +381,100 @@ export class DesktopController {
       return `<span class="win98-raised px-1.5 py-0.5 text-[9px] font-mono font-bold tracking-wide ${bgClass} shrink-0">${dot} ${escapeHtml(label || s.toUpperCase())}</span>`;
     };
 
-    filtered.forEach(proj => {
+    const createProjectCard = (proj) => {
       const card = document.createElement('article');
-      card.className = 'win98-sunken p-3 bg-white space-y-2.5 flex flex-col justify-between cursor-pointer hover:bg-blue-50/40';
+      card.className = 'win98-sunken p-3 bg-white space-y-2.5 flex flex-col justify-between hover:bg-blue-50/40 select-none';
       
-      const tagsHtml = proj.tags ? proj.tags.map(t => `<span class="win98-raised px-1 py-0.2 bg-gray-100 text-gray-700 text-[9px] font-mono font-semibold">${escapeHtml(t)}</span>`).join(' ') : '';
       const isExternalLink = proj.detailsUrl && proj.detailsUrl.startsWith('http');
+      const releaseYear = proj.specs && proj.specs.releaseDate ? proj.specs.releaseDate : '2024';
 
       card.innerHTML = `
-        <div class="space-y-2">
-          <div class="win98-sunken bg-gray-950 h-28 flex flex-col justify-between p-2 overflow-hidden relative border border-gray-800">
-            <div class="flex justify-between items-center text-[10px] font-mono text-gray-400 gap-1">
-              <span class="text-yellow-400 font-bold font-vt323 text-sm tracking-wider truncate">[ ${escapeHtml(proj.category)} ]</span>
-              ${getStatusBadgeHtml(proj.status, proj.statusLabel)}
+        <div class="space-y-1.5">
+          <div class="flex items-start justify-between gap-1 border-b border-gray-200 pb-1.5">
+            <div class="flex items-center gap-1.5 overflow-hidden">
+              <span class="font-mono font-bold text-xs text-[#000080] shrink-0">${proj.number || '01'}</span>
+              <img src="${proj.icon || './icons/document.svg'}" class="w-4 h-4 pixel-render shrink-0" alt="" />
+              <h3 class="font-bold text-xs sm:text-sm text-black truncate">${escapeHtml(proj.title)}</h3>
             </div>
-            
-            <div class="font-handjet text-2xl ${proj.accentColor || 'text-cyan-400'} font-bold tracking-widest text-center px-1 truncate">
-              ${escapeHtml(proj.title.toUpperCase())}
-            </div>
-
-            <div class="flex justify-between items-center text-[9px] font-mono text-gray-500">
-              <span>PRJ_${proj.number || '00'}</span>
-              <span>256_COLOR</span>
-            </div>
+            ${getStatusBadgeHtml(proj.status, proj.statusLabel)}
           </div>
 
-          <div class="space-y-1">
-            <div class="flex items-center justify-between gap-1">
-              <h3 class="font-bold text-sm text-[#000080] flex items-center gap-1.5">
-                <img src="${proj.icon || './icons/document.svg'}" class="w-4 h-4 pixel-render shrink-0" alt="" /> 
-                <span>${escapeHtml(proj.title)}</span>
-              </h3>
-              <span class="win98-sunken px-1 text-[9px] font-mono ${proj.type === 'research' ? 'bg-amber-100 text-amber-900' : 'bg-cyan-100 text-cyan-900'} font-bold shrink-0">
-                ${proj.type === 'research' ? (profileData.currentLang === 'zh' ? '学术研究' : 'RESEARCH') : (profileData.currentLang === 'zh' ? '交互开发' : 'INTERACTIVE')}
-              </span>
-            </div>
-            <div class="flex flex-wrap gap-1">
-              ${tagsHtml}
-            </div>
+          <div class="text-[11px] font-mono text-gray-600 flex items-center justify-between">
+            <span class="truncate">${escapeHtml(proj.category)}</span>
+            <span class="text-gray-500 shrink-0 ml-1">${escapeHtml(releaseYear)}</span>
           </div>
 
-          <p class="text-xs text-gray-700 leading-relaxed font-inter">
-            ${escapeHtml(proj.description)}
+          <p class="text-xs text-gray-700 leading-relaxed font-inter line-clamp-3">
+            ${escapeHtml(proj.shortSummary || proj.description)}
           </p>
         </div>
 
         <div class="pt-2 border-t border-gray-200 flex items-center justify-between gap-2">
-          <button class="btn-proj-details win98-raised px-2.5 py-1 text-xs font-bold hover:bg-gray-200 active:win98-pressed text-[#000080] flex items-center gap-1 shrink-0 cursor-pointer" data-id="${proj.id}">
-            <img src="./icons/properties.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span>${profileData.currentLang === 'zh' ? '查看属性' : 'Properties'}</span>
+          <button class="btn-proj-props win98-raised px-2 py-0.5 text-xs font-bold hover:bg-gray-200 active:win98-pressed text-black flex items-center gap-1 shrink-0 cursor-pointer" data-id="${proj.id}">
+            <img src="./icons/properties.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+            <span>${profileData.currentLang === 'zh' ? '属性' : 'Properties'}</span>
           </button>
           
           ${isExternalLink 
-            ? `<a href="${proj.detailsUrl}" target="_blank" rel="noopener noreferrer" class="win98-raised px-2.5 py-1 text-xs font-bold hover:bg-gray-200 active:win98-pressed no-underline text-[#000080] flex items-center gap-1 shrink-0 font-sans">
-                <span>${escapeHtml(proj.linkLabel || (profileData.currentLang === 'zh' ? '访问在线网站 ➔' : 'Open Live Site ➔'))}</span>
+            ? `<a href="${proj.detailsUrl}" target="_blank" rel="noopener noreferrer" class="win98-raised px-2.5 py-0.5 text-xs font-bold hover:bg-gray-200 active:win98-pressed no-underline text-[#000080] flex items-center gap-1 shrink-0 font-sans">
+                <span>${escapeHtml(proj.actionLabel || proj.linkLabel || (profileData.currentLang === 'zh' ? '访问网站 ➔' : 'Open Website ➔'))}</span>
               </a>`
-            : `<span class="win98-sunken px-2 py-0.5 text-[10px] text-gray-500 bg-gray-100 font-mono select-none">
-                ${escapeHtml(proj.linkStateNote || (profileData.currentLang === 'zh' ? '🔒 私有项目 / 暂无外链' : '🔒 Private Project'))}
-              </span>`
+            : `<button class="btn-proj-action win98-raised px-2.5 py-0.5 text-xs font-bold hover:bg-gray-200 active:win98-pressed text-[#000080] flex items-center gap-1 shrink-0 cursor-pointer" data-id="${proj.id}">
+                <span>${escapeHtml(proj.actionLabel || (profileData.currentLang === 'zh' ? '查看项目 ➔' : 'View Project ➔'))}</span>
+              </button>`
           }
         </div>
       `;
 
-      // Click card or properties button opens project inspector
       card.addEventListener('dblclick', () => this.openProjectInspector(proj.id));
-      const propBtn = card.querySelector('.btn-proj-details');
+      const propBtn = card.querySelector('.btn-proj-props');
       if (propBtn) {
         propBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           this.openProjectInspector(proj.id);
         });
       }
+      const actBtn = card.querySelector('.btn-proj-action');
+      if (actBtn) {
+        actBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.openProjectInspector(proj.id);
+        });
+      }
 
-      projectsContainer.appendChild(card);
-    });
+      return card;
+    };
+
+    // 1. Render Top 4 Featured Projects
+    if (featuredGrid) {
+      featuredGrid.innerHTML = '';
+      const featured = data.projects.slice(0, 4);
+      featured.forEach(proj => {
+        featuredGrid.appendChild(createProjectCard(proj));
+      });
+    }
+
+    // 2. Render More / Filtered Projects
+    if (moreGrid) {
+      moreGrid.innerHTML = '';
+      let moreList = [];
+      if (this.currentProjectFilter === 'dev') {
+        moreList = data.projects.filter(p => p.type === 'dev');
+      } else if (this.currentProjectFilter === 'research') {
+        moreList = data.projects.filter(p => p.type === 'research');
+      } else {
+        moreList = data.projects.slice(4); // remaining 3 projects for default view
+      }
+
+      moreList.forEach(proj => {
+        moreGrid.appendChild(createProjectCard(proj));
+      });
+
+      const countEl = document.getElementById('more-projects-count');
+      if (countEl) {
+        countEl.textContent = profileData.currentLang === 'zh' ? `显示 ${moreList.length} 项成果` : `${moreList.length} items listed`;
+      }
+    }
   }
 
   // Project Inspector Dialog (对象属性)
@@ -942,13 +964,15 @@ export class DesktopController {
     if (btnBack) {
       btnBack.addEventListener('click', () => {
         audioEngine.playClick();
-        document.getElementById('section-work').scrollIntoView();
+        const el = document.getElementById('section-featured');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
       });
     }
     if (btnForward) {
       btnForward.addEventListener('click', () => {
         audioEngine.playClick();
-        document.getElementById('section-skills').scrollIntoView();
+        const el = document.getElementById('section-about-contact');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
       });
     }
     if (btnRefresh) {
@@ -960,13 +984,71 @@ export class DesktopController {
     if (btnHome) {
       btnHome.addEventListener('click', () => {
         audioEngine.playClick();
-        const mainContent = document.getElementById('window-portfolio').querySelector('.win98-scrollbar');
+        const mainContent = document.getElementById('window-portfolio')?.querySelector('.win98-scrollbar');
         if (mainContent) mainContent.scrollTop = 0;
       });
     }
     if (btnPrint) {
       btnPrint.addEventListener('click', () => {
         window.print();
+      });
+    }
+  }
+
+  // Portfolio Window Actions & Interactions
+  initPortfolioActions() {
+    const btnToggleAll = document.getElementById('btn-toggle-all-projects');
+    const allWrapper = document.getElementById('all-projects-wrapper');
+    const labelToggleAll = document.getElementById('label-toggle-all');
+    const btnWork = document.getElementById('intro-btn-work');
+    const btnSocial = document.getElementById('intro-btn-social');
+    const btnNotepad = document.getElementById('btn-open-notepad-about');
+    const btnSocials = document.getElementById('btn-open-socials-win');
+
+    if (btnToggleAll && allWrapper) {
+      btnToggleAll.addEventListener('click', () => {
+        this.isShowingAllProjects = !this.isShowingAllProjects;
+        if (this.isShowingAllProjects) {
+          allWrapper.classList.remove('hidden');
+          if (labelToggleAll) {
+            labelToggleAll.textContent = profileData.getData().ui.btnShowFeatured;
+          }
+        } else {
+          allWrapper.classList.add('hidden');
+          if (labelToggleAll) {
+            labelToggleAll.textContent = profileData.getData().ui.btnViewAll;
+          }
+        }
+        this.renderProjects();
+        audioEngine.playClick();
+      });
+    }
+
+    if (btnWork) {
+      btnWork.addEventListener('click', () => {
+        audioEngine.playClick();
+        const el = document.getElementById('section-featured');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    if (btnSocial) {
+      btnSocial.addEventListener('click', () => {
+        audioEngine.playClick();
+        const el = document.getElementById('section-about-contact');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    if (btnNotepad) {
+      btnNotepad.addEventListener('click', () => {
+        this.wm.openWindow('window-notepad');
+      });
+    }
+
+    if (btnSocials) {
+      btnSocials.addEventListener('click', () => {
+        this.wm.openWindow('window-social');
       });
     }
   }

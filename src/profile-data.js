@@ -9,21 +9,18 @@ export const profileData = {
 
   zh: {
     personal: {
-      name: "王寅喆 / Tico",
-      displayName: "王寅喆 (TICO)",
-      title: "创意开发者 / 数字设计者 / 学生研究者",
-      subtitle: "用代码、设计、音乐和研究，把感兴趣的想法做成可以交互的数字作品。",
+      name: "王寅喆 / Tico Wang",
+      displayName: "王寅喆 (Tico)",
+      title: "学生 / 网页 / 设计 / 研究",
+      subtitle: "我平时会做网页、音乐相关的数字项目，也会做一些社会科学研究。",
       status: "● 正在开发新项目 / 开放合作",
       avatar: "./tico_avatar.jpg",
       bio: [
-        "我是王寅喆，也可以叫我 Tico。",
         "我平时会做网页、音乐相关的数字项目，也会做一些社会科学研究。",
-        "比起停留在概念或者设计稿，我更喜欢把想法真正写成别人可以操作、体验的东西。做过的项目包括音乐主题网站、互动页面、教育工具原型、网页 3D 实验和一些实地社会学调研。",
-        "我做网站的时候会花很多时间在字体、动画、声音和页面切换上，因为这些细节会直接决定整个网站给人的感觉。",
-        "除了写代码和做设计，我也对社会学、心理学、统计学、哲学以及篮球数据分析感兴趣。"
+        "比起只停留在设计稿，我更喜欢把想法真正做成别人可以操作和体验的东西。"
       ],
       registeredOwner: "王寅喆 (Tico)",
-      systemEdition: "Windows 98 中文第二版 (王寅喆定制版 - 4.10.2222 A)"
+      systemEdition: "Windows 98 中文第二版 (4.10.2222 A)"
     },
 
     projects: [
@@ -34,13 +31,15 @@ export const profileData = {
         status: "live",
         statusLabel: "已上线 (Live)",
         category: "实验性网页 // 音乐交互",
+        shortSummary: "一个受到 Playboi Carti 音乐和视觉风格启发的实验性网站。",
+        actionLabel: "访问网站 ➔",
         tags: ["音乐视觉", "网页设计", "原生 JavaScript", "排版实验"],
         version: "已上线 1.0",
         accentColor: "text-red-400",
         description: "一个受到 Playboi Carti 音乐和视觉风格启发的实验性网站。因为大部分音乐人网站排版都比较规整和保守，我想尝试用超大字体、破坏感图像、突兀的转场和音频交互，让网页界面本身更贴合 Carti 音乐给人的感觉。",
         techStack: "HTML / CSS / 原生 JavaScript / Web Audio API / GitHub Pages",
         detailsUrl: "https://wyz15857140708-lang.github.io/Carti-website/",
-        linkLabel: "访问在线网站 ➔",
+        linkLabel: "访问网站 ➔",
         linkStateNote: null,
         icon: "./icons/cd.svg",
         type: "dev",
@@ -63,6 +62,8 @@ export const profileData = {
         status: "in-progress",
         statusLabel: "开发中 (In Progress)",
         category: "教育科技 // 网页工具",
+        shortSummary: "针对课堂大班教学痛点设计的互动答题与即时反馈系统原型。",
+        actionLabel: "查看项目 ➔",
         tags: ["教育科技", "产品设计", "交互原型", "课堂互动", "题目编辑"],
         version: "开发中 (Alpha)",
         accentColor: "text-purple-400",
@@ -92,6 +93,8 @@ export const profileData = {
         status: "prototype",
         statusLabel: "交互原型 (Prototype)",
         category: "创意编程 // 音乐文化",
+        shortSummary: "拆解 Trap 音乐中 808 鼓点、Hi-Hat 滚奏与三连音节奏结构的交互式网页。",
+        actionLabel: "查看项目 ➔",
         tags: ["音乐文化", "网页互动", "Trap 视觉", "FL Studio"],
         version: "实验原型",
         accentColor: "text-yellow-400",
@@ -114,40 +117,14 @@ export const profileData = {
         }
       },
       {
-        id: "project-racing",
-        number: "04",
-        title: "开放世界赛车物理实验",
-        status: "prototype",
-        statusLabel: "物理实验原型 (Prototype)",
-        category: "网页实验 // 3D 物理",
-        tags: ["Three.js", "Cannon-es", "WebGL", "3D 物理", "交互实验"],
-        version: "物理实验原型",
-        accentColor: "text-cyan-400",
-        description: "一个在浏览器中运行的 3D 驾驶与物理实验，主要用来练习 Three.js 场景搭建、Cannon-es 车辆刚体动力学以及浏览器环境下的键盘操控反馈。",
-        techStack: "Three.js / Cannon-es / JavaScript / WebGL",
-        detailsUrl: null,
-        linkLabel: null,
-        linkStateNote: "🏎️ 物理原型 / 本地构建",
-        icon: "./icons/joystick.svg",
-        type: "dev",
-        specs: {
-          releaseDate: "2024",
-          architecture: "用 Three.js 做 3D 场景和车辆模型渲染，用 Cannon-es 处理车辆动力学与地面碰撞。",
-          keyFeatures: [
-            "使用 Raycast Vehicle 模拟车辆悬挂、轮胎摩擦与转向物理",
-            "加入基础动态光照、阴影和地形碰撞网格",
-            "支持键盘 WASD / 方向键驾驶与漂移控制"
-          ],
-          metrics: "浏览器原生 3D 原型 / 无需安装任何插件"
-        }
-      },
-      {
         id: "project-ksao",
-        number: "05",
+        number: "04",
         title: "NBA 球员角色 KSAO 分析研究",
         status: "research",
         statusLabel: "学术研究 (Research)",
         category: "体育分析 // 组织心理学",
+        shortSummary: "借鉴工业与组织心理学 KSAO 框架与比赛高阶数据，建立 NBA 球员角色胜任力模型。",
+        actionLabel: "查看研究 ➔",
         tags: ["体育分析", "KSAO 框架", "工作分析", "实证研究"],
         version: "研究报告",
         accentColor: "text-orange-400",
@@ -170,12 +147,44 @@ export const profileData = {
         }
       },
       {
+        id: "project-racing",
+        number: "05",
+        title: "开放世界赛车物理实验",
+        status: "prototype",
+        statusLabel: "物理实验原型 (Prototype)",
+        category: "网页实验 // 3D 物理",
+        shortSummary: "在浏览器中运行的 3D 驾驶与物理实验，练习 Three.js 与 Cannon-es 动力学。",
+        actionLabel: "查看项目 ➔",
+        tags: ["Three.js", "Cannon-es", "WebGL", "3D 物理", "交互实验"],
+        version: "物理实验原型",
+        accentColor: "text-cyan-400",
+        description: "一个在浏览器中运行的 3D 驾驶与物理实验，主要用来练习 Three.js 场景搭建、Cannon-es 车辆刚体动力学以及浏览器环境下的键盘操控反馈。",
+        techStack: "Three.js / Cannon-es / JavaScript / WebGL",
+        detailsUrl: null,
+        linkLabel: null,
+        linkStateNote: "🏎️ 物理原型 / 本地构建",
+        icon: "./icons/joystick.svg",
+        type: "dev",
+        specs: {
+          releaseDate: "2024",
+          architecture: "用 Three.js 做 3D 场景和车辆模型渲染，用 Cannon-es 处理车辆动力学与地面碰撞。",
+          keyFeatures: [
+            "使用 Raycast Vehicle 模拟车辆悬挂、轮胎摩擦与转向物理",
+            "加入基础动态光照、阴影和地形碰撞网格",
+            "支持键盘 WASD / 方向键驾驶与漂移控制"
+          ],
+          metrics: "浏览器原生 3D 原型 / 无需安装任何插件"
+        }
+      },
+      {
         id: "project-wulian",
         number: "06",
         title: "五联西苑城市与社会观察调研",
         status: "research",
         statusLabel: "田野调研 (Research)",
         category: "城市研究 // 社会学田野",
+        shortSummary: "围绕杭州五联西苑开展的城市与社区实地观察，记录公共空间日常使用情况与边界变化。",
+        actionLabel: "查看研究 ➔",
         tags: ["城市空间", "实地观察", "社区调研", "空间记录", "纪实摄影"],
         version: "调研记录与报告",
         accentColor: "text-green-400",
@@ -204,6 +213,8 @@ export const profileData = {
         status: "research",
         statusLabel: "统计调查 (Research)",
         category: "教育调查 // 统计分析",
+        shortSummary: "针对学校作息安排中是否应设置正式午休时间开展的问卷调查与统计分析。",
+        actionLabel: "查看研究 ➔",
         tags: ["问卷调查", "统计学", "样本抽样", "Jamovi", "数据分析"],
         version: "调查统计报告",
         accentColor: "text-emerald-400",
@@ -380,12 +391,12 @@ export const profileData = {
     ],
 
     specs: {
-      systemName: "王寅喆工作站 98 (TICO-STATION 98)",
-      processor: "Intel Pentium II 450MHz (个人定制系统)",
+      systemName: "TICO-STATION 98",
+      processor: "Intel Pentium II 450MHz",
       memory: "128.0 MB SDRAM",
-      storage: "Quantum Fireball 8.4GB IDE (项目代码 / 调研数据 / 音乐工程)",
-      sound: "Creative Sound Blaster AWE64 (FL Studio 音频支持)",
-      graphics: "3dfx Voodoo3 3000 AGP 16MB (Three.js & 3D 渲染)"
+      storage: "Quantum Fireball 8.4GB IDE",
+      sound: "Creative Sound Blaster AWE64",
+      graphics: "3dfx Voodoo3 3000 AGP 16MB"
     },
 
     ui: {
@@ -400,7 +411,7 @@ export const profileData = {
       loginCancelBtn: "取消",
       loginHelpBtn: "帮助(H)",
       startBtn: "开始",
-      desktopIconPortfolio: "王寅喆的作品集",
+      desktopIconPortfolio: "Tico 的作品集",
       desktopIconComputer: "我的电脑",
       desktopIconMusic: "CD 播放机",
       desktopIconSocial: "连接",
@@ -408,7 +419,7 @@ export const profileData = {
       desktopIconPaint: "画图程序",
       desktopIconMinesweeper: "扫雷游戏",
       desktopIconNotepad: "记事本 (简介)",
-      windowPortfolioTitle: "C:\\王寅喆\\作品集\\index.html - Microsoft 网页浏览器 5.0",
+      windowPortfolioTitle: "C:\\Tico\\Portfolio\\index.html - Microsoft 网页浏览器 5.0",
       menuFile: "文件(F)",
       menuEdit: "编辑(E)",
       menuView: "查看(V)",
@@ -416,29 +427,22 @@ export const profileData = {
       menuHelp: "帮助(H)",
       addressLabel: "地址(A):",
       tabAllProjects: "全部项目 (7)",
-      tabDevProjects: "网页与交互开发 (4)",
+      tabDevProjects: "网页与交互 (4)",
       tabResearchProjects: "学术与社会研究 (3)",
-      sectionWorkTitle: "精选项目目录 (按重要度排列 C:\\王寅喆\\项目库\\*)",
-      sectionSkillsTitle: "技能与兴趣模块",
-      sectionInterestsTitle: "跨学科兴趣与探索",
-      sectionFaqTitle: "常见问题 (FAQ.TXT)",
-      sectionGuestbookTitle: "访客留言簿 (GUESTBK.DB)",
-      guestbookPrompt: "给王寅喆 (Tico) 留言：",
-      guestbookNameLabel: "您的姓名 / 昵称：",
-      guestbookMsgLabel: "留言内容：",
-      guestbookNamePlaceholder: "例如: 访客",
-      guestbookMsgPlaceholder: "写下您的留言、反馈或合作意向...",
-      guestbookSubmitBtn: "发送留言",
-      guestbookRecent: "最新留言记录：",
+      sectionFeaturedTitle: "精选项目 (Featured Projects)",
+      sectionAllTitle: "全部项目",
+      sectionAboutTitle: "关于与联系",
+      btnViewAll: "查看全部项目 (共 7 项) ➔",
+      btnShowFeatured: "收起 / 只看精选 (4 项)",
       statusBarDone: "就绪",
       statusBarObjects: "已载入 7 个项目",
       statusBarZone: "本地 Internet 区域",
       mediaPlayerTitle: "Windows 98 CD 播放机",
-      systemPropertiesTitle: "系统属性 - 王寅喆工作站",
+      systemPropertiesTitle: "系统属性 - TICO-STATION 98",
       socialTitle: "连接 - 联系方式与网络链接",
       recycleBinTitle: "回收站",
       langSwitchLabel: "中 / EN",
-      startMenuPortfolio: "王寅喆的作品集",
+      startMenuPortfolio: "Tico 的作品集",
       startMenuMusic: "CD 播放机",
       startMenuComputer: "我的电脑 (系统属性)",
       startMenuSocial: "连接",
@@ -455,21 +459,18 @@ export const profileData = {
 
   en: {
     personal: {
-      name: "Tico",
-      displayName: "TICO",
-      title: "CREATIVE DEVELOPER // DIGITAL DESIGNER // STUDENT RESEARCHER",
-      subtitle: "Turning ideas into interactive digital projects through code, design, music, and research.",
+      name: "Tico Wang",
+      displayName: "TICO WANG",
+      title: "Student / Web / Design / Research",
+      subtitle: "I build web projects, music-driven experiments, and conduct social science research.",
       status: "● Currently building new projects / Open to collaborations",
       avatar: "./tico_avatar.jpg",
       bio: [
-        "I’m Tico.",
-        "I build web projects, experiment with music-driven digital tools, and conduct social science research.",
-        "I like turning ideas into things people can actually interact with rather than leaving them as concepts or static mockups. My past work includes music-focused experimental sites, classroom interaction prototypes, browser 3D experiments, and field research.",
-        "When building websites, I spend a lot of time on typography, motion, sound, and transitions because those details shape how an interface actually feels.",
-        "Outside of development and design, I'm interested in sociology, psychology, statistics, philosophy, and basketball analytics."
+        "I build web projects, music-driven experiments, and conduct social science research.",
+        "Rather than leaving ideas in design files, I like actually building things that people can interact with and experience."
       ],
       registeredOwner: "Tico",
-      systemEdition: "Windows 98 Second Edition (Tico Edition - 4.10.2222 A)"
+      systemEdition: "Windows 98 Second Edition (4.10.2222 A)"
     },
 
     projects: [
@@ -480,13 +481,15 @@ export const profileData = {
         status: "live",
         statusLabel: "LIVE 1.0",
         category: "EXPERIMENTAL WEB // MUSIC",
+        shortSummary: "An experimental website inspired by Playboi Carti's music and visuals.",
+        actionLabel: "Open Website ➔",
         tags: ["Music Visuals", "Web Design", "Vanilla JS", "Typography"],
         version: "LIVE 1.0",
         accentColor: "text-red-400",
         description: "An experimental website inspired by Playboi Carti’s music and visual identity. Most artist websites feel too clean and predictable, so I experimented with oversized type, distorted visuals, abrupt transitions, and sound to make the interface match the music's raw mood.",
         techStack: "HTML / CSS / Vanilla JavaScript / Web Audio API / GitHub Pages",
         detailsUrl: "https://wyz15857140708-lang.github.io/Carti-website/",
-        linkLabel: "Open Live Site ➔",
+        linkLabel: "Open Website ➔",
         linkStateNote: null,
         icon: "./icons/cd.svg",
         type: "dev",
@@ -505,10 +508,12 @@ export const profileData = {
       {
         id: "project-kahoot",
         number: "02",
-        title: "Kahoot-Inspired Learning Platform",
+        title: "Kahoot-Inspired Platform",
         status: "in-progress",
         statusLabel: "IN PROGRESS",
-        category: "EDTECH // WEB TOOL",
+        category: "EDTECH // PRODUCT PROTOTYPE",
+        shortSummary: "An interactive quiz and instant classroom feedback prototype designed to improve student engagement.",
+        actionLabel: "View Project ➔",
         tags: ["EdTech", "Product Design", "Interaction Prototype", "Classroom Tool", "Quiz Editor"],
         version: "In Progress (Alpha)",
         accentColor: "text-purple-400",
@@ -538,6 +543,8 @@ export const profileData = {
         status: "prototype",
         statusLabel: "PROTOTYPE",
         category: "CREATIVE CODING // MUSIC",
+        shortSummary: "An interactive web exploration deconstructing 808 bass, hi-hat rolls, and triplet rhythms in Trap music.",
+        actionLabel: "View Project ➔",
         tags: ["Music Culture", "Interactive Web", "Trap Visuals", "FL Studio"],
         version: "Interactive Prototype",
         accentColor: "text-yellow-400",
@@ -560,12 +567,44 @@ export const profileData = {
         }
       },
       {
-        id: "project-racing",
+        id: "project-ksao",
         number: "04",
+        title: "NBA KSAO Research",
+        status: "research",
+        statusLabel: "RESEARCH",
+        category: "RESEARCH // SPORTS & I-O PSYCH",
+        shortSummary: "Applying the I-O psychology KSAO framework with advanced basketball metrics to model NBA player competencies.",
+        actionLabel: "View Research ➔",
+        tags: ["Sports Analytics", "KSAO Framework", "Job Analysis", "Empirical Research"],
+        version: "Research Report",
+        accentColor: "text-orange-400",
+        description: "Applies Job Analysis and the KSAO framework from Industrial-Organizational (I-O) Psychology to NBA player evaluation, contrasting 3-and-D wings with primary creators using tracking data.",
+        techStack: "Job Analysis / KSAO Framework / NBA Tracking Data / Statistics",
+        detailsUrl: null,
+        linkLabel: null,
+        linkStateNote: "📊 Research Report / Archived",
+        icon: "./icons/chart.svg",
+        type: "research",
+        specs: {
+          releaseDate: "2024",
+          architecture: "Applying I-O Psychology Job Analysis & KSAO methodology to NBA player evaluation.",
+          keyFeatures: [
+            "Decomposes on-court performance into Knowledge, Skills, Abilities, and Other characteristics",
+            "3-and-D wing focus: corner 3PT accuracy, closeout reaction speed, lateral defense",
+            "Primary creator focus: weak-side scanning, pick-and-roll reads, working memory"
+          ],
+          metrics: "Based on regular season player tracking data and competency models"
+        }
+      },
+      {
+        id: "project-racing",
+        number: "05",
         title: "Open-World Racing Experiment",
         status: "prototype",
         statusLabel: "PROTOTYPE",
         category: "WEB EXPERIMENT // 3D PHYSICS",
+        shortSummary: "A browser-based 3D driving experiment exploring Three.js rendering and Cannon-es vehicle physics.",
+        actionLabel: "View Project ➔",
         tags: ["Three.js", "Cannon-es", "WebGL", "3D Physics", "Interactive Demo"],
         version: "Physics Prototype",
         accentColor: "text-cyan-400",
@@ -578,97 +617,73 @@ export const profileData = {
         type: "dev",
         specs: {
           releaseDate: "2024",
-          architecture: "Three.js for 3D scene rendering and Cannon-es for vehicle physics and ground collision.",
+          architecture: "Three.js for 3D vehicle & scene rendering, Cannon-es for physics simulation.",
           keyFeatures: [
-            "Uses Raycast Vehicle to simulate suspension, tire friction, and steering physics",
-            "Basic dynamic lighting, shadows, and terrain collision mesh",
-            "Keyboard controls (WASD / Arrows) for driving and drift handling"
+            "Raycast Vehicle suspension and tire friction physics",
+            "Dynamic lighting, shadow mapping, and terrain collider mesh",
+            "Keyboard controls (WASD / Arrows) for driving and drifting"
           ],
-          metrics: "Browser-native 3D prototype / No external plugins required"
-        }
-      },
-      {
-        id: "project-ksao",
-        number: "05",
-        title: "NBA Player Role KSAO Analysis",
-        status: "research",
-        statusLabel: "RESEARCH",
-        category: "SPORTS ANALYTICS // I-O PSYCHOLOGY",
-        tags: ["Sports Analytics", "KSAO Framework", "Job Analysis", "Empirical Research"],
-        version: "Research Paper",
-        accentColor: "text-orange-400",
-        description: "Applying Industrial-Organizational (I-O) Psychology Job Analysis and the KSAO framework to NBA player role evaluation. Focuses on 3-and-D Wings versus Primary Creators, breaking on-court tasks into measurable skill and cognitive dimensions.",
-        techStack: "Job Analysis / KSAO Framework / Basketball Tracking Data / Statistics",
-        detailsUrl: null,
-        linkLabel: null,
-        linkStateNote: "📊 Research Paper / Archived",
-        icon: "./icons/chart.svg",
-        type: "research",
-        specs: {
-          releaseDate: "2024",
-          architecture: "Applying I-O Psychology's Job Analysis and KSAO methodology to NBA player roles.",
-          keyFeatures: [
-            "Breaks on-court execution into Knowledge (K), Skills (S), Abilities (A), and Other traits (O)",
-            "3-and-D Wings: Corner-3 shooting, closeout reaction speed, defensive slides, and screen navigation",
-            "Primary Creators: Weak-side visual scanning, pick-and-roll reads, working memory, and decision-making under pressure"
-          ],
-          metrics: "Based on public NBA tracking data and role categorization models"
+          metrics: "Runs in modern browsers / Zero extra plugins needed"
         }
       },
       {
         id: "project-wulian",
         number: "06",
-        title: "Wulian Xiyuan Field Study",
+        title: "Wulian Xiyuan Spatial Field Study",
         status: "research",
         statusLabel: "RESEARCH",
-        category: "URBAN RESEARCH // SOCIOLOGY",
-        tags: ["Urban Space", "Field Observation", "Community Study", "Spatial Notes", "Photography"],
-        version: "Fieldwork Report",
+        category: "URBAN STUDIES // ETHNOGRAPHY",
+        shortSummary: "A field observation study on public space usage and boundary dynamics in Wulian Xiyuan, Hangzhou.",
+        actionLabel: "View Research ➔",
+        tags: ["Urban Space", "Field Observation", "Community Study", "Spatial Mapping", "Photography"],
+        version: "Field Report",
         accentColor: "text-green-400",
-        description: "A field observation project in Wulian Xiyuan, Hangzhou. Uses site visits, photographs, and spatial notes to document how residents, shopkeepers, and migrant workers actually use shared spaces and transitional areas.",
-        techStack: "Field Observation / Spatial Mapping / On-site Photos / Informal Interviews",
+        description: "A qualitative field observation study in Wulian Xiyuan, an urban village in Hangzhou. Maps spatial appropriation, street commerce, and informal boundary shifts across daily time slots.",
+        techStack: "Fieldwork / Spatial Mapping / Documentary Photography / Interviews / Qualitative Analysis",
         detailsUrl: null,
         linkLabel: null,
-        linkStateNote: "📸 Field Notes & Photo Archive",
+        linkStateNote: "📸 Qualitative Fieldwork / Spatial Archives",
         icon: "./icons/camera.svg",
         type: "research",
         specs: {
           releaseDate: "2023-2024",
-          architecture: "Qualitative fieldwork based on direct site observation, spatial mapping, and photography.",
+          architecture: "Qualitative field observation conducted through on-site walking tours, spatial mapping, and photography.",
           keyFeatures: [
-            "Documents how residential paths, storefronts, and informal street vendors share space",
-            "Tracks who uses apartment entrances, curbside seating, and parking zones across different times of day",
-            "Compiled 120+ on-site documentary photos and spatial usage notes"
+            "Documented residential alleyways, shopfronts, and informal street vendor spaces",
+            "Analyzed time-based shifts in space occupancy across morning, afternoon, and evening",
+            "Compiled 120+ field photographs and spatial notes"
           ],
-          metrics: "Multiple on-site visits with field notes and visual archives"
+          metrics: "Multiple on-site observation sessions and spatial field notes"
         }
       },
       {
         id: "project-lunch",
         number: "07",
-        title: "School Lunch Break Research",
+        title: "School Lunch Break Policy Study",
         status: "research",
         statusLabel: "RESEARCH",
-        category: "EDUCATION SURVEY // STATISTICS",
-        tags: ["Survey Design", "Statistics", "Sampling", "Jamovi", "Data Analysis"],
-        version: "Survey Report",
+        category: "EDUCATION // STATISTICS",
+        shortSummary: "An empirical survey and statistical analysis exploring the impact of school lunch break rest policies.",
+        actionLabel: "View Research ➔",
+        tags: ["Survey Design", "Statistics", "Stratified Sampling", "Jamovi", "Data Analysis"],
+        version: "Empirical Report",
         accentColor: "text-emerald-400",
-        description: "A survey and statistical analysis investigating whether schools should schedule a dedicated lunch-break period. Collected student responses across three schools, using attention checks and duplicate filtering to control data quality, followed by analysis in Jamovi.",
+        description: "An empirical survey investigating student rest duration and afternoon focus across three high schools, using Jamovi to run independent samples t-tests and regression modeling.",
         techStack: "Survey Design / Stratified Sampling / Statistical Analysis / Jamovi",
         detailsUrl: null,
         linkLabel: null,
-        linkStateNote: "📈 Survey Report / Quantitative Model",
+        linkStateNote: "📈 Statistical Report / Data Archive",
         icon: "./icons/chart.svg",
         type: "research",
         specs: {
           releaseDate: "2024",
-          architecture: "Survey-based empirical data collection and statistical inference.",
+          architecture: "Empirical study using survey sampling, data cleaning, and statistical inferential modeling.",
           keyFeatures: [
-            "Distributed surveys across 3 schools using grade-level stratified sampling",
-            "Included attention check questions and duration filtering to remove invalid responses",
-            "Performed descriptive statistics, independent t-tests, and regression analysis in Jamovi"
+            "Administered surveys across 3 high schools with stratified grade sampling",
+            "Embedded attention checks and response duration filters to ensure clean data",
+            "Conducted descriptive stats, independent t-tests, and correlation analysis using Jamovi"
           ],
-          metrics: "100+ verified student responses / Statistical analysis completed"
+          metrics: "100+ valid survey responses analyzed"
         }
       }
     ],
@@ -676,35 +691,35 @@ export const profileData = {
     skillsCategories: [
       {
         icon: "./icons/computer.svg",
-        title: "Web Development & Coding",
+        title: "Web Development & Engineering",
         items: [
-          "Frontend Development (HTML / CSS / JavaScript)",
+          "Frontend Web Development (HTML / CSS / JavaScript)",
           "Interactive Prototypes & Demos",
-          "Web Audio & Motion Interactions",
-          "Three.js 3D Scenes & Physics Experiments",
-          "Git Workflow & Static Deployment"
+          "Audio & Motion Interactions",
+          "Three.js 3D Physics Experiments",
+          "Git Version Control & Static Hosting"
         ]
       },
       {
         icon: "./icons/paint.svg",
-        title: "UI / UX & Interface Design",
+        title: "UI / UX & Digital Design",
         items: [
-          "Web Visual Layout & Typography",
+          "Web Layout & Editorial Typography",
           "Interaction Flow & Wireframing",
-          "Micro-Interactions & Animation Tuning",
-          "Retro Aesthetic & Experimental Visuals",
-          "Responsive Layouts & Mobile Adaptation"
+          "Design Details & Micro-Interactions",
+          "Retro & Experimental Aesthetics",
+          "Responsive Multi-Device Layouts"
         ]
       },
       {
         icon: "./icons/book.svg",
-        title: "Product Concepts & EdTech Tools",
+        title: "Product & Educational Tools",
         items: [
-          "EdTech Tool & Quiz System Concepts",
-          "Teacher Creation Workflow & Canvas UI",
+          "EdTech & Classroom Quiz System Concepts",
+          "Teacher-Side Slide Canvas Authoring",
           "Interaction Logic & User Flows",
-          "User Experience & Feedback Iteration",
-          "Feature Modularization"
+          "User Feedback & Rapid Iteration",
+          "Feature Architecture"
         ]
       },
       {
@@ -712,47 +727,47 @@ export const profileData = {
         title: "Social Research & Analytics",
         items: [
           "Survey Design & Sampling Controls",
-          "Jamovi Statistical Analysis",
-          "Fieldwork & Spatial Notes",
-          "Qualitative Observation",
-          "Literature Review & Research Writing"
+          "Jamovi Statistical Data Analysis",
+          "On-Site Fieldwork & Observational Notes",
+          "Spatial Mapping & Qualitative Analysis",
+          "Literature Review & Report Writing"
         ]
       },
       {
         icon: "./icons/cd.svg",
-        title: "Music & Subculture",
+        title: "Music & Cultural Exploration",
         items: [
-          "Hip-Hop & Trap Subcultures",
-          "FL Studio Beatmaking & Production",
-          "Music-Driven Web Visuals & Demos",
-          "Audio-Visual Synchronization",
-          "Digital Culture Observations"
+          "Hip-Hop & Trap Music Culture",
+          "FL Studio Beat Production",
+          "Music-Themed Web Visuals & Audio Triggers",
+          "Audio-Visual Integration",
+          "Digital Subculture Observation"
         ]
       }
     ],
 
     techTools: [
       {
-        category: "Development & Coding",
+        category: "Programming & Web",
         tools: ["HTML5", "CSS3", "JavaScript (ES6+)", "Three.js", "Cannon-es", "Tailwind CSS", "Vite", "Git & GitHub"]
       },
       {
         category: "Design & Prototyping",
-        tools: ["UI Layout", "Interaction Prototyping", "Motion Design", "Visual Experimentation", "Responsive Design"]
+        tools: ["UI Layout", "Interaction Prototyping", "Motion Design", "Visual Styles", "Responsive Design"]
       },
       {
         category: "Research & Statistics",
-        tools: ["Jamovi Statistics", "Survey Design", "Sampling Methods", "Field Observation", "Data Cleaning", "Spatial Mapping"]
+        tools: ["Jamovi Statistics", "Survey Design", "Stratified Sampling", "Fieldwork", "Data Cleaning"]
       },
       {
-        category: "Music & Audio",
+        category: "Audio & Music",
         tools: ["FL Studio", "Web Audio API", "Sample Processing", "Synthesizers"]
       }
     ],
 
     interests: [
       "Web Design & Interaction",
-      "Digital Art & Experimental Projects",
+      "Digital Art & Experimental Prototypes",
       "Hip-Hop & Trap Culture",
       "Music Production (FL Studio)",
       "Sociology",
@@ -765,38 +780,38 @@ export const profileData = {
 
     faqs: [
       {
-        question: "What do you mainly work on?",
-        answer: "I mainly build interactive web projects, experimental digital pieces, and functional prototypes.\n\nI like combining code, design, music, and research. Rather than leaving ideas as static mockups, I prefer building them into things you can actually use in the browser.",
+        question: "What do you usually work on?",
+        answer: "I work on interactive web experiments, digital tools, and product prototypes.\n\nI enjoy blending code, visual design, sound, and empirical research to build things people can genuinely interact with in a browser.",
         isOpenDefault: true
       },
       {
-        question: "What areas interest you most?",
-        answer: "Right now I’m most interested in experimental web design, music-driven digital experiences, EdTech tools, and social science research.\n\nI also have a long-term interest in psychology, philosophy, statistics, and basketball analytics.",
+        question: "What areas are you most interested in?",
+        answer: "Experimental web design, music-driven digital experiences, classroom interaction tools, and social science research.\n\nI also follow psychology, philosophy, statistics, and basketball analytics.",
         isOpenDefault: false
       },
       {
-        question: "What kind of collaborations are you open to?",
-        answer: "I’m open to collaborating on creative websites, interactive prototypes, music visual projects, EdTech tools, or interdisciplinary research.\n\nIf you have an idea that aligns, feel free to reach out!",
+        question: "What collaborations are you open to?",
+        answer: "I'm always excited to collaborate on creative web projects, interaction prototypes, music visuals, educational tools, or research projects.\n\nFeel free to reach out anytime!",
         isOpenDefault: false
       }
     ],
 
     socials: [
       {
-        name: "Email Address",
+        name: "Email",
         icon: "./icons/mail.svg",
         handle: "tico.wangyinzhe@yungu.org",
         url: "mailto:tico.wangyinzhe@yungu.org",
-        badge: "MAILTO",
+        badge: "Send Email",
         canCopy: true,
         copyText: "tico.wangyinzhe@yungu.org"
       },
       {
-        name: "Mobile Phone",
+        name: "Phone",
         icon: "./icons/phone.svg",
-        handle: "+86 15857140708",
+        handle: "+86 158-5714-0708",
         url: "tel:15857140708",
-        badge: "CALL",
+        badge: "Call",
         canCopy: true,
         copyText: "15857140708"
       },
@@ -805,7 +820,7 @@ export const profileData = {
         icon: "./icons/network.svg",
         handle: "ticowang666",
         url: "javascript:void(0)",
-        badge: "COPY ID",
+        badge: "Copy WeChat",
         canCopy: true,
         copyText: "ticowang666"
       },
@@ -814,24 +829,24 @@ export const profileData = {
         icon: "./icons/network.svg",
         handle: "@wyz15857140708-lang",
         url: "https://github.com/wyz15857140708-lang",
-        badge: "GITHUB"
+        badge: "GitHub"
       },
       {
         name: "Carti Website (Live Demo)",
         icon: "./icons/cd.svg",
         handle: "wyz15857140708-lang.github.io/Carti-website",
         url: "https://wyz15857140708-lang.github.io/Carti-website/",
-        badge: "LIVE DEMO"
+        badge: "Live Demo"
       }
     ],
 
     specs: {
       systemName: "TICO-STATION 98",
-      processor: "Intel Pentium II 450MHz (Custom Edition)",
+      processor: "Intel Pentium II 450MHz",
       memory: "128.0 MB SDRAM",
-      storage: "Quantum Fireball 8.4GB IDE (Code / Data / Audio Projects)",
-      sound: "Creative Sound Blaster AWE64 (FL Studio Ready)",
-      graphics: "3dfx Voodoo3 3000 AGP 16MB (Three.js & 3D WebGL)"
+      storage: "Quantum Fireball 8.4GB IDE",
+      sound: "Creative Sound Blaster AWE64",
+      graphics: "3dfx Voodoo3 3000 AGP 16MB"
     },
 
     ui: {
@@ -862,25 +877,18 @@ export const profileData = {
       menuHelp: "Help(H)",
       addressLabel: "Address(A):",
       tabAllProjects: "All Projects (7)",
-      tabDevProjects: "Web & Interaction (4)",
+      tabDevProjects: "Web & Interactive (4)",
       tabResearchProjects: "Research & Studies (3)",
-      sectionWorkTitle: "Selected Works (Ranked by Impact C:\\Tico\\Projects\\*)",
-      sectionSkillsTitle: "Skills & Areas of Interest",
-      sectionInterestsTitle: "Interdisciplinary Exploration",
-      sectionFaqTitle: "Frequently Asked Questions (FAQ.TXT)",
-      sectionGuestbookTitle: "Visitor Guestbook (GUESTBK.DB)",
-      guestbookPrompt: "Leave a message for Tico:",
-      guestbookNameLabel: "Your Name / Handle:",
-      guestbookMsgLabel: "Message:",
-      guestbookNamePlaceholder: "e.g., Guest99",
-      guestbookMsgPlaceholder: "Leave a note, feedback, or say hi...",
-      guestbookSubmitBtn: "Send Message",
-      guestbookRecent: "Recent Messages:",
+      sectionFeaturedTitle: "Featured Projects",
+      sectionAllTitle: "All Projects",
+      sectionAboutTitle: "About & Contact",
+      btnViewAll: "View All Projects (7) ➔",
+      btnShowFeatured: "Show Featured Only (4)",
       statusBarDone: "Done",
       statusBarObjects: "7 projects loaded",
       statusBarZone: "Local intranet zone",
       mediaPlayerTitle: "Windows 98 CD Player",
-      systemPropertiesTitle: "System Properties - Tico Workstation",
+      systemPropertiesTitle: "System Properties - TICO-STATION 98",
       socialTitle: "Links - Contact & Online Profiles",
       recycleBinTitle: "Recycle Bin",
       langSwitchLabel: "中 / EN",

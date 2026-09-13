@@ -291,9 +291,9 @@
           <div class="relative">
             <button id="menu-btn-go" class="menu-bar-btn px-1 hover:bg-[#000080] hover:text-white"><u>转</u>到(G)</button>
             <div class="menu-dropdown hidden absolute left-0 top-full win98-raised py-1 w-44 shadow-lg z-50 text-black">
-              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="document.getElementById('section-work').scrollIntoView()"><u>精</u>选项目 (Work)</div>
-              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="document.getElementById('section-skills').scrollIntoView()"><u>专</u>业技能 (Skills)</div>
-              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="document.getElementById('section-faq').scrollIntoView()"><u>常</u>见问题 (FAQ)</div>
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="document.getElementById('section-featured').scrollIntoView({behavior: 'smooth'})"><u>精</u>选项目 (Featured)</div>
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="document.getElementById('btn-toggle-all-projects').click()"><u>全</u>部项目 (All Works)</div>
+              <div class="px-3 py-1 hover:bg-[#000080] hover:text-white cursor-pointer" onclick="document.getElementById('section-about-contact').scrollIntoView({behavior: 'smooth'})"><u>关</u>于与联系 (About)</div>
             </div>
           </div>
           <div class="relative">
@@ -310,7 +310,7 @@
             <button id="tb-back" class="win98-raised px-2 py-0.5 flex items-center gap-1 hover:bg-gray-100 active:win98-pressed cursor-pointer" title="后退到精选项目">
               <span>◀</span> <span>后退</span>
             </button>
-            <button id="tb-forward" class="win98-raised px-2 py-0.5 flex items-center gap-1 hover:bg-gray-100 active:win98-pressed cursor-pointer" title="前进到专业领域">
+            <button id="tb-forward" class="win98-raised px-2 py-0.5 flex items-center gap-1 hover:bg-gray-100 active:win98-pressed cursor-pointer" title="前进到关于与联系">
               <span>前进</span> <span>▶</span>
             </button>
             <button id="tb-refresh" class="win98-raised px-2 py-0.5 flex items-center gap-1 hover:bg-gray-100 active:win98-pressed cursor-pointer" title="刷新页面">
@@ -346,24 +346,14 @@
         <div class="win98-scrollbar flex-1 overflow-y-auto overflow-x-hidden p-4 sm:p-6 bg-[#C4D6E8] bg-cover bg-fixed relative" 
              style="background-image: url('https://framerusercontent.com/images/CY9nFVcElQuS0aRbAPoUP4Q5xU.jpeg');">
           
-          <div class="max-w-3xl mx-auto space-y-6">
+          <div class="max-w-3xl mx-auto space-y-5">
 
-            <!-- HEADER BANNER & PROFILE CARD -->
+            <!-- 1. INTRO PROFILE CARD (Simple, Clean, Human) -->
             <div class="win98-raised p-1 shadow-md bg-gray-200">
-              <div class="win98-sunken overflow-hidden bg-black max-h-48 relative">
-                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/8d2b9d1f-d641-4062-9af5-a0a817bcc1e4_3840w.png" 
-                     class="w-full h-full object-cover pixel-render" 
-                     alt="Retro 98 Banner" />
-                <div class="absolute bottom-2 left-2 bg-black/70 px-2.5 py-1 text-yellow-300 font-vt323 text-base">
-                  系统状态: 在线 // 王寅喆工作站就绪 (TICO-STATION READY)
-                </div>
-              </div>
-
-              <!-- Profile Details -->
               <div class="p-4 sm:p-5 flex flex-col sm:flex-row gap-5 items-center sm:items-start bg-[#DEDEDE]">
                 <div class="win98-sunken p-1 bg-white shrink-0">
                   <img id="profile-avatar" src="/tico_avatar.jpg" 
-                       class="w-28 h-28 object-cover pixel-render border border-gray-300" 
+                       class="w-24 h-24 object-cover pixel-render border border-gray-300" 
                        alt="王寅喆肖像" />
                 </div>
                 
@@ -371,10 +361,10 @@
                   <div class="flex flex-wrap items-center justify-center sm:justify-between gap-2">
                     <div>
                       <h1 id="profile-name" class="font-handjet text-3xl sm:text-4xl font-black tracking-wider text-[#000080] uppercase">
-                        王寅喆 / TICO
+                        王寅喆 / Tico Wang
                       </h1>
-                      <p id="profile-title" class="text-xs text-gray-800 font-bold tracking-tight">
-                        创意开发者 / 数字设计者 / 学生研究者
+                      <p id="profile-title" class="text-xs text-gray-700 font-bold tracking-tight">
+                        学生 / 网页 / 设计 / 研究
                       </p>
                     </div>
                     <span id="profile-status" class="win98-sunken px-2 py-0.5 bg-green-100 text-green-800 text-[10px] font-mono font-bold">
@@ -382,154 +372,121 @@
                     </span>
                   </div>
 
-                  <!-- Tagline Banner -->
-                  <div class="win98-sunken p-2 bg-yellow-50 text-xs font-inter font-semibold text-gray-800 border-l-4 border-[#000080]">
-                    <span id="profile-tagline">“用代码、设计、音乐与研究，把感兴趣的想法变成可以真正体验的数字作品。”</span>
-                  </div>
-
-                  <!-- Multi-Paragraph Bio -->
-                  <div id="profile-bio-container" class="space-y-2 pt-1">
+                  <!-- 2-Sentence Concise Natural Bio -->
+                  <div id="profile-bio-container" class="space-y-1.5 pt-1 text-xs text-gray-800 font-inter leading-relaxed">
                     <!-- Populated dynamically from profile-data.js -->
                   </div>
 
-                  <div class="pt-3 flex flex-wrap gap-2 justify-center sm:justify-start">
-                    <button class="win98-raised px-3 py-1 text-xs font-bold hover:bg-gray-100 active:win98-pressed flex items-center gap-1.5 cursor-pointer" onclick="document.getElementById('section-work').scrollIntoView()">
-                      <img src="/icons/folder.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> 浏览精选项目 (7)
+                  <div class="pt-2 flex flex-wrap gap-2 justify-center sm:justify-start text-xs font-bold">
+                    <button id="intro-btn-work" class="win98-raised px-3 py-1 hover:bg-gray-100 active:win98-pressed flex items-center gap-1.5 cursor-pointer">
+                      <img src="/icons/folder.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span>浏览精选项目</span>
                     </button>
-                    <a href="https://wyz15857140708-lang.github.io/Carti-website/" target="_blank" rel="noopener noreferrer" class="win98-raised px-3 py-1 text-xs font-bold hover:bg-gray-100 active:win98-pressed flex items-center gap-1.5 no-underline text-black cursor-pointer">
-                      <img src="/icons/cd.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> Carti 网站在线 Demo ➔
-                    </a>
-                    <a href="https://github.com/wyz15857140708-lang" target="_blank" rel="noopener noreferrer" class="win98-raised px-3 py-1 text-xs font-bold hover:bg-gray-100 active:win98-pressed flex items-center gap-1.5 no-underline text-black cursor-pointer">
-                      <img src="/icons/dos.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> GitHub 个人主页
+                    <button id="intro-btn-social" class="win98-raised px-3 py-1 hover:bg-gray-100 active:win98-pressed flex items-center gap-1.5 cursor-pointer">
+                      <img src="/icons/network.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span>联系方式与社交</span>
+                    </button>
+                    <a href="https://github.com/wyz15857140708-lang" target="_blank" rel="noopener noreferrer" class="win98-raised px-3 py-1 hover:bg-gray-100 active:win98-pressed flex items-center gap-1.5 no-underline text-black cursor-pointer">
+                      <img src="/icons/dos.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span>GitHub</span>
                     </a>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- SECTION: FEATURED WORK / PROJECTS -->
-            <section id="section-work" class="win98-raised p-4 bg-gray-200 space-y-4">
+            <!-- 2. FEATURED PROJECTS SECTION (Top 4 Core Projects) -->
+            <section id="section-featured" class="win98-raised p-4 bg-gray-200 space-y-3">
               <div class="win98-titlebar-active px-2 py-1 flex items-center justify-between font-bold text-xs">
-                <span id="title-section-work" class="flex items-center gap-1.5">
-                  <img src="/icons/folder.svg" class="w-4 h-4 pixel-render inline" alt="" />
-                  <span>精选项目经历目录 (C:\王寅喆\项目库\*)</span>
-                </span>
-                <span id="projects-count" class="text-[10px] font-mono">共 7 项成果</span>
-              </div>
-
-              <!-- Filter Tabs -->
-              <div class="flex flex-wrap gap-1.5 text-xs select-none">
-                <button id="filter-btn-all" class="project-filter-btn win98-pressed px-3 py-1 font-bold text-xs bg-[#000080] text-white cursor-pointer flex items-center gap-1" data-filter="all">
-                  <img src="/icons/star.svg" class="w-3 h-3 pixel-render inline" alt="" /> 全部项目 (7)
-                </button>
-                <button id="filter-btn-dev" class="project-filter-btn win98-raised px-3 py-1 font-bold text-xs text-black hover:bg-gray-100 cursor-pointer flex items-center gap-1" data-filter="dev">
-                  <img src="/icons/dos.svg" class="w-3 h-3 pixel-render inline" alt="" /> 创意开发与 Web (4)
-                </button>
-                <button id="filter-btn-research" class="project-filter-btn win98-raised px-3 py-1 font-bold text-xs text-black hover:bg-gray-100 cursor-pointer flex items-center gap-1" data-filter="research">
-                  <img src="/icons/document.svg" class="w-3 h-3 pixel-render inline" alt="" /> 学术与社会研究 (3)
-                </button>
-              </div>
-
-              <!-- Projects Grid -->
-              <div id="projects-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- Dynamically populated from profile-data.js -->
-              </div>
-            </section>
-
-            <!-- SECTION: SKILLS & EXPERTISE -->
-            <section id="section-skills" class="win98-raised p-4 bg-gray-200 space-y-4">
-              <div class="win98-titlebar-active px-2 py-1 flex items-center justify-between font-bold text-xs">
-                <span id="title-section-skills" class="flex items-center gap-1.5">
-                  <img src="/icons/settings.svg" class="w-4 h-4 pixel-render inline" alt="" />
-                  <span>技能与专业领域模块 (5 大核心领域)</span>
-                </span>
-                <span class="text-[10px] font-mono">专业矩阵</span>
-              </div>
-
-              <div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                <!-- Dynamically populated from profile-data.js -->
-              </div>
-
-              <!-- Technologies & Tools Matrix -->
-              <div class="space-y-2 pt-2">
-                <div class="text-xs font-bold text-gray-800 border-b border-gray-400 pb-1 flex items-center gap-1.5">
-                  <img src="/icons/settings.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
-                  <span>常用技术栈与工具矩阵 (TECHNOLOGIES & TOOLS):</span>
-                </div>
-                <div id="tools-matrix" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                  <!-- Dynamically populated -->
-                </div>
-              </div>
-            </section>
-
-            <!-- SECTION: PERSONAL INTERESTS -->
-            <section class="win98-raised p-4 bg-gray-200 space-y-3">
-              <div class="win98-titlebar-active px-2 py-1 flex items-center justify-between font-bold text-xs">
-                <span id="title-section-interests" class="flex items-center gap-1.5">
+                <span class="flex items-center gap-1.5">
                   <img src="/icons/star.svg" class="w-4 h-4 pixel-render inline" alt="" />
-                  <span>跨学科兴趣与探索 (INTERESTS)</span>
+                  <span id="title-section-featured">精选项目 (Featured Projects)</span>
                 </span>
-                <span class="text-[10px] font-mono">好奇心引擎</span>
+                <span id="featured-count" class="text-[10px] font-mono">4 个核心项目</span>
               </div>
 
-              <div class="p-3 bg-white win98-sunken space-y-2">
-                <p class="text-xs text-gray-700 leading-relaxed font-inter">
-                  在常规 Web 开发之外我持续探索的跨学科领域，连接创意科技、社会科学、数字艺术与青年文化：
-                </p>
-                <div id="interests-tags" class="flex flex-wrap gap-1.5 pt-1">
+              <!-- Featured Projects Grid -->
+              <div id="featured-projects-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <!-- Dynamically populated from profile-data.js -->
+              </div>
+            </section>
+
+            <!-- 3. VIEW ALL PROJECTS (Collapsible & Filterable) -->
+            <section id="section-more-projects" class="win98-raised p-3 bg-gray-200 space-y-3">
+              <button id="btn-toggle-all-projects" class="win98-raised px-3 py-1.5 text-xs font-bold hover:bg-gray-100 active:win98-pressed flex items-center gap-2 cursor-pointer w-full justify-center">
+                <img src="/icons/folder.svg" class="w-4 h-4 pixel-render inline" alt="" />
+                <span id="label-toggle-all">查看全部项目 (共 7 项) ➔</span>
+              </button>
+
+              <!-- Collapsible All Projects Container -->
+              <div id="all-projects-wrapper" class="hidden space-y-3 pt-2 border-t border-gray-400">
+                <div class="flex flex-wrap gap-1.5 text-xs select-none items-center justify-between">
+                  <div class="flex flex-wrap gap-1.5">
+                    <button id="filter-btn-all" class="project-filter-btn win98-pressed px-2.5 py-0.5 font-bold text-xs bg-[#000080] text-white cursor-pointer" data-filter="all">全部 (7)</button>
+                    <button id="filter-btn-dev" class="project-filter-btn win98-raised px-2.5 py-0.5 font-bold text-xs text-black hover:bg-gray-100 cursor-pointer" data-filter="dev">网页与交互 (4)</button>
+                    <button id="filter-btn-research" class="project-filter-btn win98-raised px-2.5 py-0.5 font-bold text-xs text-black hover:bg-gray-100 cursor-pointer" data-filter="research">学术与社会研究 (3)</button>
+                  </div>
+                  <span id="more-projects-count" class="text-[10px] font-mono text-gray-600">全部项目目录</span>
+                </div>
+
+                <div id="more-projects-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <!-- Dynamically populated -->
                 </div>
               </div>
             </section>
 
-            <!-- SECTION: FAQ ACCORDION (+ / - TOGGLES) -->
-            <section id="section-faq" class="win98-raised p-4 bg-gray-200 space-y-3">
+            <!-- 4. ABOUT & CONTACT SECTION (Clean, Restrained) -->
+            <section id="section-about-contact" class="win98-raised p-4 bg-gray-200 space-y-3 text-xs">
               <div class="win98-titlebar-active px-2 py-1 flex items-center justify-between font-bold text-xs">
-                <span id="title-section-faq" class="flex items-center gap-1.5">
-                  <img src="/icons/help.svg" class="w-4 h-4 pixel-render inline" alt="" />
-                  <span>常见问题解答 (FAQ.TXT)</span>
+                <span class="flex items-center gap-1.5">
+                  <img src="/icons/network.svg" class="w-4 h-4 pixel-render inline" alt="" />
+                  <span id="title-section-about">关于与联系 (About & Contact)</span>
                 </span>
-                <span class="text-[10px] font-mono">理念与合作</span>
               </div>
 
-              <div id="faq-container" class="space-y-2 text-xs">
-                <!-- Dynamically populated from profile-data.js -->
-              </div>
-            </section>
+              <div class="win98-sunken p-3 bg-white space-y-2.5">
+                <p id="about-contact-intro" class="text-gray-800 leading-relaxed font-inter">
+                  我平时会做网页、音乐相关的数字项目，也会做一些社会科学研究。如果对我的项目感兴趣，或者想一起做点有意思的事情，欢迎随时联系我：
+                </p>
 
-            <!-- SECTION: INTERACTIVE GUESTBOOK -->
-            <section id="section-guestbook" class="win98-raised p-4 bg-gray-200 space-y-4">
-              <div class="win98-titlebar-active px-2 py-1 flex items-center justify-between font-bold text-xs">
-                <span id="title-section-guestbook" class="flex items-center gap-1.5">
-                  <img src="/icons/guestbook.svg" class="w-4 h-4 pixel-render inline" alt="" />
-                  <span>访客留言簿 (GUESTBK.DB)</span>
-                </span>
-                <span class="text-[10px] font-mono">欢迎留下印记</span>
-              </div>
-
-              <div class="space-y-4">
-                <form id="guestbook-form" class="win98-sunken p-3 bg-white space-y-3">
-                  <div id="guestbook-prompt-title" class="font-bold text-xs text-[#000080]">给王寅喆 (Tico) 留言：</div>
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                    <div>
-                      <label id="guestbook-name-label" for="guestbook-name" class="block font-bold mb-1">您的姓名 / 昵称：</label>
-                      <input id="guestbook-name" type="text" placeholder="例如: 极客99 / 访客" class="win98-sunken-field w-full px-2 py-1 outline-none text-xs" required />
-                    </div>
-                    <div>
-                      <label id="guestbook-msg-label" for="guestbook-msg" class="block font-bold mb-1">留言内容：</label>
-                      <input id="guestbook-msg" type="text" placeholder="写下您的留言、反馈或合作意向..." class="win98-sunken-field w-full px-2 py-1 outline-none text-xs" required />
-                    </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 font-mono text-xs">
+                  <div class="win98-raised p-2 flex items-center justify-between bg-gray-50">
+                    <span class="font-bold flex items-center gap-1.5 text-gray-800">
+                      <img src="/icons/mail.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+                      <span>邮箱:</span>
+                    </span>
+                    <a href="mailto:tico.wangyinzhe@yungu.org" class="text-[#000080] font-bold no-underline hover:underline">tico.wangyinzhe@yungu.org</a>
                   </div>
-                  <div class="flex justify-end">
-                    <button id="guestbook-submit-btn" type="submit" class="win98-raised px-4 py-1 text-xs font-bold hover:bg-gray-200 active:win98-pressed cursor-pointer flex items-center gap-1">
-                      <span>发送留言</span> <img src="/icons/rocket.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
-                    </button>
-                  </div>
-                </form>
 
-                <div class="space-y-2">
-                  <div id="guestbook-recent-title" class="text-xs font-bold text-gray-700">最新留言记录：</div>
-                  <div id="guestbook-list" class="space-y-2 max-h-44 overflow-y-auto win98-scrollbar pr-1"></div>
+                  <div class="win98-raised p-2 flex items-center justify-between bg-gray-50">
+                    <span class="font-bold flex items-center gap-1.5 text-gray-800">
+                      <img src="/icons/network.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+                      <span>微信号:</span>
+                    </span>
+                    <span class="text-[#000080] font-bold select-all">ticowang666</span>
+                  </div>
+
+                  <div class="win98-raised p-2 flex items-center justify-between bg-gray-50">
+                    <span class="font-bold flex items-center gap-1.5 text-gray-800">
+                      <img src="/icons/dos.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+                      <span>GitHub:</span>
+                    </span>
+                    <a href="https://github.com/wyz15857140708-lang" target="_blank" rel="noopener noreferrer" class="text-[#000080] font-bold no-underline hover:underline">@wyz15857140708-lang</a>
+                  </div>
+
+                  <div class="win98-raised p-2 flex items-center justify-between bg-gray-50">
+                    <span class="font-bold flex items-center gap-1.5 text-gray-800">
+                      <img src="/icons/phone.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
+                      <span>手机号:</span>
+                    </span>
+                    <a href="tel:15857140708" class="text-[#000080] font-bold no-underline hover:underline">15857140708</a>
+                  </div>
+                </div>
+
+                <div class="pt-2 flex flex-wrap gap-2 justify-end border-t border-gray-200">
+                  <button id="btn-open-notepad-about" class="win98-raised px-3 py-1 text-xs font-bold hover:bg-gray-100 active:win98-pressed flex items-center gap-1.5 cursor-pointer">
+                    <img src="/icons/document.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span id="btn-label-notepad">打开记事本完整简介 (Notepad)</span>
+                  </button>
+                  <button id="btn-open-socials-win" class="win98-raised px-3 py-1 text-xs font-bold hover:bg-gray-100 active:win98-pressed flex items-center gap-1.5 cursor-pointer">
+                    <img src="/icons/network.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" /> <span id="btn-label-socials">打开连接窗口 (Links)</span>
+                  </button>
                 </div>
               </div>
             </section>
