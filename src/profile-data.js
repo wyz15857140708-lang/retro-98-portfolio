@@ -390,8 +390,8 @@ export const profileData = {
 
     ui: {
       bootTitle: "AWARD MODULAR BIOS v4.51PG",
-      bootSubtitle: "王寅喆工作站 98 // 个人作品与研究系统",
-      bootPrompt: ">>> 按 [回车键 ENTER] 或点击屏幕进入 Windows 98 <<<",
+      bootSubtitle: "TICO-STATION 98",
+      bootPrompt: "Press ENTER to start Windows 98",
       loginTitle: "欢迎使用 Windows 98",
       loginSubtitle: "登录到 王寅喆 (Tico) 的个人电脑工作站",
       loginRole: "创意开发 • 数字设计 • 学术研究",
@@ -837,8 +837,8 @@ export const profileData = {
 
     ui: {
       bootTitle: "AWARD MODULAR BIOS v4.51PG",
-      bootSubtitle: "TICO-STATION 98 // Portfolio & Research System",
-      bootPrompt: ">>> Press [ENTER] or click screen to boot Windows 98 <<<",
+      bootSubtitle: "TICO-STATION 98",
+      bootPrompt: "Press ENTER to start Windows 98",
       loginTitle: "Welcome to Windows 98",
       loginSubtitle: "Log on to Tico's Personal Workstation",
       loginRole: "Creative Dev • Digital Design • Research",

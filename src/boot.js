@@ -21,15 +21,15 @@ export class BootManager {
       "Award Modular BIOS v4.51PG, An Energy Star Ally",
       "Copyright (C) 1984-98, Award Software, Inc.",
       "",
-      "PENTIUM II-MMX CPU at 450MHz (王寅喆定制开发与研究工作站)",
-      "Memory Testing: 131072K OK (系统内存自检 128MB 通过)",
+      "PENTIUM II-MMX CPU at 450MHz",
+      "Memory Test : 131072K OK",
       "",
       "Award Plug and Play BIOS Extension v1.0A",
       "Initialize Plug and Play Cards... PNP Init Completed",
       "",
       "Detecting Primary Master   ... QUANTUM FIREBALL CR 8.4A (LBA Mode)",
       "Detecting Primary Slave    ... None",
-      "Detecting Secondary Master ... CR-588 48X CD-ROM (FL Studio Audio Ready)",
+      "Detecting Secondary Master ... CR-588 48X CD-ROM",
       "Detecting Secondary Slave  ... None",
       "",
       "PCI device listing...",
@@ -38,9 +38,9 @@ export class BootManager {
       "1       0          0       121A      0005      3dfx Voodoo3 3000 3D AGP",
       "0       9          0       1102      0002      Creative Sound Blaster AWE64",
       "",
-      "Starting Windows 98 Second Edition (简体中文版 4.10.2222 A)...",
+      "Starting Windows 98...",
       "",
-      ">>> 按 [回车键 ENTER] 或点击屏幕进入 Windows 98 <<<"
+      "Press ENTER to start Windows 98"
     ];
   }
 
@@ -118,7 +118,7 @@ export class BootManager {
     cmosItems.forEach(item => {
       item.addEventListener('click', () => {
         audioEngine.playClick();
-        alert(`[ Award Modular BIOS v4.51PG ]\n\n${item.textContent.trim()}\n\n已处于最佳性能超频状态 (王寅喆定制参数已锁定)。`);
+        alert(`[ Award Modular BIOS v4.51PG ]\n\n${item.textContent.trim()}\n\nDefault settings loaded.`);
       });
     });
   }
