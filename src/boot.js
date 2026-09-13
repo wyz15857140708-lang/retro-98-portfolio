@@ -139,33 +139,19 @@ export class BootManager {
     if (this.isBooted) return;
     this.isBooted = true;
 
-    // Trigger CRT Flash effect
-    if (this.crtFlashOverlay) {
-      this.crtFlashOverlay.classList.remove('hidden');
-      this.crtFlashOverlay.classList.add('crt-flash-anim');
-    }
-
     // Play Windows 98 Startup Chime
     audioEngine.playStartupChime();
 
-    setTimeout(() => {
-      if (this.loginContainer) {
-        this.loginContainer.classList.add('hidden');
-      }
-      if (this.desktopContainer) {
-        this.desktopContainer.classList.remove('hidden');
-      }
-      if (this.onBootComplete) {
-        this.onBootComplete();
-      }
-    }, 450);
-
-    setTimeout(() => {
-      if (this.crtFlashOverlay) {
-        this.crtFlashOverlay.classList.add('hidden');
-        this.crtFlashOverlay.classList.remove('crt-flash-anim');
-      }
-    }, 900);
+    // Immediately switch from login to desktop without delay
+    if (this.loginContainer) {
+      this.loginContainer.classList.add('hidden');
+    }
+    if (this.desktopContainer) {
+      this.desktopContainer.classList.remove('hidden');
+    }
+    if (this.onBootComplete) {
+      this.onBootComplete();
+    }
   }
 
   bindEvents() {

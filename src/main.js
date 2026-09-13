@@ -29,12 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Focus main portfolio window on boot
     windowManager.openWindow('window-portfolio');
 
-    // Auto-open README.TXT ~400ms after desktop appears
+    // Auto-open README.TXT immediately on boot
     if (!hasAutoOpenedReadme) {
       hasAutoOpenedReadme = true;
-      setTimeout(() => {
-        windowManager.openWindow('window-notepad');
-      }, 400);
+      windowManager.openWindow('window-notepad');
     }
   });
   bootManager.init();
