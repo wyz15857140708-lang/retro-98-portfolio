@@ -5,6 +5,7 @@
  */
 
 import { audioEngine } from './audio.js';
+import { profileData } from './profile-data.js';
 
 export class BootManager {
   constructor(onBootComplete) {
@@ -206,6 +207,14 @@ export class BootManager {
     const cancelBtn = document.getElementById('login-cancel-btn');
     if (cancelBtn) {
       cancelBtn.addEventListener('click', () => this.completeLogin());
+    }
+
+    const helpBtn = document.getElementById('login-help-btn');
+    if (helpBtn) {
+      helpBtn.addEventListener('click', () => {
+        const msg = profileData.getData().ui.loginHelpMsg || '输入任何密码或直接按 [确定] 即可登录工作站。';
+        alert(msg);
+      });
     }
 
     const biosScreen = document.getElementById('bios-screen');

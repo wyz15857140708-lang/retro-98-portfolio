@@ -141,6 +141,13 @@
               <span class="w-1.5 h-3.5 bg-black ml-0.5 blink-caret"></span>
             </div>
           </div>
+          <div class="flex items-center gap-3">
+            <label for="login-lang-select" class="w-24 text-right font-bold" id="login-lang-label"><u>语</u>言(L):</label>
+            <select id="login-lang-select" class="win98-sunken-field flex-1 px-1.5 py-1 text-xs bg-white text-black outline-none font-win98 cursor-pointer">
+              <option id="login-lang-opt-zh" value="zh">中文 (简体)</option>
+              <option id="login-lang-opt-en" value="en">English (US)</option>
+            </select>
+          </div>
         </div>
 
         <!-- Dialog Buttons -->
@@ -151,7 +158,7 @@
           <button id="login-cancel-btn" class="win98-raised win-focus px-4 py-1 text-xs hover:bg-gray-200 active:win98-pressed cursor-pointer">
             取消
           </button>
-          <button id="login-help-btn" class="win98-raised win-focus px-4 py-1 text-xs hover:bg-gray-200 active:win98-pressed cursor-pointer" onclick="alert('输入任何密码或直接按 [确定] 即可登录工作站。')">
+          <button id="login-help-btn" class="win98-raised win-focus px-4 py-1 text-xs hover:bg-gray-200 active:win98-pressed cursor-pointer">
             帮助(H)
           </button>
         </div>

@@ -314,9 +314,16 @@ export class DesktopController {
     setText('login-subtitle-text', ui.loginSubtitle);
     setHtml('login-user-label', ui.loginUserLabel);
     setHtml('login-pass-label', ui.loginPassLabel);
+    setHtml('login-lang-label', ui.loginLangLabel);
+    setText('login-lang-opt-zh', ui.loginLangZh);
+    setText('login-lang-opt-en', ui.loginLangEn);
     setText('login-confirm-btn', ui.loginConfirmBtn);
     setText('login-cancel-btn', ui.loginCancelBtn);
     setText('login-help-btn', ui.loginHelpBtn);
+    const loginLangSelect = document.getElementById('login-lang-select');
+    if (loginLangSelect && loginLangSelect.value !== profileData.currentLang) {
+      loginLangSelect.value = profileData.currentLang;
+    }
 
     // 3. Portfolio Window
     setText('window-title-portfolio', ui.windowPortfolioTitle);
@@ -1169,6 +1176,7 @@ export class DesktopController {
     const langBtn = document.getElementById('tray-lang-btn');
     const menuLangZh = document.getElementById('menu-lang-zh');
     const menuLangEn = document.getElementById('menu-lang-en');
+    const loginLangSelect = document.getElementById('login-lang-select');
 
     const toggleLanguage = () => {
       const newLang = profileData.currentLang === 'zh' ? 'en' : 'zh';
@@ -1187,6 +1195,12 @@ export class DesktopController {
     }
     if (menuLangEn) {
       menuLangEn.addEventListener('click', () => this.switchLanguage('en'));
+    }
+
+    if (loginLangSelect) {
+      loginLangSelect.addEventListener('change', (e) => {
+        this.switchLanguage(e.target.value);
+      });
     }
   }
 
