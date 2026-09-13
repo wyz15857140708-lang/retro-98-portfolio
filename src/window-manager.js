@@ -35,18 +35,17 @@ export class WindowManager {
       let icon = winEl.getAttribute('data-icon') || '';
       
       // Map icon keys to authentic Win98 SVGs if available
-      if (id === 'window-paint') icon = win98Icons.paint;
-      else if (id === 'window-notepad') icon = win98Icons.notepad;
-      else if (id === 'window-minesweeper') icon = win98Icons.minesweeper;
-      else if (id === 'window-dos') icon = win98Icons.dos;
-      else if (id === 'window-display') icon = win98Icons.display;
-      else if (id === 'window-social') icon = win98Icons.network;
-      else if (!icon || icon.includes('framerusercontent') === false) {
-        if (id.includes('portfolio')) icon = win98Icons.folder;
-        else if (id.includes('computer')) icon = 'https://framerusercontent.com/images/uLE52N3JZ7WafwPB01oWNu4QRk.png';
-        else if (id.includes('music')) icon = 'https://framerusercontent.com/images/C2rNcoyAF0EcMLLTKXoNk7Ooaf4.png';
-        else if (id.includes('recycle')) icon = 'https://framerusercontent.com/images/aUiO9TgRYS71ppQpJSwLrc9Z9M.png';
-      }
+      if (id === 'window-paint') icon = './icons/paint.svg';
+      else if (id === 'window-notepad') icon = './icons/notepad.svg';
+      else if (id === 'window-minesweeper') icon = './icons/minesweeper.svg';
+      else if (id === 'window-dos') icon = './icons/dos.svg';
+      else if (id === 'window-display') icon = './icons/display.svg';
+      else if (id === 'window-social') icon = './icons/network.svg';
+      else if (id.includes('portfolio')) icon = './icons/folder.svg';
+      else if (id.includes('computer')) icon = './icons/computer.svg';
+      else if (id.includes('music')) icon = './icons/cd.svg';
+      else if (id.includes('recycle')) icon = './icons/recycle.svg';
+      else if (!icon) icon = './icons/document.svg';
 
       const isHidden = winEl.classList.contains('hidden');
       const isInitiallyOpen = !isHidden;
@@ -378,7 +377,14 @@ export class WindowManager {
       el.style.position = 'absolute';
       el.style.transform = 'none';
       winData.isMaximized = false;
-      if (maxBtn) maxBtn.innerHTML = '□';
+      if (maxBtn) {
+        maxBtn.innerHTML = `
+          <svg viewBox="0 0 10 10" class="w-2.5 h-2.5 pointer-events-none" shape-rendering="crispEdges">
+            <rect x="1" y="1" width="8" height="8" fill="none" stroke="#000000" stroke-width="1" />
+            <rect x="1" y="1" width="8" height="2" fill="#000000" />
+          </svg>
+        `;
+      }
     } else {
       winData.prevRect = {
         left: el.style.left || '10%',
@@ -394,7 +400,16 @@ export class WindowManager {
       el.style.position = 'fixed';
       el.style.transform = 'none';
       winData.isMaximized = true;
-      if (maxBtn) maxBtn.innerHTML = '❐';
+      if (maxBtn) {
+        maxBtn.innerHTML = `
+          <svg viewBox="0 0 10 10" class="w-2.5 h-2.5 pointer-events-none" shape-rendering="crispEdges">
+            <rect x="3" y="1" width="6" height="5" fill="none" stroke="#000000" stroke-width="1" />
+            <rect x="3" y="1" width="6" height="2" fill="#000000" />
+            <rect x="1" y="3" width="6" height="6" fill="#c0c0c0" stroke="#000000" stroke-width="1" />
+            <rect x="1" y="3" width="6" height="2" fill="#000000" />
+          </svg>
+        `;
+      }
     }
 
     this.focusWindow(id);

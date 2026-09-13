@@ -164,7 +164,7 @@ export class DesktopController {
         tile.innerHTML = `
           <div>
             <div class="flex items-center gap-2 border-b border-gray-200 pb-1.5 mb-2">
-              <img src="${cat.icon || '/icons/settings.svg'}" class="w-5 h-5 pixel-render shrink-0" alt="" />
+              <img src="${cat.icon || './icons/settings.svg'}" class="w-5 h-5 pixel-render shrink-0" alt="" />
               <h4 class="font-bold text-xs text-[#000080] uppercase tracking-wide">${escapeHtml(cat.title)}</h4>
             </div>
             <ul class="space-y-1 pl-1 font-inter">
@@ -205,7 +205,7 @@ export class DesktopController {
       data.interests.forEach(interest => {
         const tag = document.createElement('span');
         tag.className = 'win98-raised px-2 py-0.5 bg-gray-100 text-gray-800 text-xs font-mono select-none hover:bg-yellow-100 flex items-center gap-1';
-        tag.innerHTML = `<img src="/icons/star.svg" class="w-3 h-3 pixel-render inline" alt="" /> <span>${escapeHtml(interest)}</span>`;
+        tag.innerHTML = `<img src="./icons/star.svg" class="w-3 h-3 pixel-render inline" alt="" /> <span>${escapeHtml(interest)}</span>`;
         interestsContainer.appendChild(tag);
       });
     }
@@ -223,7 +223,7 @@ export class DesktopController {
 
         item.innerHTML = `
           <div class="faq-header flex justify-between items-center cursor-pointer font-bold text-xs text-gray-900 hover:text-[#000080]">
-            <span class="flex items-center gap-1.5"><img src="/icons/question.svg" class="w-3.5 h-3.5 pixel-render inline shrink-0" alt="" /> <span>${escapeHtml(faq.question)}</span></span>
+            <span class="flex items-center gap-1.5"><img src="./icons/question.svg" class="w-3.5 h-3.5 pixel-render inline shrink-0" alt="" /> <span>${escapeHtml(faq.question)}</span></span>
             <span class="faq-toggle-icon win98-raised w-5 h-5 flex items-center justify-center font-mono text-sm leading-none bg-gray-200">${isOpen ? '-' : '+'}</span>
           </div>
           <div class="faq-content ${isOpen ? '' : 'hidden'} pt-2.5 mt-2.5 border-t border-gray-300 text-xs text-gray-700 leading-relaxed font-inter">
@@ -284,13 +284,14 @@ export class DesktopController {
     const specs = data.specs;
     const sysSpecsList = document.getElementById('sys-specs-list');
     if (sysSpecsList && specs) {
+      const isZh = profileData.currentLang === 'zh';
       sysSpecsList.innerHTML = `
-        <li>• 计算机名: ${escapeHtml(specs.systemName || 'TICO-STATION 98')}</li>
-        <li>• 处理器 (CPU): ${escapeHtml(specs.processor)}</li>
-        <li>• 内存 (RAM): ${escapeHtml(specs.memory)}</li>
-        <li>• 硬盘存储 (HDD): ${escapeHtml(specs.storage)}</li>
-        <li>• 显卡 (GPU): ${escapeHtml(specs.graphics)}</li>
-        <li>• 声卡 (Sound): ${escapeHtml(specs.sound)}</li>
+        <li>• ${isZh ? '计算机名' : 'Computer Name'}: ${escapeHtml(specs.systemName || 'TICO-STATION 98')}</li>
+        <li>• ${isZh ? '处理器 (CPU)' : 'Processor (CPU)'}: ${escapeHtml(specs.processor)}</li>
+        <li>• ${isZh ? '内存 (RAM)' : 'Memory (RAM)'}: ${escapeHtml(specs.memory)}</li>
+        <li>• ${isZh ? '硬盘存储 (HDD)' : 'Storage (HDD)'}: ${escapeHtml(specs.storage)}</li>
+        <li>• ${isZh ? '显卡 (GPU)' : 'Display (GPU)'}: ${escapeHtml(specs.graphics)}</li>
+        <li>• ${isZh ? '声卡 (Sound)' : 'Audio (Sound)'}: ${escapeHtml(specs.sound)}</li>
       `;
     }
   }
@@ -298,61 +299,226 @@ export class DesktopController {
   updateStaticUITexts(ui) {
     if (!ui) return;
 
+    // 1. Desktop Icons
     setText('icon-title-portfolio', ui.desktopIconPortfolio);
     setText('icon-title-computer', ui.desktopIconComputer);
     setText('icon-title-music', ui.desktopIconMusic);
     setText('icon-title-social', ui.desktopIconSocial);
     setText('icon-title-recycle', ui.desktopIconRecycle);
-    setText('icon-title-paint', ui.desktopIconPaint || (profileData.currentLang === 'zh' ? '画图程序' : 'MS Paint'));
-    setText('icon-title-minesweeper', profileData.currentLang === 'zh' ? '扫雷游戏' : 'Minesweeper');
-    setText('icon-title-notepad', ui.desktopIconNotepad || 'README.TXT');
-    setText('notepad-window-title', ui.notepadWindowTitle || (profileData.currentLang === 'zh' ? 'README.TXT - 记事本' : 'README.TXT - Notepad'));
+    setText('icon-title-paint', ui.desktopIconPaint);
+    setText('icon-title-minesweeper', ui.desktopIconMinesweeper);
+    setText('icon-title-notepad', ui.desktopIconNotepad);
 
-    setText('window-title-portfolio', ui.windowPortfolioTitle || 'C:\\My Documents\\portfolio\\index.htm');
-    setText('address-bar-path', ui.addressBarUrl || 'C:\\My Documents\\portfolio\\index.htm');
+    // 2. Login Screen
+    setText('login-title-text', ui.loginTitle);
+    setText('login-subtitle-text', ui.loginSubtitle);
+    setHtml('login-user-label', ui.loginUserLabel);
+    setHtml('login-pass-label', ui.loginPassLabel);
+    setText('login-confirm-btn', ui.loginConfirmBtn);
+    setText('login-cancel-btn', ui.loginCancelBtn);
+    setText('login-help-btn', ui.loginHelpBtn);
 
-    setText('title-section-featured', ui.sectionFeaturedTitle || (profileData.currentLang === 'zh' ? '项目' : 'Projects'));
+    // 3. Portfolio Window
+    setText('window-title-portfolio', ui.windowPortfolioTitle);
+    setHtml('menu-btn-file', ui.menuFile);
+    setHtml('menu-item-exit', ui.menuFileExit);
+    setHtml('menu-btn-edit', ui.menuEdit);
+    setHtml('menu-item-copy-gh', ui.menuEditCopyGh);
+    setHtml('menu-item-selectall', ui.menuEditSelectAll);
+    setHtml('menu-btn-view', ui.menuView);
+    setHtml('menu-item-crt-view', ui.menuViewCrt);
+    setHtml('menu-item-refresh-view', ui.menuViewRefresh);
+    setHtml('menu-btn-go', ui.menuGo);
+    setHtml('menu-item-go-proj', ui.menuGoProjects);
+    setHtml('menu-item-go-social', ui.menuGoLinks);
+    setHtml('menu-btn-help', ui.menuHelp);
+    setHtml('menu-item-about', ui.menuHelpAbout);
+    setText('tb-projects-text', ui.tbProjects);
+    setText('tb-more-text', ui.tbMore);
+    setText('tb-refresh-text', ui.tbRefresh);
+    setText('tb-top-text', ui.tbTop);
+    setHtml('address-label', ui.addressLabel);
+    setText('address-bar-path', ui.addressBarUrl);
+    setText('btn-address-go-text', ui.addressGo);
+    setText('title-section-featured', ui.sectionFeaturedTitle);
     setText('label-toggle-all', this.isShowingAllProjects ? ui.btnShowFeatured : ui.btnViewAll);
-
     setText('filter-btn-all', ui.tabAllProjects);
     setText('filter-btn-dev', ui.tabDevProjects);
     setText('filter-btn-research', ui.tabResearchProjects);
-
-    setText('address-label', ui.addressLabel);
+    setText('footer-find-me-label', ui.footerFindMe);
+    setText('footer-email-text', ui.footerEmail);
+    setText('footer-more-label', ui.footerMoreLink);
     setText('status-bar-done', ui.statusBarDone);
     setText('status-bar-objects', ui.statusBarObjects);
     setText('status-bar-zone', ui.statusBarZone);
 
-    setText('footer-find-me-label', ui.footerFindMe || (profileData.currentLang === 'zh' ? '其他地方:' : 'Find me:'));
-    setText('footer-more-label', ui.footerMoreLink || (profileData.currentLang === 'zh' ? '更多联系方式 (Online)...' : 'Online profiles...'));
+    // 4. Paint Window
+    setText('window-paint-title', ui.paintTitle);
+    setHtml('paint-menu-file-btn', ui.paintMenuFile);
+    setHtml('paint-menu-edit-btn', ui.paintMenuEdit);
+    setHtml('paint-menu-help-btn', ui.paintMenuHelp);
+    setText('paint-btn-clear-canvas', ui.paintClear);
 
-    setText('guestbook-prompt-title', ui.guestbookPrompt);
-    setText('guestbook-name-label', ui.guestbookNameLabel);
-    setText('guestbook-msg-label', ui.guestbookMsgLabel);
-    setText('guestbook-submit-btn', ui.guestbookSubmitBtn);
-    setText('guestbook-recent-title', ui.guestbookRecent);
+    // 5. Minesweeper Window
+    setText('window-minesweeper-title', ui.minesweeperTitle);
+    setHtml('mines-menu-game-btn', ui.minesweeperMenuGame);
+    setHtml('mines-menu-help-btn', ui.minesweeperMenuHelp);
+    setHtml('mine-menu-new-text', ui.minesweeperNewGame);
+    setText('mine-menu-how-text', ui.minesweeperHowToPlay);
 
-    const nameInput = document.getElementById('guestbook-name');
-    const msgInput = document.getElementById('guestbook-msg');
-    if (nameInput) nameInput.placeholder = ui.guestbookNamePlaceholder || '';
-    if (msgInput) msgInput.placeholder = ui.guestbookMsgPlaceholder || '';
+    // 6. Notepad Window
+    setText('notepad-window-title', ui.notepadTitle);
+    setHtml('notepad-menu-file-btn', ui.notepadMenuFile);
+    setHtml('notepad-menu-edit-btn', ui.notepadMenuEdit);
+    setHtml('notepad-menu-format-btn', ui.notepadMenuFormat);
 
-    setText('menu-btn-file', ui.menuFile);
-    setText('menu-btn-edit', ui.menuEdit);
-    setText('menu-btn-view', ui.menuView);
-    setText('menu-btn-go', ui.menuGo);
-    setText('menu-btn-help', ui.menuHelp);
+    // 7. DOS Window
+    setText('window-dos-title', ui.dosTitle);
 
-    setText('start-text', ui.startBtn);
-    setText('start-item-portfolio', ui.startMenuPortfolio);
-    setText('start-item-music', ui.startMenuMusic);
-    setText('start-item-computer', ui.startMenuComputer);
-    setText('start-item-social', ui.startMenuSocial);
+    // 8. Display Properties Window
+    setText('window-display-title', ui.displayTitle);
+    setText('tab-disp-bg-btn', ui.displayTabBg);
+    setText('tab-disp-crt-btn', ui.displayTabCrt);
+    setText('display-wp-label', ui.displayWallpaperLabel);
+    setText('disp-opt-bliss', ui.displayWpBliss);
+    setText('disp-opt-teal', ui.displayWpTeal);
+    setText('disp-opt-clouds', ui.displayWpClouds);
+    setText('disp-opt-matrix', ui.displayWpMatrix);
+    setText('disp-crt-intensity-label', ui.displayCrtIntensityLabel);
+    setText('disp-crt-roll-label', ui.displayCrtRollLabel);
+    setText('btn-display-ok', ui.btnOk);
+    setText('btn-display-cancel', ui.btnCancel);
+    setText('btn-display-apply', ui.btnApply);
+
+    // 9. Music Player Window
+    setText('window-music-title', ui.mediaPlayerTitle);
+    setText('music-vol-label', ui.cdVolumeLabel);
+    setText('music-playlist-label', ui.cdPlaylistLabel);
+
+    // 10. My Computer Window
+    setText('window-computer-title', ui.systemPropertiesTitle);
+    setText('tab-sys-general-btn', ui.systemTabGeneral);
+    setText('tab-sys-device-btn', ui.systemTabDevice);
+    setText('sys-os-label', ui.systemOsLabel);
+    setText('sys-os-name', ui.systemOsName);
+    setText('sys-os-sub', ui.systemOsSub);
+    setText('sys-owner-label', ui.systemOwnerLabel);
+    setText('sys-registered-owner', ui.systemOwnerName);
+    setText('sys-registered-title', ui.systemOwnerTitle);
+    setText('sys-specs-header', ui.systemSpecsHeader);
+    setText('sys-device-tree-header', ui.systemDeviceTreeHeader);
+    setText('dev-node-root', ui.devTreeRoot);
+    setText('dev-node-cpu', ui.devCpu);
+    setText('dev-node-gpu', ui.devGpu);
+    setText('dev-node-sound', ui.devSound);
+    setText('dev-node-hdd', ui.devHdd);
+    setText('dev-node-cd', ui.devCd);
+    setText('dev-node-net', ui.devNet);
+    setText('dev-node-input', ui.devInput);
+    setText('dev-node-usb', ui.devUsb);
+    setText('btn-computer-ok', ui.btnOk);
+
+    // 11. Social / Links Window
+    setText('window-social-title', ui.socialTitle);
+    setText('social-window-header-text', ui.socialWindowHeader);
+    setText('btn-social-close', ui.btnClose);
+
+    // 12. Recycle Bin Window
+    setText('window-recycle-title', ui.recycleBinTitle);
+    setText('recycle-item-count', ui.recycleCount);
+    setText('btn-restore-recycle-text', ui.recycleRestore);
+    setText('btn-empty-recycle-text', ui.recycleEmpty);
+    setText('recycle-item-1-name', ui.recycleItem1);
+    setText('recycle-item-2-name', ui.recycleItem2);
+    setText('recycle-item-3-name', ui.recycleItem3);
+
+    // 13. Project Modal Inspector
+    setText('proj-modal-title', ui.projModalTitle);
+    setText('proj-modal-tab-general', ui.projModalTabGeneral);
+    setText('proj-modal-tab-arch', ui.projModalTabArch);
+    setText('proj-modal-tech-label', ui.projModalTechLabel);
+    setText('proj-modal-arch-label', ui.projModalArchLabel);
+    setText('proj-modal-feat-label', ui.projModalFeatLabel);
+    setText('proj-modal-btn-launch-text', ui.projModalBtnLaunch);
+    setText('proj-modal-btn-ok', ui.btnOk);
+
+    // 14. Start Menu
+    setText('start-menu-sidebar-text', ui.startMenuSidebar);
+    setHtml('start-header-programs', ui.startMenuPrograms);
+    setHtml('start-header-documents', ui.startMenuDocuments);
+    setHtml('start-header-settings', ui.startMenuSettings);
+    setText('start-item-prog-portfolio', ui.startMenuPortfolio);
+    setText('start-item-prog-paint', ui.startMenuPaint);
+    setText('start-item-prog-notepad', ui.startMenuNotepad);
+    setText('start-item-prog-minesweeper', ui.startMenuMinesweeper);
+    setText('start-item-prog-dos', ui.startMenuDos);
+    setText('start-item-prog-music', ui.startMenuMusic);
+    setText('start-item-doc-readme', ui.startMenuDocReadme);
+    setText('start-item-set-display', ui.startMenuSetDisplay);
+    setText('start-item-set-computer', ui.startMenuSetComputer);
+    setText('start-item-portfolio', ui.startMenuDirectPortfolio);
+    setText('start-item-run', ui.startMenuRun);
     setText('start-item-crt', ui.startMenuToggleCrt);
     setText('start-item-restart', ui.startMenuRestart);
     setText('start-item-shutdown', ui.startMenuShutdown);
 
+    // 15. Run Modal
+    setText('run-modal-title', ui.runTitle);
+    setText('run-modal-desc', ui.runDesc);
+    setHtml('run-modal-label', ui.runOpenLabel);
+    setText('btn-run-ok', ui.btnOk);
+    setText('btn-run-cancel', ui.btnCancel);
+
+    // 16. Shutdown Modal
+    setText('shutdown-modal-title', ui.shutdownTitle);
+    setText('shutdown-modal-prompt', ui.shutdownPrompt);
+    setText('shutdown-opt-restart-text', ui.shutdownOptRestart);
+    setText('shutdown-opt-dos-text', ui.shutdownOptDos);
+    setText('btn-shutdown-ok', ui.btnOk);
+    setText('btn-shutdown-cancel', ui.btnCancel);
+
+    // 17. Context Menus
+    setText('ctx-refresh-text', ui.ctxRefresh);
+    setText('ctx-cascade-text', ui.ctxCascade);
+    setText('ctx-minimize-all-text', ui.ctxMinAll);
+    setText('ctx-properties-text', ui.ctxProps);
+    setText('tb-ctx-cascade-text', ui.tbCtxCascade);
+    setText('tb-ctx-minimize-text', ui.tbCtxMin);
+    setText('tb-ctx-lang-text', ui.tbCtxLang);
+
+    // 18. Taskbar & Tray
+    setText('start-text', ui.startBtn);
     setText('tray-lang-text', profileData.currentLang === 'zh' ? '中' : 'EN');
+
+    // 19. Synchronize window data-title attributes for Taskbar
+    this.updateWindowDataTitles(ui);
+  }
+
+  updateWindowDataTitles(ui) {
+    if (!ui) return;
+    const windowTitleMap = {
+      'window-portfolio': ui.windowPortfolioTitle || 'C:\\My Documents\\portfolio\\index.htm',
+      'window-paint': ui.paintTitle || (profileData.currentLang === 'zh' ? '画图 - 无标题' : 'Paint - Untitled'),
+      'window-minesweeper': ui.minesweeperTitle || (profileData.currentLang === 'zh' ? '扫雷' : 'Minesweeper'),
+      'window-notepad': ui.notepadTitle || (profileData.currentLang === 'zh' ? 'README.TXT - 记事本' : 'README.TXT - Notepad'),
+      'window-dos': ui.dosTitle || (profileData.currentLang === 'zh' ? 'MS-DOS 提示符' : 'MS-DOS Prompt'),
+      'window-display': ui.displayTitle || (profileData.currentLang === 'zh' ? '显示 属性' : 'Display Properties'),
+      'window-music': ui.mediaPlayerTitle || (profileData.currentLang === 'zh' ? 'CD 播放机' : 'CD Player'),
+      'window-computer': ui.systemPropertiesTitle || (profileData.currentLang === 'zh' ? '我的电脑' : 'My Computer'),
+      'window-social': ui.socialTitle || (profileData.currentLang === 'zh' ? '连接' : 'Links'),
+      'window-recycle': ui.recycleBinTitle || (profileData.currentLang === 'zh' ? '回收站' : 'Recycle Bin')
+    };
+
+    Object.entries(windowTitleMap).forEach(([id, title]) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.setAttribute('data-title', title);
+      }
+      if (this.wm && this.wm.windows && this.wm.windows.has(id)) {
+        const winData = this.wm.windows.get(id);
+        winData.title = title;
+      }
+    });
   }
 
   renderProjects() {
@@ -550,15 +716,15 @@ export class DesktopController {
         if (itemsList) {
           itemsList.innerHTML = `
             <div class="recycle-file-row flex justify-between items-center p-1 hover:bg-blue-100 border-b border-gray-100">
-              <span class="flex items-center"><img src="/icons/document.svg" class="w-3.5 h-3.5 pixel-render inline-block mr-1.5" alt="" />无聊且缺乏灵感的模板.zip</span>
+              <span class="flex items-center"><img src="./icons/document.svg" class="w-3.5 h-3.5 pixel-render inline-block mr-1.5" alt="" />无聊且缺乏灵感的模板.zip</span>
               <span class="text-gray-400 text-[10px]">1.2 MB</span>
             </div>
             <div class="recycle-file-row flex justify-between items-center p-1 hover:bg-blue-100 border-b border-gray-100">
-              <span class="flex items-center"><img src="/icons/document.svg" class="w-3.5 h-3.5 pixel-render inline-block mr-1.5" alt="" />fl_studio_未完成的trap编曲.flp</span>
+              <span class="flex items-center"><img src="./icons/document.svg" class="w-3.5 h-3.5 pixel-render inline-block mr-1.5" alt="" />fl_studio_未完成的trap编曲.flp</span>
               <span class="text-gray-400 text-[10px]">3.4 MB</span>
             </div>
             <div class="recycle-file-row flex justify-between items-center p-1 hover:bg-blue-100">
-              <span class="flex items-center"><img src="/icons/document.svg" class="w-3.5 h-3.5 pixel-render inline-block mr-1.5" alt="" />未经过偏差控制的废弃问卷数据.csv</span>
+              <span class="flex items-center"><img src="./icons/document.svg" class="w-3.5 h-3.5 pixel-render inline-block mr-1.5" alt="" />未经过偏差控制的废弃问卷数据.csv</span>
               <span class="text-gray-400 text-[10px]">540 KB</span>
             </div>
           `;
@@ -956,6 +1122,7 @@ export class DesktopController {
     const labelToggleAll = document.getElementById('label-toggle-all');
     const btnWork = document.getElementById('intro-btn-work');
     const btnSocials = document.getElementById('footer-btn-open-socials');
+    const btnEmail = document.getElementById('footer-email-link');
 
     if (btnToggleAll && allWrapper) {
       btnToggleAll.addEventListener('click', () => {
@@ -986,6 +1153,12 @@ export class DesktopController {
 
     if (btnSocials) {
       btnSocials.addEventListener('click', () => {
+        this.wm.openWindow('window-social');
+      });
+    }
+
+    if (btnEmail) {
+      btnEmail.addEventListener('click', () => {
         this.wm.openWindow('window-social');
       });
     }
@@ -1314,7 +1487,7 @@ export class DesktopController {
         item.className = 'win98-sunken p-2.5 bg-white text-xs space-y-1';
         item.innerHTML = `
           <div class="flex justify-between items-center border-b border-gray-300 pb-1 font-bold text-[#000080]">
-            <span class="flex items-center gap-1.5"><img src="/icons/document.svg" class="w-3.5 h-3.5 pixel-render inline shrink-0" alt="" /> <span>${escapeHtml(entry.name)}</span></span>
+            <span class="flex items-center gap-1.5"><img src="./icons/document.svg" class="w-3.5 h-3.5 pixel-render inline shrink-0" alt="" /> <span>${escapeHtml(entry.name)}</span></span>
             <span class="text-gray-500 text-[10px] font-mono">${escapeHtml(entry.time)}</span>
           </div>
           <p class="text-gray-800 leading-relaxed font-inter">${escapeHtml(entry.message)}</p>
@@ -1381,7 +1554,7 @@ export class DesktopController {
           idx === 0 ? 'bg-[#000080] text-white' : 'text-black'
         }`;
         item.innerHTML = `
-          <span class="truncate font-mono flex items-center gap-1.5"><img src="/icons/cd.svg" class="w-3.5 h-3.5 pixel-render inline shrink-0" alt="" /> <span>${track.title}</span></span>
+          <span class="truncate font-mono flex items-center gap-1.5"><img src="./icons/cd.svg" class="w-3.5 h-3.5 pixel-render inline shrink-0" alt="" /> <span>${track.title}</span></span>
           <span class="text-[10px] opacity-75 font-mono ml-2">${audioEngine.formatTime(track.duration)}</span>
         `;
         item.addEventListener('click', () => {
@@ -1492,6 +1665,12 @@ function setText(id, text) {
   if (!text) return;
   const el = document.getElementById(id);
   if (el) el.textContent = text;
+}
+
+function setHtml(id, html) {
+  if (!html) return;
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
 }
 
 function escapeHtml(str) {
