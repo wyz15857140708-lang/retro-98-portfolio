@@ -51,8 +51,7 @@ export const profileData = {
             "用原生 JavaScript 实现页面平滑滚动与动态微交互",
             "支持桌面端和手机浏览器正常浏览",
             "通过 GitHub Pages 进行静态托管与部署"
-          ],
-          metrics: "已部署上线 / 无第三方重型框架依赖"
+          ]
         }
       },
       {
@@ -82,8 +81,7 @@ export const profileData = {
             "规划多种互动题型：单选、多选、连线、即时投票",
             "重点优化老师创建题目和课堂内容的步骤",
             "实时显示学生答题结果和成绩分布"
-          ],
-          metrics: "核心功能原型阶段 / 目标支持多人同时在线答题"
+          ]
         }
       },
       {
@@ -112,8 +110,7 @@ export const profileData = {
             "拆解 Trap 音乐常见元素：808 重低音、三连音 Hi-Hat、采样切片与合成器音色",
             "提供一个可在浏览器里试听节奏的小型简易数字鼓机界面",
             "整理了一个介绍 Atlanta 和 Southern Trap 视觉风格变化的互动时间轴"
-          ],
-          metrics: "网页音频交互实验 / 基于 Web Audio API 实现"
+          ]
         }
       },
       {
@@ -142,8 +139,7 @@ export const profileData = {
             "将场上战术执行拆解为知识 (K)、技能 (S)、能力 (A) 和其他特质 (O) 四个维度",
             "3-and-D 侧翼重点分析：底角三分命中率、closeout 反应、防守横移与掩护处理",
             "持球核心重点分析：弱侧观察、挡拆阅读、工作记忆以及高压环境下的决策"
-          ],
-          metrics: "包含 NBA 轮换球员常规赛公开追踪数据与角色模型"
+          ]
         }
       },
       {
@@ -172,8 +168,7 @@ export const profileData = {
             "使用 Raycast Vehicle 模拟车辆悬挂、轮胎摩擦与转向物理",
             "加入基础动态光照、阴影和地形碰撞网格",
             "支持键盘 WASD / 方向键驾驶与漂移控制"
-          ],
-          metrics: "浏览器原生 3D 原型 / 无需安装任何插件"
+          ]
         }
       },
       {
@@ -202,8 +197,7 @@ export const profileData = {
             "记录五联西苑周边住宅、商铺、公共过道和非正规商业摊位的使用情况",
             "观察记录小区入口、沿街店铺、停车区域和公共座椅在不同时间段分别被谁使用",
             "整理了 120+ 张现场照片和空间使用记录"
-          ],
-          metrics: "多次实地走访记录与空间观察笔记"
+          ]
         }
       },
       {
@@ -232,8 +226,7 @@ export const profileData = {
             "在 3 所学校中发放问卷并按年级进行分层抽样",
             "通过加入注意力检测题 (Attention Check) 和剔除异常作答时间来控制问卷质量",
             "使用 Jamovi 进行描述性统计、独立样本 t 检验与线性分析"
-          ],
-          metrics: "收集 100+ 份有效学生问卷 / 完成统计检验分析"
+          ]
         }
       }
     ],
@@ -506,8 +499,7 @@ export const profileData = {
             "Scroll animations and micro-interactions built with vanilla JavaScript",
             "Responsive layout for desktop and mobile screens",
             "Deployed directly via GitHub Pages"
-          ],
-          metrics: "Live prototype / Zero heavy framework dependencies"
+          ]
         }
       },
       {
@@ -537,8 +529,7 @@ export const profileData = {
             "Support for multiple choice, matching, and quick live polling formats",
             "Streamlined step-by-step creation flow for teachers",
             "Live aggregation of student answers and score breakdown"
-          ],
-          metrics: "Functional prototype / Aiming for multi-user classroom sessions"
+          ]
         }
       },
       {
@@ -567,8 +558,7 @@ export const profileData = {
             "Deconstructs Trap essentials: 808 sub-bass, triplet hi-hat rolls, vocal chops, and dark synths",
             "Simple interactive drum sequencer to trigger beats directly in the browser",
             "An interactive timeline outlining visual shifts in Atlanta and Southern Trap culture"
-          ],
-          metrics: "Audio-visual experiment / In-browser Web Audio synthesis"
+          ]
         }
       },
       {
@@ -597,8 +587,7 @@ export const profileData = {
             "Decomposes on-court performance into Knowledge, Skills, Abilities, and Other characteristics",
             "3-and-D wing focus: corner 3PT accuracy, closeout reaction speed, lateral defense",
             "Primary creator focus: weak-side scanning, pick-and-roll reads, working memory"
-          ],
-          metrics: "Based on regular season player tracking data and competency models"
+          ]
         }
       },
       {
@@ -627,8 +616,7 @@ export const profileData = {
             "Raycast Vehicle suspension and tire friction physics",
             "Dynamic lighting, shadow mapping, and terrain collider mesh",
             "Keyboard controls (WASD / Arrows) for driving and drifting"
-          ],
-          metrics: "Runs in modern browsers / Zero extra plugins needed"
+          ]
         }
       },
       {
@@ -657,8 +645,7 @@ export const profileData = {
             "Documented residential alleyways, shopfronts, and informal street vendor spaces",
             "Analyzed time-based shifts in space occupancy across morning, afternoon, and evening",
             "Compiled 120+ field photographs and spatial notes"
-          ],
-          metrics: "Multiple on-site observation sessions and spatial field notes"
+          ]
         }
       },
       {
@@ -687,8 +674,7 @@ export const profileData = {
             "Administered surveys across 3 high schools with stratified grade sampling",
             "Embedded attention checks and response duration filters to ensure clean data",
             "Conducted descriptive stats, independent t-tests, and correlation analysis using Jamovi"
-          ],
-          metrics: "100+ valid survey responses analyzed"
+          ]
         }
       }
     ],

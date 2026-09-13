@@ -361,26 +361,6 @@ export class DesktopController {
     const moreGrid = document.getElementById('more-projects-grid');
     if (!data.projects) return;
 
-    const getStatusBadgeHtml = (status, label) => {
-      const s = status || 'prototype';
-      let bgClass = 'bg-blue-800 text-white';
-      let dot = '◆';
-      if (s === 'live') {
-        bgClass = 'bg-emerald-700 text-white';
-        dot = '●';
-      } else if (s === 'in-progress') {
-        bgClass = 'bg-purple-700 text-white';
-        dot = '▲';
-      } else if (s === 'research') {
-        bgClass = 'bg-amber-800 text-white';
-        dot = '■';
-      } else if (s === 'archived') {
-        bgClass = 'bg-gray-700 text-white';
-        dot = '▼';
-      }
-      return `<span class="win98-raised px-1.5 py-0.5 text-[9px] font-mono font-bold tracking-wide ${bgClass} shrink-0">${dot} ${escapeHtml(label || s.toUpperCase())}</span>`;
-    };
-
     const createProjectCard = (proj) => {
       const card = document.createElement('article');
       card.className = 'win98-sunken p-3 bg-white space-y-2.5 flex flex-col justify-between hover:bg-blue-50/40 select-none';
@@ -390,13 +370,10 @@ export class DesktopController {
 
       card.innerHTML = `
         <div class="space-y-1.5">
-          <div class="flex items-start justify-between gap-1 border-b border-gray-200 pb-1.5">
-            <div class="flex items-center gap-1.5 overflow-hidden">
-              <span class="font-mono font-bold text-xs text-[#000080] shrink-0">${proj.number || '01'}</span>
-              <img src="${proj.icon || './icons/document.svg'}" class="w-4 h-4 pixel-render shrink-0" alt="" />
-              <h3 class="font-bold text-xs sm:text-sm text-black truncate">${escapeHtml(proj.title)}</h3>
-            </div>
-            ${getStatusBadgeHtml(proj.status, proj.statusLabel)}
+          <div class="flex items-center gap-1.5 border-b border-gray-200 pb-1.5 overflow-hidden">
+            <span class="font-mono font-bold text-xs text-[#000080] shrink-0">${proj.number || '01'}</span>
+            <img src="${proj.icon || './icons/document.svg'}" class="w-4 h-4 pixel-render shrink-0" alt="" />
+            <h3 class="font-bold text-xs sm:text-sm text-black truncate">${escapeHtml(proj.title)}</h3>
           </div>
 
           <div class="text-[11px] font-mono text-gray-600 flex items-center justify-between">
@@ -409,12 +386,7 @@ export class DesktopController {
           </p>
         </div>
 
-        <div class="pt-2 border-t border-gray-200 flex items-center justify-between gap-2">
-          <button class="btn-proj-props win98-raised px-2 py-0.5 text-xs font-bold hover:bg-gray-200 active:win98-pressed text-black flex items-center gap-1 shrink-0 cursor-pointer" data-id="${proj.id}">
-            <img src="./icons/properties.svg" class="w-3.5 h-3.5 pixel-render inline" alt="" />
-            <span>${profileData.currentLang === 'zh' ? '属性' : 'Properties'}</span>
-          </button>
-          
+        <div class="pt-2 border-t border-gray-200 flex items-center justify-end">
           ${isExternalLink 
             ? `<a href="${proj.detailsUrl}" target="_blank" rel="noopener noreferrer" class="win98-raised px-2.5 py-0.5 text-xs font-bold hover:bg-gray-200 active:win98-pressed no-underline text-[#000080] flex items-center gap-1 shrink-0 font-sans">
                 <span>${escapeHtml(proj.actionLabel || proj.linkLabel || (profileData.currentLang === 'zh' ? '访问网站 ➔' : 'Open Website ➔'))}</span>
@@ -427,13 +399,6 @@ export class DesktopController {
       `;
 
       card.addEventListener('dblclick', () => this.openProjectInspector(proj.id));
-      const propBtn = card.querySelector('.btn-proj-props');
-      if (propBtn) {
-        propBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          this.openProjectInspector(proj.id);
-        });
-      }
       const actBtn = card.querySelector('.btn-proj-action');
       if (actBtn) {
         actBtn.addEventListener('click', (e) => {
@@ -506,14 +471,12 @@ export class DesktopController {
     const techEl = document.getElementById('proj-modal-tech');
     const archEl = document.getElementById('proj-modal-arch');
     const featuresEl = document.getElementById('proj-modal-features');
-    const metricsEl = document.getElementById('proj-modal-metrics');
-    const releaseEl = document.getElementById('proj-modal-release');
     const linkEl = document.getElementById('proj-modal-link');
 
     if (titleEl) titleEl.textContent = `${proj.title} - 对象属性`;
     if (nameEl) nameEl.textContent = proj.title;
     if (iconEl) iconEl.innerHTML = `<img src="${proj.icon || './icons/document.svg'}" class="w-8 h-8 pixel-render" alt="" />`;
-    if (catEl) catEl.innerHTML = `${escapeHtml(proj.category)} &nbsp;|&nbsp; <span class="font-bold text-[#000080]">${escapeHtml(proj.statusLabel || proj.version || '1.0')}</span>`;
+    if (catEl) catEl.innerHTML = `${escapeHtml(proj.category)}`;
     if (descEl) descEl.textContent = proj.description;
     if (techEl) techEl.textContent = proj.techStack;
 
@@ -529,9 +492,6 @@ export class DesktopController {
         featuresEl.appendChild(li);
       });
     }
-
-    if (metricsEl) metricsEl.textContent = specs.metrics || '高响应度 / 兼容 Windows 98 标准浏览器';
-    if (releaseEl) releaseEl.textContent = specs.releaseDate || '1998 / 2024';
 
     if (linkEl) {
       const isExternalLink = proj.detailsUrl && proj.detailsUrl.startsWith('http');
